@@ -1,6 +1,7 @@
-# retro_mashup
-Retro Mashup created with Godot 3. A 2D game representing our old
-retro game styles.
+# retro_Apocalypse
+Retro Apocalypse is created with Godot 3. A 2D game representing our old
+retro game styles where the player can play with multiple characters to try and stop a zombie apocalypse 
+from spreading.
 
 ## CONTROLS
   * ESC: Exit fullscreen, if not in full screen then exit game
