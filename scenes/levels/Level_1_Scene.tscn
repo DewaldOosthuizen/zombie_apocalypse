@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://resources/levels/freetileset/png/BG/BG.png" type="Texture" id=1]
+[ext_resource path="res://resources/levels/freetileset/png/bg/BG.png" type="Texture" id=1]
 [ext_resource path="res://scenes/environment/Open_Door_Scene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/environment/Flora_5_scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/environment/Flora_6_scene.tscn" type="PackedScene" id=4]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/environment/Floor_1_High_Scene_2.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/enemies/Enemy_Zombie_Scene.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/enemies/Enemy_barrier.tscn" type="PackedScene" id=20]
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_level_script.gd\"
