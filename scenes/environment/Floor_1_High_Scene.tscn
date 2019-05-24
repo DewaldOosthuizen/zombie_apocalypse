@@ -10,6 +10,7 @@
 [ext_resource path="res://resources/levels/freetileset/png/tiles/9.png" type="Texture" id=8]
 [ext_resource path="res://resources/levels/freetileset/png/tiles/12.png" type="Texture" id=9]
 
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 63.0128, 23.9394 )
 

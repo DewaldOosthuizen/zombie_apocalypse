@@ -3,6 +3,7 @@
 [ext_resource path="res://resources/levels/graveyardtilesetnew/png/tiles/Bone (1).png" type="Texture" id=1]
 [ext_resource path="res://resources/levels/graveyardtilesetnew/png/tiles/Bone (4).png" type="Texture" id=2]
 
+
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -0.629952, -8.34976 )
 
