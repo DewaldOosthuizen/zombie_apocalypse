@@ -1,6 +1,5 @@
-# Retro Apocalypse
-Retro Apocalypse is created with Godot 3. A 2D game representing our old
-retro game styles where the player can play with multiple characters to try and stop a zombie apocalypse 
+# Zombie Apocalypse
+Zombie Apocalypse is created with Godot 3. A 2D game where the player can play with multiple characters to try and stop a zombie apocalypse 
 from spreading.
 
 ## CONTROLS
