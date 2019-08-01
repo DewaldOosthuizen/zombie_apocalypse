@@ -13,8 +13,7 @@ func _ready():
 	health = healthIncreases[randi()%healthIncreases.size()]
 	get_node(\"Label\").text = str(health) + \"%\"
 	set_process(true)
-	pass 
-	
+
 
 func _process(delta):
 	var objectsInArea = get_node(\"Area2D\").get_overlapping_bodies()
@@ -29,15 +28,14 @@ func _process(delta):
 					
 					i._emit_refresh_hud()
 					self.queue_free()
-	pass
 "
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 12.948, 12.0281 )
 
 [node name="Node2D" type="Node2D" groups=[
-"power_up",
 "health_pack",
+"power_up",
 ]]
 script = SubResource( 1 )
 

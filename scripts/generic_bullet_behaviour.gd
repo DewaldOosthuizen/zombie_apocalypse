@@ -34,13 +34,11 @@ func _animate_bullet(delta):
 	# Ensures bullet disapears upon hitting invalid objects
 	if (noValidCollision.size() == 2):
 		self.queue_free()
-	pass
 
 
 func _set_speed(delta):
 	velocity.x = speed * delta * movementDirection
 	velocity.y = 0
-	pass
 
 
 func _create_muzzle(muzzle_scene):
@@ -52,12 +50,10 @@ func _create_muzzle(muzzle_scene):
 		muzzle.position = self.position - Vector2(20, 1)
 	
 	get_tree().root.add_child(muzzle)
-	pass
 
 
 func _animate():
 	sprite.play()
-	pass
 
 
 func _remove_if_brick(object):
@@ -73,9 +69,8 @@ func _remove_if_brick(object):
 				self.queue_free()
 		else:
 			noValidCollision.append(true)
-	pass
 
-	
+
 func _check_collision_objects():
 	var area = get_node("Area2D").get_overlapping_bodies()
 	if (area.size() != 0):
@@ -84,4 +79,3 @@ func _check_collision_objects():
 				get_node("CollisionShape2D").disabled = true
 				body._take_damage(damage + (5 * power)) #take damage and increase damage based on power level of bullet
 				self.queue_free()
-	pass

@@ -79,21 +79,16 @@ signal character_ready(character)
 
 # default character behavioyr drive, used for main characters
 func _start_process(delta):
-	# check which objects are within player area
-	_area_checks()
-	
 	# set player speed, gravity and animate sprite
 	_animate_player(delta)
-	
+
 	# handle collision on the x-axis
 	var collidedObject1 = move_and_collide(Vector2(velocity.x, 0))
 	_handle_collision(collidedObject1, false)
-
+	
 	# handle collision on the y-axis
 	var collidedObject2 = move_and_collide(Vector2(0, velocity.y))
 	_handle_collision(collidedObject2, velocity.y > stationaryVelocity)
-	
-	pass
 
 
 func _animate_player(delta):
@@ -202,7 +197,6 @@ func _handle_timers(delta):
 				playerSprite.visible = true
 
 		flickerTimer = 0
-	pass
 
 
 func _handle_collision(collidedObject, resetJump):
@@ -211,7 +205,6 @@ func _handle_collision(collidedObject, resetJump):
 		if (resetJump):
 			playerSpeedY = 0
 			currentJumpCount = 0
-	pass
 
 
 func _shoot_bullet(power):
@@ -233,7 +226,6 @@ func _shoot_bullet(power):
 		
 	#	Add the nodes to the current scene
 	get_tree().root.add_child(bullet)
-	pass
 
 
 func _area_checks():
@@ -251,18 +243,8 @@ func _area_checks():
 						body._daze()
 				elif ((parent.is_in_group("brick") or parent.is_in_group("power_up_brick"))):
 					parent.break_object()
-					
-					
-	var objectsInCharacterArea = get_node("CharacterArea2D").get_overlapping_bodies()
-	if (objectsInCharacterArea and objectsInCharacterArea.size() != 0):
-		for body in objectsInCharacterArea:
-			if (body and !body.is_queued_for_deletion() and health > 0):
-				var parent = body.get_parent()
-				if (parent.is_in_group("float")):
-					if (parent.canTween and currentJumpCount == 0 and movementDirection == 0):
-						self.position.x += (parent.position.x - self.position.x)
-	
-	
+
+
 	var areasInCharacterArea = get_node("CharacterArea2D").get_overlapping_areas()
 	if (areasInCharacterArea and areasInCharacterArea.size() != 0):
 		for area in areasInCharacterArea:
@@ -277,22 +259,19 @@ func _area_checks():
 								_take_damage(parent.action2Damage)
 							elif (parent.action3):
 								_take_damage(parent.action3Damage)
-	pass
 
 
 func _move_left():
 	facingDirection = -1
 	movementDirection = facingDirection
 	playerSprite.flip_h = true
-	pass
 
 
 func _move_right():
 	facingDirection = 1
 	movementDirection = facingDirection
 	playerSprite.flip_h = false
-	pass
-	
+
 
 func _take_damage(damageAmount):
 	if (!invincible):
@@ -306,13 +285,10 @@ func _take_damage(damageAmount):
 				energy = 0
 		else:
 			health -= damageAmount
-		
-	pass	
 
 
 func _daze():
 	dazed = true
-	pass
 
 
 func _reset_character_sprite_states(delta):
@@ -362,15 +338,13 @@ func _default_collision():
 	AreaRightAttackCollisionShape2D.disabled = true
 	StandCollisionShape2D.disabled = false
 	SlideCollisionShape2D.disabled = true
-	pass
-	
-	
+
+
 func _melee_attack_collision():
 	if (action2 and facingDirection == 1):
 		AreaRightAttackCollisionShape2D.disabled = false
 	elif (action2 and facingDirection == -1):
 		AreaLeftAttackCollisionShape2D.disabled = false
-	pass
 
 
 func _slide_attack_collision():
@@ -378,18 +352,16 @@ func _slide_attack_collision():
 	AreaSlideCollisionShape2D.disabled = false
 	StandCollisionShape2D.disabled = true
 	AreaStandCollisionShape2D.disabled = true
-	pass
-	
-	
+
+
 func _change_sprite_animation(animationText):
 	playerSprite.animation = gender + "_" + type + "_" + animationText
-	pass
 
 
 func _take_damage_from_saw(character, saw):
 	if (self == character and saw.is_in_group("enemy_saw")):
 		_take_damage(15)
-	pass
+
 
 # called from world scene when setting up the character
 func _subscribe_to_signals():
@@ -397,7 +369,7 @@ func _subscribe_to_signals():
 	for i in enemy_saws:
 		if (!i.is_connected("touchedSaw", self, "_take_damage_from_saw")):
 			i.connect("touchedSaw", self, "_take_damage_from_saw")
-			
+
 
 func _emit_reload():
 	if(mainCharacter):
@@ -407,7 +379,6 @@ func _emit_reload():
 		bones.position = self.get_position()  - Vector2(0, -70)
 		get_tree().root.add_child(bones)
 		self.queue_free()
-	pass
 
 
 func _emit_reposition():
@@ -415,16 +386,13 @@ func _emit_reposition():
 		emit_signal("reposition")
 	else:
 		self.queue_free()
-	pass
 
 
 func _emit_refresh_hud():
 	if (mainCharacter):
 		emit_signal("refresh_hud", self)
-	pass
-	
+
 
 func _emit_character_ready():
 	if (mainCharacter):
 		emit_signal("character_ready", self)
-	pass

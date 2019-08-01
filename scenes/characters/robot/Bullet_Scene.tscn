@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://resources/characters/robot/png/objects/Bullet_000.png" type="Texture" id=1]
-[ext_resource path="res://resources/characters/robot/png/objects/Bullet_001.png" type="Texture" id=2]
-[ext_resource path="res://resources/characters/robot/png/objects/Bullet_002.png" type="Texture" id=3]
-[ext_resource path="res://resources/characters/robot/png/objects/Bullet_003.png" type="Texture" id=4]
-[ext_resource path="res://resources/characters/robot/png/objects/Bullet_004.png" type="Texture" id=5]
+[ext_resource path="res://resources/characters/robot/objects/Bullet_000.png" type="Texture" id=1]
+[ext_resource path="res://resources/characters/robot/objects/Bullet_001.png" type="Texture" id=2]
+[ext_resource path="res://resources/characters/robot/objects/Bullet_002.png" type="Texture" id=3]
+[ext_resource path="res://resources/characters/robot/objects/Bullet_003.png" type="Texture" id=4]
+[ext_resource path="res://resources/characters/robot/objects/Bullet_004.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
@@ -16,11 +16,12 @@ func _ready():
 	._create_muzzle(muzzle)
 	set_process(true)
 	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
-	pass
+
 
 func _screen_exited():
 	self.queue_free()
-	
+
+
 func _process(delta):
 	._animate_bullet(delta)"
 

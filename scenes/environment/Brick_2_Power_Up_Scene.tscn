@@ -1,7 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/levels/deserttileset/png/objects/StoneBlock.png" type="Texture" id=1]
-
+[ext_resource path="res://resources/environment/desert/objects/StoneBlock.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -17,11 +16,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-#	nodeWithSignal.connect( String signal, Object target, String method)
-	pass
-
 func break_object():
 	var particleEffect = bricksParticle_scene.instance()
 	particleEffect.get_node(\".\").set_emitting(true)
@@ -32,7 +26,6 @@ func break_object():
 	var powerUp = energy_stone_scene.instance()
 	powerUp.position = self.position - Vector2(0, 50)
 	get_tree().root.add_child(powerUp)
-	
 	self.queue_free()
 "
 

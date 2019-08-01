@@ -1,7 +1,6 @@
 extends Node2D
 
-# Declare member variables here.
-var tweenNode
+var tweenNode # set this node inside the _ready function of child node extending this script
 
 var tweenRunning = false
 export var moveDirectionX = 0 # -1 = left, 1 = right
@@ -28,13 +27,11 @@ func _start_tween_process():
 		tweenNode.interpolate_property(self, "position", self.position, movementPosition, tweenDuration, trans_type, ease_type)
 		#start tween
 		tweenNode.start()
-	pass
 
 
 func _set_initial_movement(initPosition):
 	if (canTween):
 		movementPosition = initPosition + Vector2(moveDistanceX * moveDirectionX, moveDistanceY * moveDirectionY)
-	pass
 
 
 func _change_x_direction():
@@ -59,4 +56,3 @@ func _on_tween_completed(object, key):
 	
 	movementPosition = self.position + Vector2(moveDistanceX * moveDirectionX, moveDistanceY * moveDirectionY)
 	tweenRunning = false
-	pass

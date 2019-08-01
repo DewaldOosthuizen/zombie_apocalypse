@@ -28,4 +28,3 @@ from spreading.
   * CTRL:    - slide
   * Z:       - shoot
   * X:       - melee
-

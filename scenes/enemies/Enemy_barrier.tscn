@@ -11,12 +11,12 @@ signal touchedBarrier(enemy, barrier)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	barrierReact = get_node(\"Area2D\")
-	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	_area_check()
-	pass
+
 
 func _area_check():
 	var area = barrierReact.get_overlapping_bodies()

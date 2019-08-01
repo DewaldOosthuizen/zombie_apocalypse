@@ -31,37 +31,30 @@ var character_stats = {
 	\"character\": characters[character_selection]
 } # player character attributes
 
-onready var health_bar = get_node(\"CanvasLayer/HealthProgress\")
-onready var energy_bar = get_node(\"CanvasLayer/EnergyProgress\")
-onready var ammo_indication = get_node(\"CanvasLayer/BulletCount\")
-onready var health_label = get_node(\"CanvasLayer/HealthLabel\")
-onready var energy_label = get_node(\"CanvasLayer/EnergyLabel\")
-
 var character_node = null
-var end_door = null
+
+onready var camera = load(\"res://scenes/characters/Camera2D.tscn\").instance()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# set the game to full screen
-	OS.window_fullscreen = false
+	OS.window_fullscreen = true
 	OS.keep_screen_on = true
 	# start the first level
 	advance_to_next_level()
-	pass
-	
-	
+
+
 #Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# get player input
 	handle_events()
 	_connect_signals()
-	pass
-
+	
 
 func _connect_signals():
 	# get the end door for current level and listen for events, if main character enters the door
 	# the signal will emit and the next level will be created
-	end_door = get_tree().get_nodes_in_group(\"end_door\")
+	var end_door = get_tree().get_nodes_in_group(\"end_door\")
 	if (!end_door.empty()):
 		end_door = end_door.front()
 		# connect end door signals
@@ -73,7 +66,6 @@ func _connect_signals():
 	if (!character_node.empty()):
 		character_node = character_node.front()
 		_connect_to_character_signals(character_node)
-	pass
 
 
 func handle_events():
@@ -97,12 +89,14 @@ func handle_events():
 		# create new character
 		var newCharacter = (character_stats[\"character\"][\"scene\"]).instance()
 		newCharacter.position = character_node.position
+		character_node.remove_child(camera)
 		character_node.queue_free()
 	
 		newCharacter.gender = character_stats[\"character\"][\"gender\"]
 		_connect_to_character_signals(newCharacter)
+		camera.current = true
+		newCharacter.add_child(camera)
 		get_tree().root.add_child(newCharacter)
-	pass
 
 
 func advance_to_next_level():
@@ -134,7 +128,6 @@ func advance_to_next_level():
 	# increment level and add next level as active scene
 	active_level += 1;
 	create_level()
-	pass
 
 
 func create_level():
@@ -146,11 +139,10 @@ func create_level():
 			level_scene.connect(\"entered_level\", self, \"setup_level\")
 #		if (!level_scene.is_connected(\"exit_level\", self, \"reset_current_scene\")):
 #			level_scene.connect(\"exit_level\", self, \"reset_current_scene\")
-				
+		
 		# set the next level as the current scene
 		get_tree().root.call_deferred(\"add_child\", level_scene)
 		print(\":: started level \" + str(active_level) + \" ::\")
-	pass
 
 
 func reset_current_scene(character):
@@ -164,7 +156,6 @@ func reset_current_scene(character):
 
 	# recreate level
 	create_level()
-	pass
 
 
 func character_ready(character):
@@ -177,8 +168,6 @@ func character_ready(character):
 		character_stats[\"loaded\"] = true
 	
 	refresh_hud(character)
-	pass
-	
 
 
 func _connect_to_character_signals(character):
@@ -191,31 +180,30 @@ func _connect_to_character_signals(character):
 		character.connect(\"refresh_hud\", self, \"refresh_hud\")
 	if (!character.is_connected(\"character_ready\", self, \"character_ready\")):
 		character.connect(\"character_ready\", self, \"character_ready\")
-	pass
 
 
 func reset_character_position():
 	# reset character position to start of level
 	character_node.position.x = 300
 	character_node.position.y = 100
-	pass
-	
+
 
 func setup_character():
 	print(\"== setup character ==\")
 	
 	if (character_node):
+		character_node.remove_child(camera)
 		character_node.queue_free()
 
 	character_stats[\"loaded\"] = false
 	character_node = (character_stats[\"character\"][\"scene\"]).instance()
-	character_node.position.x = 300
-	character_node.position.y = 100
+	reset_character_position()
 	character_node.gender = character_stats[\"character\"][\"gender\"]
+	camera.current = true
+	character_node.add_child(camera)
 	get_tree().root.add_child(character_node)
 	_connect_to_character_signals(character_node)
 	refresh_hud(character_node)
-	pass
 
 
 func setup_level():
@@ -228,10 +216,15 @@ func setup_level():
 	
 		# setup character for connected level
 		setup_character()
-	pass
-	
+
 
 func refresh_hud(character):
+	var health_bar = get_node(\"CanvasLayer/HealthProgress\")
+	var energy_bar = get_node(\"CanvasLayer/EnergyProgress\")
+	var ammo_indication = get_node(\"CanvasLayer/BulletCount\")
+	var health_label = get_node(\"CanvasLayer/HealthLabel\")
+	var energy_label = get_node(\"CanvasLayer/EnergyLabel\")
+	
 	print(\"== refreshing the HUD values ==\")
 	# get character attributes for HUD - 
 	# HUD is short for Heads Up Display. In video and computer games, 
@@ -251,7 +244,7 @@ func refresh_hud(character):
 	energy_bar.max_value = character.maxEnergy
 	ammo_indication.text = \"x\" + str(character.ammo)
 	
-	var characterBulletImage = load(\"res://resources/characters/\" + character_stats[\"character\"][\"type\"] + \"/png/objects/Bullet_000.png\")
+	var characterBulletImage = load(\"res://resources/characters/\" + character_stats[\"character\"][\"type\"] + \"/objects/Bullet_000.png\")
 	get_node(\"CanvasLayer/BulletImage\").texture = characterBulletImage
 	
 	var ammo_packs = get_tree().get_nodes_in_group(\"ammo_pack\")
@@ -262,8 +255,7 @@ func refresh_hud(character):
 	if (!character_stats[\"loaded\"]):
 		character_stats[\"loaded\"] = true
 	
-	print(character_stats)
-	pass"
+	print(character_stats)"
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.866667, 0.0901961, 0.0901961, 1 )

@@ -1,8 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/levels/freetileset/png/tiles/17.png" type="Texture" id=1]
-[ext_resource path="res://resources/levels/freetileset/png/tiles/18.png" type="Texture" id=2]
-
+[ext_resource path="res://resources/environment/forest/tiles/17.png" type="Texture" id=1]
+[ext_resource path="res://resources/environment/forest/tiles/18.png" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
@@ -10,7 +9,6 @@ script/source = "extends StaticBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
-	pass # Replace with function body.
 	
 
 func _process(delta):
@@ -30,7 +28,6 @@ func _character_fell_into_pit():
 				parent._emit_reload()
 			elif (parent.is_in_group(\"character\")):
 				parent.queue_free()
-	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id=2]

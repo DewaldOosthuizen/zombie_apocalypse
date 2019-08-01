@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resources/characters/ninja/png/objects/Bullet_000.png" type="Texture" id=1]
+[ext_resource path="res://resources/characters/ninja/objects/Bullet_000.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
@@ -9,14 +9,14 @@ func _ready():
 	sprite = get_node(\"AnimatedSprite\")
 	set_process(true)
 	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
-	pass
+
 
 func _screen_exited():
 	self.queue_free()
-	
+
+
 func _process(delta):
-	._animate_bullet(delta)
-	pass"
+	._animate_bullet(delta)"
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {

@@ -1,7 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://resources/levels/graveyardtilesetnew/png/objects/Crate.png" type="Texture" id=1]
-
+[ext_resource path="res://resources/environment/graveyard/objects/Crate.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -11,13 +10,7 @@ const bricksParticle_scene = preload(\"res://scenes/environment/Brick_1_Particle
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	set_process(true)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	pass
 
 
 func break_object():
