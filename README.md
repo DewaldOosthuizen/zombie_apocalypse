@@ -7,7 +7,7 @@ from spreading.
   * R: Respawn character at level starting position
 
 
-## ROBOT CONTROLS
+### ROBOT CONTROLS
 * MOVEMENTS
   * A, LEFT ARROW        - move left
   * D, RIGHT ARROW:      - move right
@@ -17,7 +17,7 @@ from spreading.
   * Z:       - shoot
   * X:       - melee
 
-## MALE NINJA CONTROLS
+### MALE NINJA CONTROLS
 * MOVEMENTS
   * A, LEFT ARROW                                 - move left
   * D, RIGHT ARROW:                               - move right
