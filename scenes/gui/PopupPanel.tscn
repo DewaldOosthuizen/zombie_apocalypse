@@ -1,4 +1,4 @@
-[gd_scene format=2]
+[gd_scene format=3]
 
 [node name="PopupPanel" type="PopupPanel"]
 margin_right = 213.0

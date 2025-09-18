@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource path="res://resources/environment/lab/objects/Saw.png" type="Texture" id=1]
+[ext_resource path="res://resources/environment/lab/objects/Saw.png" type="Texture2D" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_tween_script.gd\"
@@ -13,7 +13,7 @@ signal touchedSaw(object, saw)
 
 func _ready():
 	tweenNode = get_node(\"Tween\")
-	playerSprite = self.get_node(\"Sprite\")
+	playerSprite = self.get_node(\"Sprite2D\")
 	reactArea = get_node(\"Area2D\")
 	._set_initial_movement(self.position)
 	set_process(true)
@@ -50,7 +50,7 @@ radius = 70.8964
 position = Vector2( 1, 0 )
 script = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 1 )
 

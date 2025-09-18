@@ -212,7 +212,7 @@ func _shoot_bullet(power):
 	var bullet = bullet_scene.instantiate()
 	bullet.power = power
 	bullet.damage = action1Damage
-	var bulletSprite = bullet.get_node("AnimatedSprite")
+	var bulletSprite = bullet.get_node("AnimatedSprite2D")
 	ammo -= 1
 	
 	if (!playerSprite.flip_h):

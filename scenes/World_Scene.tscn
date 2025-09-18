@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource path="res://resources/hud/health/Health1.png" type="Texture" id=1]
-[ext_resource path="res://resources/hud/power/Power1.png" type="Texture" id=2]
+[ext_resource path="res://resources/hud/health/Health1.png" type="Texture2D" id=1]
+[ext_resource path="res://resources/hud/power/Power1.png" type="Texture2D" id=2]
 [ext_resource path="res://scenes/gui/PopupPanel.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]

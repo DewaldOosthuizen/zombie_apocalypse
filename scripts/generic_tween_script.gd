@@ -19,14 +19,14 @@ func _start_tween_process():
 		tweenRunning = true
 		
 		# check if the signal is connected
-		if (!tweenNode.is_connected("tween_completed", Callable(self, "_on_tween_completed"))):
+		if (!tweenNode.is_connected("finished", Callable(self, "_on_tween_completed"))):
 			# connect the signal, once tween is completed it will call the _on_tween_completed method
-			tweenNode.connect("tween_completed", Callable(self, "_on_tween_completed"))
+			tweenNode.connect("finished", Callable(self, "_on_tween_completed"))
 		
 		# tween properties
-		tweenNode.interpolate_property(self, "position", self.position, movementPosition, tweenDuration, trans_type, ease_type)
-		#start tween
-		tweenNode.start()
+		var tween = tweenNode.tween_property(self, "position", movementPosition, tweenDuration)
+		tween.set_trans(trans_type)
+		tween.set_ease(ease_type)
 
 
 func _set_initial_movement(initPosition):

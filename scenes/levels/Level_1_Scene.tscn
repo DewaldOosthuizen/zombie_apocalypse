@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=25 format=3]
 
-[ext_resource path="res://resources/environment/forest/BG.png" type="Texture" id=1]
+[ext_resource path="res://resources/environment/forest/BG.png" type="Texture2D" id=1]
 [ext_resource path="res://scenes/environment/End_Door_Scene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/environment/Flora_5_scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/environment/Flora_6_scene.tscn" type="PackedScene" id=4]
@@ -111,25 +111,25 @@ script = SubResource( 1 )
 
 [node name="Backgrounds" type="Node2D" parent="."]
 
-[node name="BG1" type="Sprite" parent="Backgrounds"]
+[node name="BG1" type="Sprite2D" parent="Backgrounds"]
 position = Vector2( -127.05, -1409.37 )
 scale = Vector2( 4.52243, 2.80085 )
 texture = ExtResource( 1 )
 offset = Vector2( 2703.29, 423.062 )
 
-[node name="BG2" type="Sprite" parent="Backgrounds"]
+[node name="BG2" type="Sprite2D" parent="Backgrounds"]
 position = Vector2( -127.05, -1409.37 )
 scale = Vector2( 4.52653, 2.80253 )
 texture = ExtResource( 1 )
 offset = Vector2( 1702.8, 422.583 )
 
-[node name="BG3" type="Sprite" parent="Backgrounds"]
+[node name="BG3" type="Sprite2D" parent="Backgrounds"]
 position = Vector2( -127.05, -1409.37 )
 scale = Vector2( 4.5186, 2.80372 )
 texture = ExtResource( 1 )
 offset = Vector2( 705.559, 422.245 )
 
-[node name="BG4" type="Sprite" parent="Backgrounds"]
+[node name="BG4" type="Sprite2D" parent="Backgrounds"]
 position = Vector2( -127.05, -1409.37 )
 scale = Vector2( 4.50749, 2.80372 )
 texture = ExtResource( 1 )
