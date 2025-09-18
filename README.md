@@ -1,6 +1,17 @@
 # Zombie Apocalypse
-Zombie Apocalypse is created with Godot 3. A 2D game where the player can play with multiple characters to try and stop a zombie apocalypse 
+Zombie Apocalypse is created with Godot 4. A 2D game where the player can play with multiple characters to try and stop a zombie apocalypse 
 from spreading.
+
+## Requirements
+- Godot 4.x or later
+
+## Migration to Godot 4
+This project has been updated from Godot 3 to Godot 4, including:
+- Updated node types (CharacterBody2D, AnimatedSprite2D, Sprite2D)
+- Modernized GDScript syntax (@export, @onready, Callable)
+- Updated signal connections and scene instantiation
+- DisplayServer API for fullscreen handling
+- Updated Tween API
 
 ## CONTROLS
   * ESC: Exit fullscreen, if not in full screen then exit game
