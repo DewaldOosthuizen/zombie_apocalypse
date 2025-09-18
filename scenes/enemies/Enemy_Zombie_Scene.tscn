@@ -106,8 +106,8 @@ var defaultMaxSpeed
 var stopMove = false
 var no_collision_group = [\"bullet\"]
 
-onready var healthBar = get_node(\"HealthProgressBar\")
-onready var energyBar = get_node(\"EnergyProgressBar\")
+@onready var healthBar = get_node(\"HealthProgressBar\")
+@onready var energyBar = get_node(\"EnergyProgressBar\")
 
 
 

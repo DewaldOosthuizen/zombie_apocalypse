@@ -42,7 +42,7 @@ const ammo_scene = preload(\"res://scenes/Ammo_Scene.tscn\")
 
 var random = null;
 
-onready var power_up_scenes = [
+@onready var power_up_scenes = [
 	energy_stone_scene, 
 	ammo_scene, 
 	energy_stone_scene, 
@@ -64,13 +64,13 @@ func _ready():
 #	pass
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instance()
+	var particleEffect = bricksParticle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)
 	
 	# create actual power up 
-	var powerUp = power_up_scenes[random].instance()
+	var powerUp = power_up_scenes[random].instantiate()
 	powerUp.position = self.position
 	get_tree().root.add_child(powerUp)
 	
@@ -95,7 +95,7 @@ func _process(delta):
 
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instance()
+	var particleEffect = bricksParticle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)

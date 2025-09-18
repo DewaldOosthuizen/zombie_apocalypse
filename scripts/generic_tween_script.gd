@@ -3,13 +3,13 @@ extends Node2D
 var tweenNode # set this node inside the _ready function of child node extending this script
 
 var tweenRunning = false
-export var moveDirectionX = 0 # -1 = left, 1 = right
-export var moveDirectionY = 0 # -1 = up, 1 = down
-export var canTween = false
-export var moveDistanceX = 0 
-export var moveDistanceY = 0
+@export var moveDirectionX = 0 # -1 = left, 1 = right
+@export var moveDirectionY = 0 # -1 = up, 1 = down
+@export var canTween = false
+@export var moveDistanceX = 0 
+@export var moveDistanceY = 0
 var movementPosition
-export var tweenDuration = 4 # duration of tween moving from position
+@export var tweenDuration = 4 # duration of tween moving from position
 var trans_type = Tween.TRANS_LINEAR
 var ease_type = Tween.EASE_IN_OUT
 
@@ -19,9 +19,9 @@ func _start_tween_process():
 		tweenRunning = true
 		
 		# check if the signal is connected
-		if (!tweenNode.is_connected("tween_completed", self, "_on_tween_completed")):
+		if (!tweenNode.is_connected("tween_completed", Callable(self, "_on_tween_completed"))):
 			# connect the signal, once tween is completed it will call the _on_tween_completed method
-			tweenNode.connect("tween_completed", self, "_on_tween_completed")
+			tweenNode.connect("tween_completed", Callable(self, "_on_tween_completed"))
 		
 		# tween properties
 		tweenNode.interpolate_property(self, "position", self.position, movementPosition, tweenDuration, trans_type, ease_type)

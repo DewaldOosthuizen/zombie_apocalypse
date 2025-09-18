@@ -33,13 +33,13 @@ var character_stats = {
 
 var character_node = null
 
-onready var camera = load(\"res://scenes/characters/Camera2D.tscn\").instance()
+@onready var camera = load(\"res://scenes/characters/Camera2D.tscn\").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# set the game to full screen
-	OS.window_fullscreen = true
-	OS.keep_screen_on = true
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	DisplayServer.screen_set_keep_on(true)
 	# start the first level
 	advance_to_next_level()
 
@@ -58,8 +58,8 @@ func _connect_signals():
 	if (!end_door.empty()):
 		end_door = end_door.front()
 		# connect end door signals
-		if(!end_door.is_connected(\"enteredEndDoor\", self, \"advance_to_next_level\")):
-			end_door.connect(\"enteredEndDoor\", self, \"advance_to_next_level\")
+		if(!end_door.is_connected(\"enteredEndDoor\", Callable(self, \"advance_to_next_level\"))):
+			end_door.connect(\"enteredEndDoor\", Callable(self, \"advance_to_next_level\"))
 			print(\":: end door connected ::\")
 			
 	character_node = get_tree().get_nodes_in_group(\"main_character\")
@@ -87,7 +87,7 @@ func handle_events():
 		character_stats[\"character\"] = characters[character_selection]
 			
 		# create new character
-		var newCharacter = (character_stats[\"character\"][\"scene\"]).instance()
+		var newCharacter = (character_stats[\"character\"][\"scene\"]).instantiate()
 		newCharacter.position = character_node.position
 		character_node.remove_child(camera)
 		character_node.queue_free()
@@ -134,9 +134,9 @@ func create_level():
 	print(\"== create level ==\")
 	var level_scene = playable_levels[active_level - 1]
 	if (level_scene):
-		level_scene = level_scene.instance()
-		if (!level_scene.is_connected(\"entered_level\", self, \"setup_level\")):
-			level_scene.connect(\"entered_level\", self, \"setup_level\")
+		level_scene = level_scene.instantiate()
+		if (!level_scene.is_connected(\"entered_level\", Callable(self, \"setup_level\"))):
+			level_scene.connect(\"entered_level\", Callable(self, \"setup_level\"))
 #		if (!level_scene.is_connected(\"exit_level\", self, \"reset_current_scene\")):
 #			level_scene.connect(\"exit_level\", self, \"reset_current_scene\")
 		
@@ -172,14 +172,14 @@ func character_ready(character):
 
 func _connect_to_character_signals(character):
 	# connect character signals
-	if (!character.is_connected(\"reload\", self, \"reset_current_scene\")):
-		character.connect(\"reload\", self, \"reset_current_scene\")
-	if (!character.is_connected(\"reposition\", self, \"reset_character_position\")):
-		character.connect(\"reposition\", self, \"reset_character_position\")
-	if (!character.is_connected(\"refresh_hud\", self, \"refresh_hud\")):
-		character.connect(\"refresh_hud\", self, \"refresh_hud\")
-	if (!character.is_connected(\"character_ready\", self, \"character_ready\")):
-		character.connect(\"character_ready\", self, \"character_ready\")
+	if (!character.is_connected(\"reload\", Callable(self, \"reset_current_scene\"))):
+		character.connect(\"reload\", Callable(self, \"reset_current_scene\"))
+	if (!character.is_connected(\"reposition\", Callable(self, \"reset_character_position\"))):
+		character.connect(\"reposition\", Callable(self, \"reset_character_position\"))
+	if (!character.is_connected(\"refresh_hud\", Callable(self, \"refresh_hud\"))):
+		character.connect(\"refresh_hud\", Callable(self, \"refresh_hud\"))
+	if (!character.is_connected(\"character_ready\", Callable(self, \"character_ready\"))):
+		character.connect(\"character_ready\", Callable(self, \"character_ready\"))
 
 
 func reset_character_position():
@@ -196,7 +196,7 @@ func setup_character():
 		character_node.queue_free()
 
 	character_stats[\"loaded\"] = false
-	character_node = (character_stats[\"character\"][\"scene\"]).instance()
+	character_node = (character_stats[\"character\"][\"scene\"]).instantiate()
 	reset_character_position()
 	character_node.gender = character_stats[\"character\"][\"gender\"]
 	camera.current = true

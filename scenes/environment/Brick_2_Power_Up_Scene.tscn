@@ -17,13 +17,13 @@ func _ready():
 
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instance()
+	var particleEffect = bricksParticle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)
 	
 	# create actual power up
-	var powerUp = energy_stone_scene.instance()
+	var powerUp = energy_stone_scene.instantiate()
 	powerUp.position = self.position - Vector2(0, 50)
 	get_tree().root.add_child(powerUp)
 	self.queue_free()
