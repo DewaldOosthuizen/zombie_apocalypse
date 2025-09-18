@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 # variables
 var sprite
@@ -42,7 +42,7 @@ func _set_speed(delta):
 
 
 func _create_muzzle(muzzle_scene):
-	var muzzle = muzzle_scene.instance()
+	var muzzle = muzzle_scene.instantiate()
 	
 	if (movementDirection == 1):
 		muzzle.position = self.position - Vector2(-20, 1)

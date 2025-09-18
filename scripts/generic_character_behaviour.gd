@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
 var playerSprite # reference to character sprite image
@@ -17,18 +17,18 @@ var movementMultiplier = 800 # character movement multiplier
 var stationaryVelocity = 0.2 # default velocity on ground with gravity sits at 0.22, anything under means the character is in the air
 var velocity = Vector2(0, 0)
 
-export var maxJumpCount = 1 # characters can only jump once by default
-export var maxSpeed = 350 # character max speed, defaulted to 350 
-export var ammo = 0 # default starting ammo for characters
-export var energy = 0 # energy gained from energy stones
-export var maxEnergy = 100 # character max energy
-export var health = 100 # character starts with 100 % health
-export var maxHealth = 100 # character max health %
-export var action1Damage = 30 # damage dealt with action 1
-export var action2Damage = 20 # damage dealt with action 2
-export var action3Damage = 10 # damage dealt with action 3
-export var characterScale = Vector2(1, 1)
-export var mainCharacter = false # indicate whether the character should have mainCharacter features
+@export var maxJumpCount = 1 # characters can only jump once by default
+@export var maxSpeed = 350 # character max speed, defaulted to 350 
+@export var ammo = 0 # default starting ammo for characters
+@export var energy = 0 # energy gained from energy stones
+@export var maxEnergy = 100 # character max energy
+@export var health = 100 # character starts with 100 % health
+@export var maxHealth = 100 # character max health %
+@export var action1Damage = 30 # damage dealt with action 1
+@export var action2Damage = 20 # damage dealt with action 2
+@export var action3Damage = 10 # damage dealt with action 3
+@export var characterScale = Vector2(1, 1)
+@export var mainCharacter = false # indicate whether the character should have mainCharacter features
 
 # Timers
 var deathTime = 3
@@ -143,7 +143,7 @@ func _handle_timers(delta):
 		if (!invincible):
 			invincible = true
 			# create instance of blodd and add it to the scene
-			var particleEffect = bloodParticle_scene.instance()
+			var particleEffect = bloodParticle_scene.instantiate()
 			particleEffect.modulate = blood_colour
 			particleEffect.get_node(".").set_emitting(true)
 			particleEffect.position = self.get_position()
@@ -184,7 +184,7 @@ func _handle_timers(delta):
 				playerSprite.modulate = Color("#1d68c9") # blues
 			else:
 				playerSprite.modulate = Color("#ffffff") # normal
-		elif ((stepify(health, 0.2) / stepify(maxHealth, 0.2) * 100) < 40):
+		elif ((snapped(health, 0.2) / snapped(maxHealth, 0.2) * 100) < 40):
 			# indicate that health has dropped below 40%
 			if(playerSprite.modulate == Color("#ffffff")):
 				playerSprite.modulate = Color("#dd1717") # red
@@ -209,10 +209,10 @@ func _handle_collision(collidedObject, resetJump):
 
 func _shoot_bullet(power):
 	action1 = true
-	var bullet = bullet_scene.instance()
+	var bullet = bullet_scene.instantiate()
 	bullet.power = power
 	bullet.damage = action1Damage
-	var bulletSprite = bullet.get_node("AnimatedSprite")
+	var bulletSprite = bullet.get_node("AnimatedSprite2D")
 	ammo -= 1
 	
 	if (!playerSprite.flip_h):
@@ -367,15 +367,15 @@ func _take_damage_from_saw(character, saw):
 func _subscribe_to_signals():
 	var enemy_saws = get_tree().get_nodes_in_group("enemy_saw")
 	for i in enemy_saws:
-		if (!i.is_connected("touchedSaw", self, "_take_damage_from_saw")):
-			i.connect("touchedSaw", self, "_take_damage_from_saw")
+		if (!i.is_connected("touchedSaw", Callable(self, "_take_damage_from_saw"))):
+			i.connect("touchedSaw", Callable(self, "_take_damage_from_saw"))
 
 
 func _emit_reload():
 	if(mainCharacter):
 		emit_signal("reload", self)
 	else:
-		var bones = bone_scene.instance()
+		var bones = bone_scene.instantiate()
 		bones.position = self.get_position()  - Vector2(0, -70)
 		get_tree().root.add_child(bones)
 		self.queue_free()
