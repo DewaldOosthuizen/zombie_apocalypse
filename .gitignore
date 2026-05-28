@@ -18,3 +18,7 @@ data_*/
 *.tmp
 
 # End of https://www.gitignore.io/api/godot
+# workspace-orchestrator managed entries
+.hermes_tmp_prompt.txt
+.understand-anything/intermediate/
+.understand-anything/diff-overlay.json
