@@ -1,3 +1,30 @@
+# Created by https://www.gitignore.io/api/godot
+# Edit at https://www.gitignore.io/?templates=godot
+
+### Godot ###
+
+# Godot 4+ specific ignores
+.godot/
+
 # Godot export configuration — contains machine-specific output paths.
 # Each contributor configures their own export targets locally.
 export_presets.cfg
+
+# Godot 3 specific ignores (legacy)
+.import/
+export.cfg
+
+# Mono-specific ignores
+.mono/
+data_*/
+
+# Temporary files
+*.tmp
+
+# End of https://www.gitignore.io/api/godot
+
+
+# workspace-orchestrator managed entries
+.hermes_tmp_prompt.txt
+.understand-anything/intermediate/
+.understand-anything/diff-overlay.json
