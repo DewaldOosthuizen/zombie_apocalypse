@@ -122,3 +122,21 @@ The game loads to Level 1 automatically with a character that can be controlled 
 - Game initialization: ~1-2 seconds in headless mode
 - Level loading: Instantaneous for included levels
 - Memory usage: Lightweight, suitable for testing in CI environments
+
+<!-- graph-tools-start -->
+
+## Code Exploration and Token Efficiency
+
+If `.codegraph/` exists, use CodeGraph tools FIRST for symbol lookup,
+context gathering, and call tracing before opening any source files.
+
+```bash
+codegraph context "<task description>" -p .
+codegraph query "<ClassName or function>" -p .
+codegraph affected <changed-files> -p .   # find affected tests
+codegraph sync .                          # after any code changes
+```
+
+Fall back to grep/file reading only when these tools return insufficient results.
+
+<!-- graph-tools-end -->
