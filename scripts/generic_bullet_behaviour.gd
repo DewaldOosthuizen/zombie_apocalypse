@@ -9,11 +9,17 @@ var power = 0
 var damage = 30
 
 var velocity = Vector2(0, 0)
-var noValidCollision = []
+var _area2d: Area2D          # cached in _ready() to avoid per-frame scene tree traversal
+var _collision_shape: CollisionShape2D  # cached in _ready() to avoid per-frame scene tree traversal
+var _non_brick_hit_count: int = 0  # replaces noValidCollision array; counts non-brick surface hits
 var deltaTime = 0
 
 const bricksParticle_scene = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
 const blood_scene = preload("res://scenes/Blood_Particle_Scene.tscn")
+
+func _ready():
+	_area2d = get_node("Area2D")
+	_collision_shape = get_node("CollisionShape2D")
 
 func _animate_bullet(delta):
 	deltaTime += delta
@@ -32,7 +38,7 @@ func _animate_bullet(delta):
 	_remove_if_brick(collider1)
 	
 	# Ensures bullet disapears upon hitting invalid objects
-	if (noValidCollision.size() == 2):
+	if (_non_brick_hit_count >= 2):
 		self.queue_free()
 
 
@@ -68,14 +74,15 @@ func _remove_if_brick(object):
 			if (power < 1):
 				self.queue_free()
 		else:
-			noValidCollision.append(true)
+			_non_brick_hit_count += 1
 
 
 func _check_collision_objects():
-	var area = get_node("Area2D").get_overlapping_bodies()
+	var area = _area2d.get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
 			if (body.is_in_group("enemy_character")):
-				get_node("CollisionShape2D").disabled = true
+				_collision_shape.disabled = true
 				body._take_damage(damage + (5 * power)) #take damage and increase damage based on power level of bullet
 				self.queue_free()
+				return

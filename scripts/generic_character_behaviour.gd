@@ -71,6 +71,9 @@ var AreaRightAttackCollisionShape2D
 var StandCollisionShape2D
 var SlideCollisionShape2D
 
+var _attack_area: Area2D      # cached in _setup_collision() to avoid per-frame scene tree traversal
+var _character_area: Area2D   # cached in _setup_collision() to avoid per-frame scene tree traversal
+
 #signals
 signal reload(character)
 signal reposition()
@@ -229,7 +232,7 @@ func _shoot_bullet(power):
 
 
 func _area_checks():
-	var objectsInAttackArea = get_node("AttackArea2D").get_overlapping_bodies()
+	var objectsInAttackArea = _attack_area.get_overlapping_bodies()
 	if (objectsInAttackArea and objectsInAttackArea.size() != 0):
 		for body in objectsInAttackArea:
 			if (body and !body.is_queued_for_deletion() and health > 0):
@@ -245,7 +248,7 @@ func _area_checks():
 					parent.break_object()
 
 
-	var areasInCharacterArea = get_node("CharacterArea2D").get_overlapping_areas()
+	var areasInCharacterArea = _character_area.get_overlapping_areas()
 	if (areasInCharacterArea and areasInCharacterArea.size() != 0):
 		for area in areasInCharacterArea:
 			if (area and !area.is_queued_for_deletion() and health > 0):
@@ -328,6 +331,8 @@ func _setup_collision():
 	AreaRightAttackCollisionShape2D = get_node("AttackArea2D/RightAttackCollisionShape2D")
 	StandCollisionShape2D = get_node("StandCollisionShape2D")
 	SlideCollisionShape2D = get_node("SlideCollisionShape2D")
+	_attack_area = get_node("AttackArea2D")
+	_character_area = get_node("CharacterArea2D")
 	_default_collision()
 	
 
