@@ -40,3 +40,20 @@ This project has been updated from Godot 3 to Godot 4, including:
   * X:       - melee
  
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
+
+## Running Tests
+
+This project uses [GUT](https://github.com/bitwes/Gut) for unit testing.
+
+Prerequisites: Godot 4.x installed and on your PATH.
+
+Run all tests headlessly:
+
+    godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+      -gdir=res://tests \
+      -gprefix=test_ \
+      -gsuffix=.gd \
+      -gexit
+
+Tests can also be run from inside the Godot editor via the GUT panel
+(Scene > GUT > Run All).

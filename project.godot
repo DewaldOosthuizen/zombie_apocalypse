@@ -73,6 +73,10 @@ respawn={
  ]
 }
 
+[editor_plugins]
+
+enabled=["res://addons/gut/addons/gut/plugin.cfg"]
+
 [rendering]
 
 quality/intended_usage/framebuffer_allocation=0
