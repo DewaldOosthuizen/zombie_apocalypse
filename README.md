@@ -38,7 +38,31 @@ This project has been updated from Godot 3 to Godot 4, including:
   * CTRL:    - slide
   * Z:       - shoot
   * X:       - melee
- 
+
+### ADVENTURE GIRL CONTROLS
+
+> **Status:** Work in progress — sprite assets are present
+> (Idle, Dead, Jump, Melee, Run, Shoot, Slide) but no playable scene exists yet.
+> Controls below reflect the shared input map and will be confirmed once the
+> character scene is implemented.
+
+* MOVEMENTS
+  * A, LEFT ARROW        - move left
+  * D, RIGHT ARROW       - move right
+  * W, SPACE, UP ARROW   - jump
+* ATTACKS
+  * CTRL   - slide
+  * Z      - shoot
+  * X      - melee
+
+## Characters
+
+| Character      | Scene file present | Animations available                          | Status           |
+|----------------|--------------------|-----------------------------------------------|------------------|
+| Robot          | Yes                | Full set                                      | Playable         |
+| Male Ninja     | Yes                | Full set                                      | Playable         |
+| Adventure Girl | No                 | Idle, Dead, Jump, Melee, Run, Shoot, Slide    | Work in progress |
+
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
 
 ## Running Tests
