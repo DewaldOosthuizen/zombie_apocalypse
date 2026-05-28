@@ -1,0 +1,15 @@
+name: Lint — no absolute home paths
+
+on: [push, pull_request]
+
+jobs:
+  check-home-paths:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject absolute home-directory paths in tracked files
+        run: |
+          if git grep -rE '(/home/[^/]+/|C:\\Users\\[^\\]+\\)' -- ':!*.md' ':!openspec/'; then
+            echo "ERROR: Absolute home-directory path detected in a tracked file."
+            exit 1
+          fi
