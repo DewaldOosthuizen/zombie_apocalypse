@@ -48,3 +48,27 @@ func test_set_initial_movement_computes_correct_target_x():
 	_tween._set_initial_movement(Vector2(50, 50))
 	assert_eq(_tween.movementPosition, Vector2(150, 50),
 		"target X must be origin.x + distance * direction")
+
+func test_on_tween_completed_resets_running_flag():
+	_tween.tweenRunning = true
+	_tween._on_tween_completed()
+	assert_false(_tween.tweenRunning,
+		"tweenRunning must be cleared after tween completes")
+
+func test_on_tween_completed_clears_active_tween():
+	_tween._active_tween = null  # no real Tween needed for this check
+	_tween.tweenRunning = true
+	_tween._on_tween_completed()
+	assert_null(_tween._active_tween,
+		"_active_tween must be null after completion")
+
+func test_on_tween_completed_updates_movement_position():
+	_tween.moveDirectionX = 1
+	_tween.moveDirectionY = 0
+	_tween.moveDistanceX = 50
+	_tween.moveDistanceY = 0
+	_tween.position = Vector2(100, 100)
+	_tween.tweenRunning = true
+	_tween._on_tween_completed()
+	assert_eq(_tween.movementPosition, Vector2(150, 100),
+		"movement position must update after tween completes")
