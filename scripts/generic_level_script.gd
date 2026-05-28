@@ -1,12 +1,12 @@
 extends Node2D
 
 # Declare member variables here. Examples:
-signal exit_level()
-signal entered_level()
+signal level_exited()
+signal level_entered()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	emit_signal("entered_level")
+	emit_signal("level_entered")
 
 func _exit_tree():
-	emit_signal("exit_level")
+	emit_signal("level_exited")

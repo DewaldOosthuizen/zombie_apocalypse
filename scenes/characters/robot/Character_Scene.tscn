@@ -93,10 +93,10 @@ func _ready():
 #		ammo = 10 # starting ammo
 #		energy = 0 # starting energy
 #		health = 100 # starting health
-#		mainCharacter = true # is main character
-#		action1Damage = 40
-#		action2Damage = 20
-#		action3Damage = 10
+#		main_character = true # is main character
+#		action1_damage = 40
+#		action2_damage = 20
+#		action3_damage = 10
 		velocity = Vector2(0, 0)
 		facingDirection = 1
 		movementDirection = 1
@@ -150,8 +150,8 @@ func control_character(delta):
 			repeatFrames = false;
 			._change_sprite_animation(\"slide\")
 			._slide_attack_collision()
-		elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !action3):
-			playerSpeedY = -JUMPFORCE
+		elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < max_jump_count and !action3):
+			player_speed_y = -JUMPFORCE
 			currentJumpCount += 1
 			._change_sprite_animation(\"jump\")
 			playerSprite.frame = 0
@@ -253,8 +253,8 @@ z_index = 10
 script = SubResource( 1 )
 ammo = 10
 maxEnergy = 200
-action1Damage = 40
-mainCharacter = true
+action1_damage = 40
+main_character = true
 
 [node name="CharacterArea2D" type="Area2D" parent="."]
 position = Vector2( 1.26428, -2.04825 )
