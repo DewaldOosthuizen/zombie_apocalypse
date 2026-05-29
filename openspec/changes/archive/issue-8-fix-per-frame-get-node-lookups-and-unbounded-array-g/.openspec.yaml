@@ -1,0 +1,12 @@
+schema: spec-driven
+id: issue-8-fix-per-frame-get-node-lookups-and-unbounded-array-g
+title: "Fix per-frame get_node() lookups and unbounded array growth in bullet/character scripts"
+created: "2026-05-28"
+status: proposed
+issue: 8
+repository: DewaldOosthuizen/zombie_apocalypse
+priority: medium
+category: code-optimisation/performance
+affected_files:
+  - scripts/generic_bullet_behaviour.gd
+  - scripts/generic_character_behaviour.gd

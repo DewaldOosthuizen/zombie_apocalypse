@@ -6,7 +6,7 @@
 script/source = "extends Node2D
 
 # Declare member variables here.
-const bricksParticle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
+const bricks_particle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
 const energy_stone_scene = preload(\"res://scenes/Energy_Stone_Scene.tscn\")
 
 
@@ -17,7 +17,7 @@ func _ready():
 
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instantiate()
+	var particleEffect = bricks_particle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)

@@ -120,13 +120,13 @@ func _ready():
 	bubbleSpaceReact = get_node(\"React - Area2D\")
 	bubbleSpaceStopReact = get_node(\"StopReact - Area2D2\")
 	repeatFrames = true
-	defaultMaxSpeed = maxSpeed
+	defaultMaxSpeed = max_speed
 	invincibleTime = 1
 	dazedTime = 1.2
 	healthBar.max_value = maxHealth
 	energyBar.max_value = maxEnergy
 	blood_colour = Color(\"#6a4040\")
-	self.scale = characterScale
+	self.scale = character_scale
 	
 	if (gender == 'female'):
 		playerSprite.scale = Vector2(0.13, 0.13)
@@ -163,7 +163,7 @@ func _physics_process(delta):
 		
 		if (collidedObject2 and health > 0):
 			if (collidedObject2.normal == Vector2(0,-1)):
-				playerSpeedY = 0
+				player_speed_y = 0
 			if (collidedObject2.normal == Vector2(1,0) and !_check_collision_group(collidedObject2.collider)):
 				._move_right()
 			elif (collidedObject2.normal == Vector2(-1,0) and !_check_collision_group(collidedObject2.collider)):
@@ -197,7 +197,7 @@ func _process(delta):
 		else:
 			._change_sprite_animation(\"walk\")
 			repeatFrames = true
-			maxSpeed = defaultMaxSpeed
+			max_speed = defaultMaxSpeed
 
 
 func _check_collision_group(collider):
@@ -230,8 +230,8 @@ func _areaCheck():
 							facingDirection = 1
 						movementDirection = 0
 					
-					if (maxSpeed <= defaultMaxSpeed):
-						maxSpeed *= 2
+					if (max_speed <= defaultMaxSpeed):
+						max_speed *= 2
 				elif (body.is_in_group(\"enemy_saw\")):
 					change_direction(self, body)
 		
@@ -327,15 +327,15 @@ bg_color = Color( 0.113725, 0.223529, 0.647059, 1 )
 position = Vector2( -0.0189209, 1.0983 )
 scale = Vector2( 1.2, 1.2 )
 script = SubResource( 1 )
-maxJumpCount = 0
-maxSpeed = 150
+max_jump_count = 0
+max_speed = 150
 energy = 10
 maxEnergy = 10
 health = 20
 maxHealth = 20
-action1Damage = 0
-action3Damage = 0
-characterScale = Vector2( 1.2, 1.2 )
+action1_damage = 0
+action3_damage = 0
+character_scale = Vector2( 1.2, 1.2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 editor/display_folded = true
