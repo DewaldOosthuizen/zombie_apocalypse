@@ -10,6 +10,7 @@ script/source = "extends Node2D
 var active_level = 0 # starting level
 var ninja_scene = preload(\"res://scenes/characters/ninja/Character_Scene.tscn\")
 var robot_scene = preload(\"res://scenes/characters/robot/Character_Scene.tscn\")
+var adventure_girl_scene = preload(\"res://scenes/characters/adventure_girl/Character_Scene.tscn\")
 
 var playable_levels = [
 	preload(\"res://scenes/levels/Level_1_Scene.tscn\"),
@@ -20,7 +21,8 @@ var character_selection = 0
 var characters = [
 	{\"type\": \"ninja\", \"gender\": \"female\", \"scene\": ninja_scene}, 
 	{\"type\": \"ninja\", \"gender\": \"male\", \"scene\": ninja_scene},
-	{\"type\": \"robot\", \"gender\": \"male\", \"scene\": robot_scene}
+	{\"type\": \"robot\", \"gender\": \"male\", \"scene\": robot_scene},
+	{\"type\": \"adventure_girl\", \"gender\": \"female\", \"scene\": adventure_girl_scene}
 ]
 
 var character_stats = {
