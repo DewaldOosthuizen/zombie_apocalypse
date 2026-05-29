@@ -8,6 +8,24 @@ func before_each():
 func after_each():
 	_char.free()
 
+func test_shoot_bullet_with_null_bullet_scene_pushes_error_and_returns():
+	_char.bullet_scene = null
+	_char.action1 = false
+	_char.ammo = 5
+	_char._shoot_bullet(10)
+	assert_false(_char.action1, "action1 must remain false when bullet_scene is null")
+	assert_eq(_char.ammo, 5, "ammo must not be decremented when bullet_scene is null")
+
+func test_shoot_bullet_with_zero_ammo_is_noop():
+	# Use a non-null sentinel for bullet_scene — the ammo guard fires before
+	# instantiate() is ever called, so we only need a non-null reference here.
+	_char.bullet_scene = load("res://scripts/generic_character_behaviour.gd")
+	_char.action1 = false
+	_char.ammo = 0
+	_char._shoot_bullet(10)
+	assert_false(_char.action1, "action1 must remain false when ammo is 0")
+	assert_eq(_char.ammo, 0, "ammo must not go negative when already 0")
+
 func test_take_damage_reduces_health_when_no_energy():
 	_char.health = 100
 	_char.energy = 0
