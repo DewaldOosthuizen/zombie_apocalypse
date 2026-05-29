@@ -4,5 +4,5 @@ repos:
       - id: no-home-paths
         name: No absolute home-directory paths
         language: pygrep
-        entry: '(/home/[^/]+/|C:\\Users\\[^\\]+\\)'
+        entry: '(/[h]ome/[^/]+/|C:\\[U]sers\\[^\\]+\\)'
         exclude: '^(.*\.md|openspec/).*'

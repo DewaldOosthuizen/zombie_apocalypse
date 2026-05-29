@@ -20,7 +20,7 @@
       "type": "pipeline",
       "name": "lint-paths.yml",
       "filePath": ".github/workflows/lint-paths.yml",
-      "summary": "GitHub Actions CI workflow that runs on push and pull_request to reject any tracked file containing absolute home-directory paths (e.g. /home/<user>/ or C:\\Users\\). Excludes Markdown files and the openspec/ directory from the check.",
+      "summary": "GitHub Actions CI workflow that runs on push and pull_request to reject any tracked file containing absolute home-directory paths on Unix-like or Windows systems. Excludes Markdown files and the openspec/ directory from the check.",
       "tags": [
         "ci",
         "github-actions",
