@@ -28,3 +28,5 @@ data_*/
 .hermes_tmp_prompt.txt
 .understand-anything/intermediate/
 .understand-anything/diff-overlay.json
+# workspace-orchestrator managed entries
+graphify-out/cache/

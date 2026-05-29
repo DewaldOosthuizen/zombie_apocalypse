@@ -35,7 +35,7 @@ func _ready():
 script/source = "extends Node2D
 
 # Declare member variables here.
-const bricksParticle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
+const bricks_particle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
 const energy_stone_scene = preload(\"res://scenes/Energy_Stone_Scene.tscn\")
 const health_scene = preload(\"res://scenes/Health_Scene.tscn\")
 const ammo_scene = preload(\"res://scenes/Ammo_Scene.tscn\")
@@ -64,7 +64,7 @@ func _ready():
 #	pass
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instantiate()
+	var particleEffect = bricks_particle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)
@@ -81,7 +81,7 @@ func break_object():
 script/source = "extends Node2D
 
 # Declare member variables here.
-const bricksParticle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
+const bricks_particle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -95,7 +95,7 @@ func _process(delta):
 
 
 func break_object():
-	var particleEffect = bricksParticle_scene.instantiate()
+	var particleEffect = bricks_particle_scene.instantiate()
 	particleEffect.get_node(\".\").set_emitting(true)
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)
@@ -272,56 +272,56 @@ position = Vector2( 9243.88, -141.219 )
 
 [node name="Enemy_saw" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 9390.55, 723.597 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 370
-tweenDuration = 2
+move_direction_y = -1
+can_tween = true
+move_distance_y = 370
+tween_duration = 2
 
 [node name="Enemy_saw2" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 9974.35, 344.071 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 370
-tweenDuration = 2
+move_direction_y = 1
+can_tween = true
+move_distance_y = 370
+tween_duration = 2
 
 [node name="Enemy_saw3" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 10489.9, 723.597 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 370
-tweenDuration = 2
+move_direction_y = -1
+can_tween = true
+move_distance_y = 370
+tween_duration = 2
 
 [node name="Enemy_saw4" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 11791.3, 716.747 )
-moveDirectionX = -1
-canTween = true
-moveDistanceX = 500
-tweenDuration = 2
+move_direction_x = -1
+can_tween = true
+move_distance_x = 500
+tween_duration = 2
 
 [node name="Enemy_saw5" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 12040, 155 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 390
-tweenDuration = 1
+move_direction_x = 1
+can_tween = true
+move_distance_x = 390
+tween_duration = 1
 
 [node name="Enemy_saw6" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 9604.03, -486.667 )
-tweenDuration = 0
+tween_duration = 0
 
 [node name="Enemy_saw7" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 8201.68, -443.407 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 310
-tweenDuration = 1
+move_direction_x = 1
+can_tween = true
+move_distance_x = 310
+tween_duration = 1
 
 [node name="Enemy_saw8" parent="Enemies_saw" instance=ExtResource( 11 )]
 position = Vector2( 9975.22, -387.617 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 600
-tweenDuration = 3
+move_direction_y = 1
+can_tween = true
+move_distance_y = 600
+tween_duration = 3
 
 [node name="Bricks" type="Node2D" parent="."]
 editor/display_folded = true
@@ -483,10 +483,10 @@ scale = Vector2( 3, 5 )
 
 [node name="Float1" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 2110.65, 320.005 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 220
-tweenDuration = 2
+move_direction_y = 1
+can_tween = true
+move_distance_y = 220
+tween_duration = 2
 
 [node name="Float7" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 1597.67, 597.093 )
@@ -502,10 +502,10 @@ scale = Vector2( 2, 1 )
 
 [node name="Float3" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 2567.97, 324.366 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 600
-tweenDuration = 3
+move_direction_x = 1
+can_tween = true
+move_distance_x = 600
+tween_duration = 3
 
 [node name="Float5" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 3521.88, 271.982 )
@@ -515,10 +515,10 @@ position = Vector2( 4371.78, -203.757 )
 
 [node name="Float9" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 5358.39, 388.344 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 460
-tweenDuration = 3
+move_direction_x = 1
+can_tween = true
+move_distance_x = 460
+tween_duration = 3
 
 [node name="Float10" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 6119.8, 421.062 )
@@ -546,16 +546,16 @@ position = Vector2( 5068.06, 388.261 )
 
 [node name="Float19" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 4720.15, 327.907 )
-moveDirectionX = -1
-canTween = true
-moveDistanceX = 800
+move_direction_x = -1
+can_tween = true
+move_distance_x = 800
 
 [node name="Float21" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 12241, 38 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 500
-tweenDuration = 3
+move_direction_y = -1
+can_tween = true
+move_distance_y = 500
+tween_duration = 3
 
 [node name="Float22" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 11840.1, -361.411 )
@@ -568,25 +568,25 @@ position = Vector2( 10940.8, -435.505 )
 
 [node name="Float27" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 6962.43, -362.617 )
-moveDirectionX = -1
-canTween = true
-moveDistanceX = 2200
-moveDistanceY = 200
-tweenDuration = 6
+move_direction_x = -1
+can_tween = true
+move_distance_x = 2200
+move_distance_y = 200
+tween_duration = 6
 
 [node name="Float28" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 3865.75, -487.321 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 350
-tweenDuration = 2
+move_direction_y = 1
+can_tween = true
+move_distance_y = 350
+tween_duration = 2
 
 [node name="Float29" parent="Floats" instance=ExtResource( 15 )]
 position = Vector2( 3340.99, -242.95 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 350
-tweenDuration = 2
+move_direction_y = -1
+can_tween = true
+move_distance_y = 350
+tween_duration = 2
 
 [node name="Ground" type="Node2D" parent="."]
 position = Vector2( 6.13867, 419.887 )
@@ -836,13 +836,13 @@ position = Vector2( 8062.24, 682.719 )
 
 [node name="Enemy15" parent="Enemies" instance=ExtResource( 19 )]
 position = Vector2( 11930, 687.58 )
-maxSpeed = 100
+max_speed = 100
 energy = 50
 maxEnergy = 50
 health = 100
 maxHealth = 100
-action2Damage = 40
-characterScale = Vector2( 2, 2 )
+action2_damage = 40
+character_scale = Vector2( 2, 2 )
 allowMove = false
 
 [node name="Enemy8" parent="Enemies" instance=ExtResource( 19 )]
@@ -872,8 +872,8 @@ energy = 50
 maxEnergy = 50
 health = 100
 maxHealth = 100
-action2Damage = 40
-characterScale = Vector2( 2, 2 )
+action2_damage = 40
+character_scale = Vector2( 2, 2 )
 allowMove = false
 
 [node name="Enemy30" parent="Enemies" instance=ExtResource( 19 )]

@@ -1,0 +1,2699 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "Zombie Apocalypse",
+    "languages": [
+      "GDScript",
+      "TSCN",
+      "Markdown"
+    ],
+    "frameworks": [
+      "Godot 4"
+    ],
+    "description": "A Godot 4 2D platformer where players use Robot and Ninja characters to stop a zombie apocalypse. Features generic base scripts for characters, bullets, levels, and tweens.",
+    "analyzedAt": "2026-05-28T20:35:46.865819+00:00",
+    "gitCommitHash": "7eb7f547ea73f24b7a9bfde3b1bfdf2186aaf642"
+  },
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/lint-paths.yml",
+      "type": "pipeline",
+      "name": "lint-paths.yml",
+      "filePath": ".github/workflows/lint-paths.yml",
+      "summary": "GitHub Actions CI workflow that runs on push and pull_request to reject any tracked file containing absolute home-directory paths (e.g. /home/<user>/ or C:\\Users\\). Excludes Markdown files and the openspec/ directory from the check.",
+      "tags": [
+        "ci",
+        "github-actions",
+        "security",
+        "lint",
+        "infra"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.github/ISSUE_TEMPLATE/bug_report.md",
+      "type": "document",
+      "name": "Bug Report Template",
+      "filePath": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "summary": "GitHub issue template for reporting bugs. Prompts users for a description, reproduction steps, expected behaviour, screenshots, and platform/device information.",
+      "tags": [
+        "github",
+        "issue-template",
+        "docs",
+        "bug"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.github/ISSUE_TEMPLATE/feature_request.md",
+      "type": "document",
+      "name": "Feature Request Template",
+      "filePath": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "summary": "GitHub issue template for feature requests. Asks for the problem being solved, desired solution, alternatives considered, and additional context.",
+      "tags": [
+        "github",
+        "issue-template",
+        "docs",
+        "feature"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.github/ISSUE_TEMPLATE/new-development-request.md",
+      "type": "document",
+      "name": "New Development Request Template",
+      "filePath": ".github/ISSUE_TEMPLATE/new-development-request.md",
+      "summary": "GitHub issue template for new development work. Prompts for a description of the new development, additional context, and impact on existing features.",
+      "tags": [
+        "github",
+        "issue-template",
+        "docs",
+        "development"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.gitignore",
+      "type": "config",
+      "name": ".gitignore",
+      "filePath": ".gitignore",
+      "summary": "Git ignore rules for the Godot 4 project. Excludes Godot-specific build artifacts (.godot/, export_presets.cfg), Mono files, temporary files, and workspace-orchestrator managed entries.",
+      "tags": [
+        "git",
+        "config",
+        "godot"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.pre-commit-config.yaml",
+      "type": "config",
+      "name": ".pre-commit-config.yaml",
+      "filePath": ".pre-commit-config.yaml",
+      "summary": "Pre-commit hook configuration that uses pygrep to reject commits containing absolute home-directory paths. Complements the CI workflow lint-paths.yml.",
+      "tags": [
+        "pre-commit",
+        "config",
+        "security",
+        "lint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Instructions for AI agents (Hermes, Copilot, Codex, etc.) on how to orient themselves in the repository. Documents available graph tools: graphify, understand-anything, and codegraph, along with their recommended usage order.",
+      "tags": [
+        "docs",
+        "ai-agents",
+        "codegraph",
+        "tooling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "CHANGELOG.md",
+      "summary": "High-level changelog tracking released plugin versions. Currently documents v0.1 (initial asset library publish, scene tree browsing) and v0.2 (inspector integration, F12 node selection).",
+      "tags": [
+        "docs",
+        "changelog",
+        "versioning"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:LICENSE.md",
+      "type": "document",
+      "name": "LICENSE.md",
+      "filePath": "LICENSE.md",
+      "summary": "MIT License for the project, copyright 2019 Dewald Oosthuizen. Grants unrestricted use, copy, modify, and distribution rights.",
+      "tags": [
+        "docs",
+        "license",
+        "mit"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Main project documentation for Zombie Apocalypse, a Godot 4 2D platformer. Covers requirements, Godot 3-to-4 migration notes, and full keyboard controls for Robot and Male Ninja characters.",
+      "tags": [
+        "docs",
+        "readme",
+        "godot",
+        "gameplay"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:export_presets.cfg",
+      "type": "config",
+      "name": "export_presets.cfg",
+      "filePath": "export_presets.cfg",
+      "summary": "Godot export preset configuration defining Linux/X11 and Windows Desktop export targets with texture format and architecture settings. Export paths are empty (previously leaked absolute home-directory paths, now cleared).",
+      "tags": [
+        "godot",
+        "config",
+        "export",
+        "build"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:project.godot",
+      "type": "config",
+      "name": "project.godot",
+      "filePath": "project.godot",
+      "summary": "Godot 4 engine configuration file (config_version=5) for the Retro_Apocalyse project. Defines the main scene (World_Scene.tscn), display settings (1280x800), all input action bindings, and rendering quality settings.",
+      "tags": [
+        "godot",
+        "config",
+        "input",
+        "rendering",
+        "project"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/.openspec.yaml",
+      "type": "config",
+      "name": ".openspec.yaml (issue-5)",
+      "filePath": "openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/.openspec.yaml",
+      "summary": "OpenSpec metadata file for the issue-5 change set. Records the schema type (spec-driven) and creation date (2026-05-28).",
+      "tags": [
+        "openspec",
+        "config",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "type": "document",
+      "name": "Proposal: Remove Hardcoded Paths (issue-5)",
+      "filePath": "openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "summary": "Detailed proposal for removing hardcoded absolute home-directory paths from export_presets.cfg that were leaking developer username and Dropbox folder structure. Covers four issues: clearing both export paths, creating .gitignore, adding CI lint workflow, and adding a pre-commit hook.",
+      "tags": [
+        "openspec",
+        "proposal",
+        "security",
+        "docs",
+        "export_presets"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/spec-approved.md",
+      "type": "document",
+      "name": "Spec Approved (issue-5)",
+      "filePath": "openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/spec-approved.md",
+      "summary": "Approval record for the issue-5 proposal dated 2026-05-28. Confirms all facts were verified against the actual files and the proposed fixes are minimal and correct.",
+      "tags": [
+        "openspec",
+        "approval",
+        "docs"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "type": "document",
+      "name": "Tasks: Remove Hardcoded Paths (issue-5)",
+      "filePath": "openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "summary": "Granular task checklist for implementing the issue-5 proposal. Covers clearing export_presets.cfg paths, creating .gitignore, adding CI lint workflow, optional pre-commit hook, git history cleanup, and an operational credential-rotation action item.",
+      "tags": [
+        "openspec",
+        "tasks",
+        "security",
+        "docs"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/.openspec.yaml",
+      "type": "config",
+      "name": ".openspec.yaml (issue-7)",
+      "filePath": "openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/.openspec.yaml",
+      "summary": "OpenSpec metadata file for the issue-7 change set. Records the schema type (spec-driven) and creation date (2026-05-28).",
+      "tags": [
+        "openspec",
+        "config",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "type": "document",
+      "name": "Proposal: Enforce GDScript Naming Conventions (issue-7)",
+      "filePath": "openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "summary": "Comprehensive proposal to rename all camelCase identifiers to snake_case across four GDScript files (generic_character_behaviour.gd, generic_bullet_behaviour.gd, generic_tween_script.gd, generic_level_script.gd), fix five comment typos, standardise signal names, and add gdtoolkit CI enforcement.",
+      "tags": [
+        "openspec",
+        "proposal",
+        "gdscript",
+        "refactor",
+        "naming-conventions",
+        "docs"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "type": "document",
+      "name": "Tasks: Enforce GDScript Naming Conventions (issue-7)",
+      "filePath": "openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "summary": "Detailed task checklist for the issue-7 refactor. Covers variable renames in all four script files, typo fixes, scene file updates for @export variable references, signal rename propagation, and CI gdlint setup.",
+      "tags": [
+        "openspec",
+        "tasks",
+        "gdscript",
+        "refactor",
+        "docs"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scenes/Ammo_Scene.tscn",
+      "type": "file",
+      "name": "Ammo_Scene.tscn",
+      "filePath": "scenes/Ammo_Scene.tscn",
+      "summary": "Collectible ammo power-up scene that randomly grants 5, 10, or 15 bullets to the player character on contact. Displays a bullet image and count label, adapting texture to the current character type.",
+      "tags": [
+        "scene",
+        "pickup",
+        "ammo",
+        "power-up",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/Blood_Particle_Scene.tscn",
+      "type": "file",
+      "name": "Blood_Particle_Scene.tscn",
+      "filePath": "scenes/Blood_Particle_Scene.tscn",
+      "summary": "Particle effect scene that emits a one-shot blood splatter using Particles2D and a blood texture. Automatically frees itself once the emission finishes.",
+      "tags": [
+        "scene",
+        "particles",
+        "vfx",
+        "blood",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/Energy_Stone_Scene.tscn",
+      "type": "file",
+      "name": "Energy_Stone_Scene.tscn",
+      "filePath": "scenes/Energy_Stone_Scene.tscn",
+      "summary": "Collectible energy power-up that restores a random percentage (15%, 20%, or 35%) of the character's max energy on contact. Uses a power gem sprite and proximity Area2D detection.",
+      "tags": [
+        "scene",
+        "pickup",
+        "energy",
+        "power-up",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/Health_Scene.tscn",
+      "type": "file",
+      "name": "Health_Scene.tscn",
+      "filePath": "scenes/Health_Scene.tscn",
+      "summary": "Collectible health power-up that restores a random percentage (15%, 20%, 35%, or 40%) of the character's max health when picked up. Uses a health sprite with Area2D collision.",
+      "tags": [
+        "scene",
+        "pickup",
+        "health",
+        "power-up",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/World_Scene.tscn",
+      "type": "file",
+      "name": "World_Scene.tscn",
+      "filePath": "scenes/World_Scene.tscn",
+      "summary": "Root world/game manager scene that orchestrates level loading, character selection (Robot, Ninja male/female), HUD updates, and game flow including level progression. Contains the CanvasLayer HUD with health, energy, ammo indicators and a PopupPanel.",
+      "tags": [
+        "scene",
+        "world",
+        "game-manager",
+        "hud",
+        "level-manager",
+        "godot4"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "config:scenes/default_env.tres",
+      "type": "config",
+      "name": "default_env.tres",
+      "filePath": "scenes/default_env.tres",
+      "summary": "Godot Environment resource defining a procedural sky background with blue sky, horizon, and ground colours. Used as the default world environment for the game scenes.",
+      "tags": [
+        "config",
+        "environment",
+        "sky",
+        "tres",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/characters/robot/Bullet_Scene.tscn",
+      "type": "file",
+      "name": "Bullet_Scene.tscn",
+      "filePath": "scenes/characters/robot/Bullet_Scene.tscn",
+      "summary": "Robot character's bullet projectile scene with a 5-frame animated sprite (CharacterBody2D). Extends generic_bullet_behaviour.gd and spawns a Muzzle_Scene effect on creation; frees itself when it leaves the screen.",
+      "tags": [
+        "scene",
+        "bullet",
+        "projectile",
+        "robot",
+        "animation",
+        "godot4"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/characters/robot/Character_Scene.tscn",
+      "type": "file",
+      "name": "Character_Scene.tscn",
+      "filePath": "scenes/characters/robot/Character_Scene.tscn",
+      "summary": "Playable Robot character scene (CharacterBody2D) with full animation set (idle, run, jump, shoot, melee, slide, dead) for male variant. Extends generic_character_behaviour.gd, handles player input, shooting, melee, and slide attacks.",
+      "tags": [
+        "scene",
+        "character",
+        "robot",
+        "player",
+        "animation",
+        "combat",
+        "godot4"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scenes/characters/robot/Muzzle_Scene.tscn",
+      "type": "file",
+      "name": "Muzzle_Scene.tscn",
+      "filePath": "scenes/characters/robot/Muzzle_Scene.tscn",
+      "summary": "Muzzle flash effect scene using an AnimatedSprite2D with a 5-frame animation. Auto-plays and frees itself after the animation completes one cycle.",
+      "tags": [
+        "scene",
+        "vfx",
+        "muzzle-flash",
+        "robot",
+        "animation",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/enemies/Enemy_Saw_Scene.tscn",
+      "type": "file",
+      "name": "Enemy_Saw_Scene.tscn",
+      "filePath": "scenes/enemies/Enemy_Saw_Scene.tscn",
+      "summary": "Environmental hazard scene: a rotating saw blade (StaticBody2D) that damages characters on contact and can be destroyed by high-power bullets. Uses a Tween for movement via generic_tween_script.gd, emitting a touchedSaw signal.",
+      "tags": [
+        "scene",
+        "enemy",
+        "hazard",
+        "saw",
+        "environment",
+        "godot4"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/enemies/Enemy_Zombie_Scene.tscn",
+      "type": "file",
+      "name": "Enemy_Zombie_Scene.tscn",
+      "filePath": "scenes/enemies/Enemy_Zombie_Scene.tscn",
+      "summary": "Zombie enemy character scene (CharacterBody2D) supporting male and female variants with full animation sets (idle, walk, attack, dead). Extends generic_character_behaviour.gd with AI that chases the player and avoids saws and barriers.",
+      "tags": [
+        "scene",
+        "enemy",
+        "zombie",
+        "character",
+        "ai",
+        "animation",
+        "godot4"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scenes/enemies/Enemy_barrier.tscn",
+      "type": "file",
+      "name": "Enemy_barrier.tscn",
+      "filePath": "scenes/enemies/Enemy_barrier.tscn",
+      "summary": "Invisible barrier Node2D used to turn zombie enemies around at level boundaries. Emits a touchedBarrier signal when an enemy_character body enters its Area2D collision zone.",
+      "tags": [
+        "scene",
+        "enemy",
+        "barrier",
+        "collision",
+        "ai",
+        "godot4"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Bone_Scene.tscn",
+      "type": "file",
+      "name": "Bone_Scene.tscn",
+      "filePath": "scenes/environment/Bone_Scene.tscn",
+      "summary": "Environment scene representing a bone object dropped when an enemy character dies. Instantiated by generic_character_behaviour.gd on non-main character death.",
+      "tags": [
+        "environment",
+        "tscn",
+        "prop",
+        "enemy-death"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Brick_1_Particle_Scene.tscn",
+      "type": "file",
+      "name": "Brick_1_Particle_Scene.tscn",
+      "filePath": "scenes/environment/Brick_1_Particle_Scene.tscn",
+      "summary": "Particle effect scene triggered when a Brick_1 block is destroyed by a bullet or melee attack.",
+      "tags": [
+        "environment",
+        "tscn",
+        "particle",
+        "brick"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Brick_1_Power_Up_Scene.tscn",
+      "type": "file",
+      "name": "Brick_1_Power_Up_Scene.tscn",
+      "filePath": "scenes/environment/Brick_1_Power_Up_Scene.tscn",
+      "summary": "A variant of Brick_1 that contains a power-up, releasing it when broken. Belongs to the power_up_brick group.",
+      "tags": [
+        "environment",
+        "tscn",
+        "brick",
+        "power-up"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Brick_1_Scene.tscn",
+      "type": "file",
+      "name": "Brick_1_Scene.tscn",
+      "filePath": "scenes/environment/Brick_1_Scene.tscn",
+      "summary": "Standard destructible brick block (type 1) belonging to the brick group. Can be broken by bullets or melee attacks.",
+      "tags": [
+        "environment",
+        "tscn",
+        "brick",
+        "destructible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Brick_2_Particle_Scene.tscn",
+      "type": "file",
+      "name": "Brick_2_Particle_Scene.tscn",
+      "filePath": "scenes/environment/Brick_2_Particle_Scene.tscn",
+      "summary": "Particle effect scene triggered when a Brick_2 block is destroyed.",
+      "tags": [
+        "environment",
+        "tscn",
+        "particle",
+        "brick"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Brick_2_Power_Up_Scene.tscn",
+      "type": "file",
+      "name": "Brick_2_Power_Up_Scene.tscn",
+      "filePath": "scenes/environment/Brick_2_Power_Up_Scene.tscn",
+      "summary": "A variant of Brick_2 containing a power-up, releasing it upon being broken. Belongs to the power_up_brick group.",
+      "tags": [
+        "environment",
+        "tscn",
+        "brick",
+        "power-up"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Brick_2_Scene.tscn",
+      "type": "file",
+      "name": "Brick_2_Scene.tscn",
+      "filePath": "scenes/environment/Brick_2_Scene.tscn",
+      "summary": "Standard destructible brick block (type 2) belonging to the brick group. Alternative visual style to Brick_1.",
+      "tags": [
+        "environment",
+        "tscn",
+        "brick",
+        "destructible"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/End_Door_Scene.tscn",
+      "type": "file",
+      "name": "End_Door_Scene.tscn",
+      "filePath": "scenes/environment/End_Door_Scene.tscn",
+      "summary": "The level exit door scene. When the player reaches this object the level transition is triggered.",
+      "tags": [
+        "environment",
+        "tscn",
+        "level-exit",
+        "trigger"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Float_1_Scene.tscn",
+      "type": "file",
+      "name": "Float_1_Scene.tscn",
+      "filePath": "scenes/environment/Float_1_Scene.tscn",
+      "summary": "Floating platform scene (type 1) that moves via tween, used as a traversal element in levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "platform",
+        "floating"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Float_2_Scene.tscn",
+      "type": "file",
+      "name": "Float_2_Scene.tscn",
+      "filePath": "scenes/environment/Float_2_Scene.tscn",
+      "summary": "Floating platform scene (type 2), an alternate floating platform with different tween settings.",
+      "tags": [
+        "environment",
+        "tscn",
+        "platform",
+        "floating"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Floor_1_High_Scene.tscn",
+      "type": "file",
+      "name": "Floor_1_High_Scene.tscn",
+      "filePath": "scenes/environment/Floor_1_High_Scene.tscn",
+      "summary": "Tall floor/wall platform scene (type 1) used to build elevated terrain sections in levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "floor",
+        "platform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Floor_1_High_Scene_2.tscn",
+      "type": "file",
+      "name": "Floor_1_High_Scene_2.tscn",
+      "filePath": "scenes/environment/Floor_1_High_Scene_2.tscn",
+      "summary": "Second variant of the tall floor scene (type 1), used to provide visual variety in elevated terrain.",
+      "tags": [
+        "environment",
+        "tscn",
+        "floor",
+        "platform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Floor_1_Scene.tscn",
+      "type": "file",
+      "name": "Floor_1_Scene.tscn",
+      "filePath": "scenes/environment/Floor_1_Scene.tscn",
+      "summary": "Standard ground floor platform (type 1), the primary solid surface players and enemies walk on.",
+      "tags": [
+        "environment",
+        "tscn",
+        "floor",
+        "platform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Floor_2_High_Scene.tscn",
+      "type": "file",
+      "name": "Floor_2_High_Scene.tscn",
+      "filePath": "scenes/environment/Floor_2_High_Scene.tscn",
+      "summary": "Tall floor/wall platform scene (type 2) used for elevated terrain in levels with a different tileset.",
+      "tags": [
+        "environment",
+        "tscn",
+        "floor",
+        "platform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Floor_2_Scene.tscn",
+      "type": "file",
+      "name": "Floor_2_Scene.tscn",
+      "filePath": "scenes/environment/Floor_2_Scene.tscn",
+      "summary": "Standard ground floor platform (type 2) with an alternative visual style to Floor_1_Scene.",
+      "tags": [
+        "environment",
+        "tscn",
+        "floor",
+        "platform"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_10_scene.tscn",
+      "type": "file",
+      "name": "Flora_10_scene.tscn",
+      "filePath": "scenes/environment/Flora_10_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 10) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_11_scene.tscn",
+      "type": "file",
+      "name": "Flora_11_scene.tscn",
+      "filePath": "scenes/environment/Flora_11_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 11) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_12_scene.tscn",
+      "type": "file",
+      "name": "Flora_12_scene.tscn",
+      "filePath": "scenes/environment/Flora_12_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 12) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_13_scene.tscn",
+      "type": "file",
+      "name": "Flora_13_scene.tscn",
+      "filePath": "scenes/environment/Flora_13_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 13) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_14_scene.tscn",
+      "type": "file",
+      "name": "Flora_14_scene.tscn",
+      "filePath": "scenes/environment/Flora_14_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 14) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_1_scene.tscn",
+      "type": "file",
+      "name": "Flora_1_scene.tscn",
+      "filePath": "scenes/environment/Flora_1_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 1) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_2_scene.tscn",
+      "type": "file",
+      "name": "Flora_2_scene.tscn",
+      "filePath": "scenes/environment/Flora_2_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 2) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_3_scene.tscn",
+      "type": "file",
+      "name": "Flora_3_scene.tscn",
+      "filePath": "scenes/environment/Flora_3_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 3) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_4_scene.tscn",
+      "type": "file",
+      "name": "Flora_4_scene.tscn",
+      "filePath": "scenes/environment/Flora_4_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 4) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_5_scene.tscn",
+      "type": "file",
+      "name": "Flora_5_scene.tscn",
+      "filePath": "scenes/environment/Flora_5_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 5) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_6_scene.tscn",
+      "type": "file",
+      "name": "Flora_6_scene.tscn",
+      "filePath": "scenes/environment/Flora_6_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 6) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_7_scene.tscn",
+      "type": "file",
+      "name": "Flora_7_scene.tscn",
+      "filePath": "scenes/environment/Flora_7_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 7) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_8_scene.tscn",
+      "type": "file",
+      "name": "Flora_8_scene.tscn",
+      "filePath": "scenes/environment/Flora_8_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 8) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Flora_9_scene.tscn",
+      "type": "file",
+      "name": "Flora_9_scene.tscn",
+      "filePath": "scenes/environment/Flora_9_scene.tscn",
+      "summary": "Decorative flora/vegetation prop (variant 9) used to add visual detail to levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "flora",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Pit_1_Scenet.tscn",
+      "type": "file",
+      "name": "Pit_1_Scenet.tscn",
+      "filePath": "scenes/environment/Pit_1_Scenet.tscn",
+      "summary": "Hazard pit scene (type 1) that damages or kills characters that fall into it. Acts as a level hazard.",
+      "tags": [
+        "environment",
+        "tscn",
+        "hazard",
+        "pit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Pit_2_Scenet.tscn",
+      "type": "file",
+      "name": "Pit_2_Scenet.tscn",
+      "filePath": "scenes/environment/Pit_2_Scenet.tscn",
+      "summary": "Hazard pit scene (type 2), an alternate pit variant used to introduce variety in level danger zones.",
+      "tags": [
+        "environment",
+        "tscn",
+        "hazard",
+        "pit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/environment/Rock_scene.tscn",
+      "type": "file",
+      "name": "Rock_scene.tscn",
+      "filePath": "scenes/environment/Rock_scene.tscn",
+      "summary": "Decorative rock prop scene used as environmental detail or static obstacle in levels.",
+      "tags": [
+        "environment",
+        "tscn",
+        "prop",
+        "decoration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/environment/Skeleton_scene.tscn",
+      "type": "file",
+      "name": "Skeleton_scene.tscn",
+      "filePath": "scenes/environment/Skeleton_scene.tscn",
+      "summary": "Decorative skeleton prop scene placed in levels to reinforce the zombie apocalypse theme.",
+      "tags": [
+        "environment",
+        "tscn",
+        "prop",
+        "decoration",
+        "theme"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.codegraph/.gitignore",
+      "type": "config",
+      "name": ".codegraph/.gitignore",
+      "filePath": ".codegraph/.gitignore",
+      "summary": "Git ignore rules for the .codegraph tooling directory, excluding generated output files from version control.",
+      "tags": [
+        "config",
+        "git",
+        "codegraph"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.codegraph/config.json",
+      "type": "config",
+      "name": "codegraph config.json",
+      "filePath": ".codegraph/config.json",
+      "summary": "Configuration file for the codegraph tool defining source file inclusion patterns, graph generation settings, and output options for the zombie apocalypse project.",
+      "tags": [
+        "config",
+        "codegraph",
+        "json",
+        "tooling"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.github/copilot-instructions.md",
+      "type": "document",
+      "name": "copilot-instructions.md",
+      "filePath": ".github/copilot-instructions.md",
+      "summary": "GitHub Copilot custom instructions for the project, describing coding conventions, project structure, GDScript patterns, and AI-assisted development guidelines.",
+      "tags": [
+        "docs",
+        "github",
+        "copilot",
+        "conventions"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:resources/characters/freeknight/README.txt",
+      "type": "document",
+      "name": "freeknight README.txt",
+      "filePath": "resources/characters/freeknight/README.txt",
+      "summary": "Attribution or license notice for the free knight character asset used in the game.",
+      "tags": [
+        "docs",
+        "resources",
+        "character",
+        "license"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:resources/characters/knight/README.txt",
+      "type": "document",
+      "name": "knight README.txt",
+      "filePath": "resources/characters/knight/README.txt",
+      "summary": "Attribution or license notice for the knight character asset used in the game.",
+      "tags": [
+        "docs",
+        "resources",
+        "character",
+        "license"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/characters/Camera2D.tscn",
+      "type": "file",
+      "name": "Camera2D.tscn",
+      "filePath": "scenes/characters/Camera2D.tscn",
+      "summary": "Camera2D scene attached to the player character to follow them through the level with configurable smoothing and limits.",
+      "tags": [
+        "tscn",
+        "camera",
+        "character"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/characters/ninja/Bullet_Scene.tscn",
+      "type": "file",
+      "name": "Bullet_Scene.tscn",
+      "filePath": "scenes/characters/ninja/Bullet_Scene.tscn",
+      "summary": "Bullet projectile scene for the Ninja character, with AnimatedSprite2D, Area2D, and CollisionShape2D. Script extends generic_bullet_behaviour.gd.",
+      "tags": [
+        "tscn",
+        "ninja",
+        "bullet",
+        "projectile"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "type": "file",
+      "name": "Ninja Character_Scene.tscn",
+      "filePath": "scenes/characters/ninja/Character_Scene.tscn",
+      "summary": "Full Ninja player character scene (490 lines) containing AnimatedSprite2D, collision shapes, attack areas, and character script extending generic_character_behaviour.gd.",
+      "tags": [
+        "tscn",
+        "ninja",
+        "character",
+        "player"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scenes/gui/PopupPanel.tscn",
+      "type": "file",
+      "name": "PopupPanel.tscn",
+      "filePath": "scenes/gui/PopupPanel.tscn",
+      "summary": "GUI popup panel scene used to display in-game messages or pause/game-over overlays to the player.",
+      "tags": [
+        "tscn",
+        "gui",
+        "ui",
+        "popup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scenes/levels/Level_1_Scene.tscn",
+      "type": "file",
+      "name": "Level_1_Scene.tscn",
+      "filePath": "scenes/levels/Level_1_Scene.tscn",
+      "summary": "Main layout scene for Level 1 (981 lines). Assembles all environment, character, and enemy instances; uses generic_level_script.gd to manage level signals.",
+      "tags": [
+        "tscn",
+        "level",
+        "level-1",
+        "layout"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scenes/levels/Level_2_Scene.tscn",
+      "type": "file",
+      "name": "Level_2_Scene.tscn",
+      "filePath": "scenes/levels/Level_2_Scene.tscn",
+      "summary": "Main layout scene for Level 2 (470 lines). Assembles environment and character instances; uses generic_level_script.gd to manage level entry/exit signals.",
+      "tags": [
+        "tscn",
+        "level",
+        "level-2",
+        "layout"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "file",
+      "name": "generic_bullet_behaviour.gd",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Base bullet class extending CharacterBody2D. Handles projectile movement, collision detection, brick destruction, enemy damage, and visual scaling based on power level.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "base-class",
+        "collision"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "type": "function",
+      "name": "_animate_bullet",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Main bullet update function called each frame. Sets speed, plays animation, scales by power level, moves the bullet, checks collisions, and frees bullet on invalid collision.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "animation",
+        "movement"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_set_speed",
+      "type": "function",
+      "name": "_set_speed",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Calculates and sets the bullet's x-axis velocity based on speed, delta time, and movement direction.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "movement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_create_muzzle",
+      "type": "function",
+      "name": "_create_muzzle",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Instantiates a muzzle flash scene and positions it relative to the bullet's origin direction, then adds it to the scene tree.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "vfx",
+        "muzzle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_animate",
+      "type": "function",
+      "name": "_animate",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Plays the bullet sprite animation.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "animation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_remove_if_brick",
+      "type": "function",
+      "name": "_remove_if_brick",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Checks if the collided object is a brick or power-up brick, calls break_object() on it, and queues the bullet for deletion if its power level is insufficient to pass through.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "collision",
+        "brick"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_bullet_behaviour.gd:_check_collision_objects",
+      "type": "function",
+      "name": "_check_collision_objects",
+      "filePath": "scripts/generic_bullet_behaviour.gd",
+      "summary": "Queries the Area2D for overlapping bodies and calls _take_damage on any enemy characters found, then removes the bullet.",
+      "tags": [
+        "gdscript",
+        "bullet",
+        "collision",
+        "damage"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/generic_character_behaviour.gd",
+      "type": "file",
+      "name": "generic_character_behaviour.gd",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Base character class extending CharacterBody2D. Manages movement, jumping, health, ammo, energy, damage, animations, timers, and character state (alive/dead/dazed/invincible).",
+      "tags": [
+        "gdscript",
+        "character",
+        "base-class",
+        "physics"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_start_process",
+      "type": "function",
+      "name": "_start_process",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Main character update driver. Calls _animate_player then handles x-axis and y-axis collision via move_and_collide.",
+      "tags": [
+        "gdscript",
+        "character",
+        "movement",
+        "collision"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_animate_player",
+      "type": "function",
+      "name": "_animate_player",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Calculates player speed with gravity, clamps values, updates velocity, controls sprite playback, and delegates to _handle_timers.",
+      "tags": [
+        "gdscript",
+        "character",
+        "animation",
+        "physics"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "type": "function",
+      "name": "_handle_timers",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Manages glide, daze, blood/damage, death, invincibility, and flicker timers each frame. Triggers blood particle effects and damage signals.",
+      "tags": [
+        "gdscript",
+        "character",
+        "timers",
+        "state"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_handle_collision",
+      "type": "function",
+      "name": "_handle_collision",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Resets vertical speed and jump count when the character lands on a surface.",
+      "tags": [
+        "gdscript",
+        "character",
+        "collision",
+        "jump"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_shoot_bullet",
+      "type": "function",
+      "name": "_shoot_bullet",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Instantiates the bullet scene, sets power/damage/direction based on current facing, decrements ammo, and adds the bullet to the scene tree.",
+      "tags": [
+        "gdscript",
+        "character",
+        "bullet",
+        "shooting"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_area_checks",
+      "type": "function",
+      "name": "_area_checks",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Checks AttackArea2D and CharacterArea2D overlaps to deal melee damage to enemies, break bricks, and receive damage from enemies.",
+      "tags": [
+        "gdscript",
+        "character",
+        "combat",
+        "area"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_move_left",
+      "type": "function",
+      "name": "_move_left",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Sets facing and movement direction to left and flips the character sprite horizontally.",
+      "tags": [
+        "gdscript",
+        "character",
+        "movement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_move_right",
+      "type": "function",
+      "name": "_move_right",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Sets facing and movement direction to right and unflips the character sprite.",
+      "tags": [
+        "gdscript",
+        "character",
+        "movement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_take_damage",
+      "type": "function",
+      "name": "_take_damage",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Applies damage to the character, deducting from energy first and then health. Sets blood flag and shield indicator as appropriate.",
+      "tags": [
+        "gdscript",
+        "character",
+        "damage",
+        "health"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_daze",
+      "type": "function",
+      "name": "_daze",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Sets the dazed flag to true, temporarily immobilising the character.",
+      "tags": [
+        "gdscript",
+        "character",
+        "state",
+        "daze"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_reset_character_sprite_states",
+      "type": "function",
+      "name": "_reset_character_sprite_states",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Resets sprite animation and collision state after actions complete or health/daze state changes.",
+      "tags": [
+        "gdscript",
+        "character",
+        "animation",
+        "state"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_setup_collision",
+      "type": "function",
+      "name": "_setup_collision",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Fetches and caches all collision shape node references from the scene tree and sets default collision state.",
+      "tags": [
+        "gdscript",
+        "character",
+        "collision",
+        "setup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_default_collision",
+      "type": "function",
+      "name": "_default_collision",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Enables the standing collision shape and disables all attack/slide collision shapes, restoring default collision configuration.",
+      "tags": [
+        "gdscript",
+        "character",
+        "collision"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_melee_attack_collision",
+      "type": "function",
+      "name": "_melee_attack_collision",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Enables the directional melee attack collision shape based on current facing direction when action2 is active.",
+      "tags": [
+        "gdscript",
+        "character",
+        "collision",
+        "melee"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_slide_attack_collision",
+      "type": "function",
+      "name": "_slide_attack_collision",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Switches to slide collision shapes, disabling standing shapes, to represent the character's slide attack hitbox.",
+      "tags": [
+        "gdscript",
+        "character",
+        "collision",
+        "slide"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_change_sprite_animation",
+      "type": "function",
+      "name": "_change_sprite_animation",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Sets the animated sprite's animation by composing the name from gender, type, and animation text.",
+      "tags": [
+        "gdscript",
+        "character",
+        "animation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_take_damage_from_saw",
+      "type": "function",
+      "name": "_take_damage_from_saw",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Signal handler for saw hazard contact. Deals 15 damage to the character if it is the signal's target.",
+      "tags": [
+        "gdscript",
+        "character",
+        "damage",
+        "hazard"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_subscribe_to_signals",
+      "type": "function",
+      "name": "_subscribe_to_signals",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Connects to all enemy saw touchedSaw signals in the scene so the character can receive saw damage.",
+      "tags": [
+        "gdscript",
+        "character",
+        "signals",
+        "setup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_emit_reload",
+      "type": "function",
+      "name": "_emit_reload",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Emits the reload signal for main characters (triggering respawn logic), or drops bones and removes non-main characters from the scene.",
+      "tags": [
+        "gdscript",
+        "character",
+        "signal",
+        "death"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_emit_reposition",
+      "type": "function",
+      "name": "_emit_reposition",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Emits the reposition signal for main characters, or removes non-main characters from the scene.",
+      "tags": [
+        "gdscript",
+        "character",
+        "signal"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_emit_refresh_hud",
+      "type": "function",
+      "name": "_emit_refresh_hud",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Emits the refresh_hud signal to update the HUD with current character stats, only for main characters.",
+      "tags": [
+        "gdscript",
+        "character",
+        "signal",
+        "hud"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_character_behaviour.gd:_emit_character_ready",
+      "type": "function",
+      "name": "_emit_character_ready",
+      "filePath": "scripts/generic_character_behaviour.gd",
+      "summary": "Emits the character_ready signal when the character has finished setup, only for main characters.",
+      "tags": [
+        "gdscript",
+        "character",
+        "signal",
+        "setup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/generic_level_script.gd",
+      "type": "file",
+      "name": "generic_level_script.gd",
+      "filePath": "scripts/generic_level_script.gd",
+      "summary": "Base level script extending Node2D. Declares exit_level and entered_level signals and emits them on scene tree entry and exit.",
+      "tags": [
+        "gdscript",
+        "level",
+        "signals",
+        "base-class"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_level_script.gd:_ready",
+      "type": "function",
+      "name": "_ready",
+      "filePath": "scripts/generic_level_script.gd",
+      "summary": "Called when the level scene enters the tree; emits the entered_level signal.",
+      "tags": [
+        "gdscript",
+        "level",
+        "signal"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_level_script.gd:_exit_tree",
+      "type": "function",
+      "name": "_exit_tree",
+      "filePath": "scripts/generic_level_script.gd",
+      "summary": "Called when the level scene exits the tree; emits the exit_level signal.",
+      "tags": [
+        "gdscript",
+        "level",
+        "signal"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/generic_tween_script.gd",
+      "type": "file",
+      "name": "generic_tween_script.gd",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Base tween script extending Node2D. Provides configurable directional tweening for moving objects like floating platforms, with distance, direction, and duration exports.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "movement",
+        "base-class"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_tween_script.gd:_start_tween_process",
+      "type": "function",
+      "name": "_start_tween_process",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Starts a tween animation moving the node to movementPosition if tweening is enabled and not already running. Connects the finished signal to _on_tween_completed.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "movement"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/generic_tween_script.gd:_set_initial_movement",
+      "type": "function",
+      "name": "_set_initial_movement",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Calculates and stores the target movement position based on initial position, distance, and direction exports.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "movement",
+        "setup"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_tween_script.gd:_change_x_direction",
+      "type": "function",
+      "name": "_change_x_direction",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Reverses the x movement direction between 1 and -1.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "movement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_tween_script.gd:_change_y_direction",
+      "type": "function",
+      "name": "_change_y_direction",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Reverses the y movement direction between 1 and -1.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "movement"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/generic_tween_script.gd:_on_tween_completed",
+      "type": "function",
+      "name": "_on_tween_completed",
+      "filePath": "scripts/generic_tween_script.gd",
+      "summary": "Tween finished callback. Reverses both x and y directions and updates movementPosition for the return journey, then resets tweenRunning.",
+      "tags": [
+        "gdscript",
+        "tween",
+        "callback"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pipeline:.github/workflows/lint-paths.yml",
+      "target": "config:export_presets.cfg",
+      "type": "configures",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "pipeline:.github/workflows/lint-paths.yml",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:.github/ISSUE_TEMPLATE/bug_report.md",
+      "target": "document:.github/ISSUE_TEMPLATE/feature_request.md",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:.github/ISSUE_TEMPLATE/feature_request.md",
+      "target": "document:.github/ISSUE_TEMPLATE/new-development-request.md",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.gitignore",
+      "target": "config:export_presets.cfg",
+      "type": "configures",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.pre-commit-config.yaml",
+      "target": "pipeline:.github/workflows/lint-paths.yml",
+      "type": "related",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:project.godot",
+      "type": "documents",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:AGENTS.md",
+      "target": "document:README.md",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "config:project.godot",
+      "target": "config:export_presets.cfg",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/.openspec.yaml",
+      "target": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "type": "configures",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "target": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/spec-approved.md",
+      "type": "related",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "target": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "type": "related",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+      "target": "config:export_presets.cfg",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "target": "config:.gitignore",
+      "type": "depends_on",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "target": "pipeline:.github/workflows/lint-paths.yml",
+      "type": "depends_on",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+      "target": "config:.pre-commit-config.yaml",
+      "type": "depends_on",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "config:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/.openspec.yaml",
+      "target": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "type": "configures",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "target": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "type": "related",
+      "weight": 0.95,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "target": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "target": "file:scripts/generic_tween_script.gd",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+      "target": "file:scripts/generic_level_script.gd",
+      "type": "documents",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "target": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "target": "file:scripts/generic_tween_script.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md",
+      "target": "file:scripts/generic_level_script.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/gui/PopupPanel.tscn",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/characters/robot/Character_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/levels/Level_1_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/levels/Level_2_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/World_Scene.tscn",
+      "target": "file:scenes/characters/Camera2D.tscn",
+      "type": "imports",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/robot/Bullet_Scene.tscn",
+      "target": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/robot/Bullet_Scene.tscn",
+      "target": "file:scenes/characters/robot/Muzzle_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/robot/Character_Scene.tscn",
+      "target": "file:scenes/characters/Camera2D.tscn",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/robot/Character_Scene.tscn",
+      "target": "file:scenes/characters/robot/Bullet_Scene.tscn",
+      "type": "imports",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/robot/Character_Scene.tscn",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/enemies/Enemy_Saw_Scene.tscn",
+      "target": "file:scripts/generic_tween_script.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/enemies/Enemy_Zombie_Scene.tscn",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "depends_on",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Brick_1_Power_Up_Scene.tscn",
+      "target": "file:scenes/environment/Brick_1_Scene.tscn",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Brick_2_Power_Up_Scene.tscn",
+      "target": "file:scenes/environment/Brick_2_Scene.tscn",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Brick_1_Scene.tscn",
+      "target": "file:scenes/environment/Brick_1_Particle_Scene.tscn",
+      "type": "related",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Brick_2_Scene.tscn",
+      "target": "file:scenes/environment/Brick_2_Particle_Scene.tscn",
+      "type": "related",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Float_1_Scene.tscn",
+      "target": "file:scenes/environment/Float_2_Scene.tscn",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Floor_1_Scene.tscn",
+      "target": "file:scenes/environment/Floor_1_High_Scene.tscn",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Floor_1_High_Scene.tscn",
+      "target": "file:scenes/environment/Floor_1_High_Scene_2.tscn",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Floor_2_Scene.tscn",
+      "target": "file:scenes/environment/Floor_2_High_Scene.tscn",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Pit_1_Scenet.tscn",
+      "target": "file:scenes/environment/Pit_2_Scenet.tscn",
+      "type": "related",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_1_scene.tscn",
+      "target": "file:scenes/environment/Flora_2_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_2_scene.tscn",
+      "target": "file:scenes/environment/Flora_3_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_3_scene.tscn",
+      "target": "file:scenes/environment/Flora_4_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_4_scene.tscn",
+      "target": "file:scenes/environment/Flora_5_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_5_scene.tscn",
+      "target": "file:scenes/environment/Flora_6_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_6_scene.tscn",
+      "target": "file:scenes/environment/Flora_7_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_7_scene.tscn",
+      "target": "file:scenes/environment/Flora_8_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/environment/Flora_8_scene.tscn",
+      "target": "file:scenes/environment/Flora_9_scene.tscn",
+      "type": "related",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_set_speed",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_create_muzzle",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_animate",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_remove_if_brick",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_check_collision_objects",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_set_speed",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_animate",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_check_collision_objects",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_bullet_behaviour.gd:_animate_bullet",
+      "target": "function:scripts/generic_bullet_behaviour.gd:_remove_if_brick",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_bullet_behaviour.gd",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_bullet_behaviour.gd:_check_collision_objects",
+      "target": "function:scripts/generic_character_behaviour.gd:_take_damage",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_start_process",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_animate_player",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_handle_collision",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_shoot_bullet",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_area_checks",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_move_left",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_move_right",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_take_damage",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_daze",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_reset_character_sprite_states",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_setup_collision",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_default_collision",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_melee_attack_collision",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_slide_attack_collision",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_change_sprite_animation",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_take_damage_from_saw",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_subscribe_to_signals",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_reload",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_reposition",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_refresh_hud",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_character_behaviour.gd",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_character_ready",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_start_process",
+      "target": "function:scripts/generic_character_behaviour.gd:_animate_player",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_start_process",
+      "target": "function:scripts/generic_character_behaviour.gd:_handle_collision",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_animate_player",
+      "target": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "target": "function:scripts/generic_character_behaviour.gd:_change_sprite_animation",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_reload",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_handle_timers",
+      "target": "function:scripts/generic_character_behaviour.gd:_emit_refresh_hud",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_reset_character_sprite_states",
+      "target": "function:scripts/generic_character_behaviour.gd:_change_sprite_animation",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_reset_character_sprite_states",
+      "target": "function:scripts/generic_character_behaviour.gd:_default_collision",
+      "type": "calls",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_setup_collision",
+      "target": "function:scripts/generic_character_behaviour.gd:_default_collision",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_take_damage_from_saw",
+      "target": "function:scripts/generic_character_behaviour.gd:_take_damage",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_character_behaviour.gd:_area_checks",
+      "target": "function:scripts/generic_character_behaviour.gd:_take_damage",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_level_script.gd",
+      "target": "function:scripts/generic_level_script.gd:_ready",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_level_script.gd",
+      "target": "function:scripts/generic_level_script.gd:_exit_tree",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_tween_script.gd",
+      "target": "function:scripts/generic_tween_script.gd:_start_tween_process",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_tween_script.gd",
+      "target": "function:scripts/generic_tween_script.gd:_set_initial_movement",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_tween_script.gd",
+      "target": "function:scripts/generic_tween_script.gd:_change_x_direction",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_tween_script.gd",
+      "target": "function:scripts/generic_tween_script.gd:_change_y_direction",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scripts/generic_tween_script.gd",
+      "target": "function:scripts/generic_tween_script.gd:_on_tween_completed",
+      "type": "contains",
+      "weight": 1.0,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_tween_script.gd:_on_tween_completed",
+      "target": "function:scripts/generic_tween_script.gd:_change_x_direction",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "function:scripts/generic_tween_script.gd:_on_tween_completed",
+      "target": "function:scripts/generic_tween_script.gd:_change_y_direction",
+      "type": "calls",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/levels/Level_1_Scene.tscn",
+      "target": "file:scripts/generic_level_script.gd",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/levels/Level_2_Scene.tscn",
+      "target": "file:scripts/generic_level_script.gd",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/ninja/Bullet_Scene.tscn",
+      "target": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "imports",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "target": "file:scenes/characters/ninja/Bullet_Scene.tscn",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "target": "file:scenes/characters/Camera2D.tscn",
+      "type": "related",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/levels/Level_1_Scene.tscn",
+      "target": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/levels/Level_2_Scene.tscn",
+      "target": "file:scenes/characters/ninja/Character_Scene.tscn",
+      "type": "related",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "file:scenes/levels/Level_1_Scene.tscn",
+      "target": "file:scenes/gui/PopupPanel.tscn",
+      "type": "related",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.codegraph/config.json",
+      "target": "file:scripts/generic_bullet_behaviour.gd",
+      "type": "configures",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.codegraph/config.json",
+      "target": "file:scripts/generic_character_behaviour.gd",
+      "type": "configures",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.codegraph/config.json",
+      "target": "file:scripts/generic_level_script.gd",
+      "type": "configures",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:.codegraph/config.json",
+      "target": "file:scripts/generic_tween_script.gd",
+      "type": "configures",
+      "weight": 0.6,
+      "direction": "forward"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:core-scripts",
+      "name": "Core Scripts",
+      "description": "GDScript base classes providing reusable character, bullet, level, and tween behaviour",
+      "nodeIds": [
+        "file:scripts/generic_character_behaviour.gd",
+        "file:scripts/generic_bullet_behaviour.gd",
+        "file:scripts/generic_level_script.gd",
+        "file:scripts/generic_tween_script.gd"
+      ]
+    },
+    {
+      "id": "layer:character-scenes",
+      "name": "Character Scenes",
+      "description": "Playable character and bullet scenes for Robot and Ninja",
+      "nodeIds": [
+        "file:scenes/characters/Camera2D.tscn",
+        "file:scenes/characters/robot/Character_Scene.tscn",
+        "file:scenes/characters/robot/Bullet_Scene.tscn",
+        "file:scenes/characters/robot/Muzzle_Scene.tscn",
+        "file:scenes/characters/ninja/Character_Scene.tscn",
+        "file:scenes/characters/ninja/Bullet_Scene.tscn"
+      ]
+    },
+    {
+      "id": "layer:enemy-scenes",
+      "name": "Enemy Scenes",
+      "description": "Zombie, Saw, and Barrier enemy scenes",
+      "nodeIds": [
+        "file:scenes/enemies/Enemy_Zombie_Scene.tscn",
+        "file:scenes/enemies/Enemy_Saw_Scene.tscn",
+        "file:scenes/enemies/Enemy_barrier.tscn"
+      ]
+    },
+    {
+      "id": "layer:environment-scenes",
+      "name": "Environment Scenes",
+      "description": "Floor, brick, flora, pit, float, rock, bone, and skeleton environment building blocks",
+      "nodeIds": [
+        "file:scenes/environment/Bone_Scene.tscn",
+        "file:scenes/environment/Brick_1_Particle_Scene.tscn",
+        "file:scenes/environment/Brick_1_Power_Up_Scene.tscn",
+        "file:scenes/environment/Brick_1_Scene.tscn",
+        "file:scenes/environment/Brick_2_Particle_Scene.tscn",
+        "file:scenes/environment/Brick_2_Power_Up_Scene.tscn",
+        "file:scenes/environment/Brick_2_Scene.tscn",
+        "file:scenes/environment/End_Door_Scene.tscn",
+        "file:scenes/environment/Float_1_Scene.tscn",
+        "file:scenes/environment/Float_2_Scene.tscn",
+        "file:scenes/environment/Floor_1_High_Scene.tscn",
+        "file:scenes/environment/Floor_1_High_Scene_2.tscn",
+        "file:scenes/environment/Floor_1_Scene.tscn",
+        "file:scenes/environment/Floor_2_High_Scene.tscn",
+        "file:scenes/environment/Floor_2_Scene.tscn",
+        "file:scenes/environment/Flora_10_scene.tscn",
+        "file:scenes/environment/Flora_11_scene.tscn",
+        "file:scenes/environment/Flora_12_scene.tscn",
+        "file:scenes/environment/Flora_13_scene.tscn",
+        "file:scenes/environment/Flora_14_scene.tscn",
+        "file:scenes/environment/Flora_1_scene.tscn",
+        "file:scenes/environment/Flora_2_scene.tscn",
+        "file:scenes/environment/Flora_3_scene.tscn",
+        "file:scenes/environment/Flora_4_scene.tscn",
+        "file:scenes/environment/Flora_5_scene.tscn",
+        "file:scenes/environment/Flora_6_scene.tscn",
+        "file:scenes/environment/Flora_7_scene.tscn",
+        "file:scenes/environment/Flora_8_scene.tscn",
+        "file:scenes/environment/Flora_9_scene.tscn",
+        "file:scenes/environment/Pit_1_Scenet.tscn",
+        "file:scenes/environment/Pit_2_Scenet.tscn",
+        "file:scenes/environment/Rock_scene.tscn",
+        "file:scenes/environment/Skeleton_scene.tscn"
+      ]
+    },
+    {
+      "id": "layer:game-scenes",
+      "name": "Game Scenes",
+      "description": "World, Level, GUI, and pickup scenes that orchestrate the full game",
+      "nodeIds": [
+        "file:scenes/World_Scene.tscn",
+        "file:scenes/Ammo_Scene.tscn",
+        "file:scenes/Blood_Particle_Scene.tscn",
+        "file:scenes/Energy_Stone_Scene.tscn",
+        "file:scenes/Health_Scene.tscn",
+        "file:scenes/levels/Level_1_Scene.tscn",
+        "file:scenes/levels/Level_2_Scene.tscn",
+        "file:scenes/gui/PopupPanel.tscn"
+      ]
+    },
+    {
+      "id": "layer:project-config",
+      "name": "Project Config",
+      "description": "Godot project configuration, export settings, git, codegraph, openspec, and pre-commit tooling configs",
+      "nodeIds": [
+        "config:project.godot",
+        "config:export_presets.cfg",
+        "config:.gitignore",
+        "config:.pre-commit-config.yaml",
+        "config:.codegraph/config.json",
+        "config:.codegraph/.gitignore",
+        "config:scenes/default_env.tres",
+        "config:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/.openspec.yaml",
+        "config:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/.openspec.yaml"
+      ]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "Documentation",
+      "description": "README, AGENTS.md, CHANGELOG, LICENSE, Copilot instructions, resource attribution files, openspec markdown docs, and GitHub issue templates",
+      "nodeIds": [
+        "document:README.md",
+        "document:AGENTS.md",
+        "document:CHANGELOG.md",
+        "document:LICENSE.md",
+        "document:.github/copilot-instructions.md",
+        "document:resources/characters/freeknight/README.txt",
+        "document:resources/characters/knight/README.txt",
+        "document:.github/ISSUE_TEMPLATE/bug_report.md",
+        "document:.github/ISSUE_TEMPLATE/feature_request.md",
+        "document:.github/ISSUE_TEMPLATE/new-development-request.md",
+        "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/proposal.md",
+        "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/spec-approved.md",
+        "document:openspec/changes/archive/issue-5-remove-hardcoded-local-filesystem-paths-leaked-in-ex/tasks.md",
+        "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/proposal.md",
+        "document:openspec/changes/issue-7-enforce-gdscript-naming-conventions-and-fix-typos-ac/tasks.md"
+      ]
+    },
+    {
+      "id": "layer:ci-cd",
+      "name": "CI/CD",
+      "description": "GitHub Actions workflow for linting path leaks",
+      "nodeIds": [
+        "pipeline:.github/workflows/lint-paths.yml"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Overview",
+      "description": "Start with the README to understand the game: a Godot 4 2D platformer with Robot and Ninja characters fighting zombies.",
+      "nodeIds": [
+        "document:README.md",
+        "config:project.godot"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Base Character System",
+      "description": "The generic_character_behaviour.gd is the foundation \u2014 a GDScript base class for all characters (player and enemy alike). It manages health, ammo, movement, jumping, animations, and damage states.",
+      "nodeIds": [
+        "file:scripts/generic_character_behaviour.gd"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Bullet & Projectile System",
+      "description": "generic_bullet_behaviour.gd extends CharacterBody2D to handle projectile movement, collision detection, and damage. Bullets interact with brick environments and enemy characters.",
+      "nodeIds": [
+        "file:scripts/generic_bullet_behaviour.gd"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Playable Characters",
+      "description": "The Robot and Ninja character scenes extend the base character script. The Robot has a muzzle flash, while the Ninja supports double-jump/glide. Each has its own Bullet_Scene.",
+      "nodeIds": [
+        "file:scenes/characters/robot/Character_Scene.tscn",
+        "file:scenes/characters/ninja/Character_Scene.tscn",
+        "file:scenes/characters/robot/Bullet_Scene.tscn",
+        "file:scenes/characters/ninja/Bullet_Scene.tscn"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Enemies",
+      "description": "The Zombie enemy reuses generic_character_behaviour.gd just like players. The Saw uses generic_tween_script.gd for oscillating movement. Enemy_barrier turns zombies around at boundaries.",
+      "nodeIds": [
+        "file:scenes/enemies/Enemy_Zombie_Scene.tscn",
+        "file:scenes/enemies/Enemy_Saw_Scene.tscn",
+        "file:scenes/enemies/Enemy_barrier.tscn"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Level Design",
+      "description": "Level scenes compose environment building blocks: floors, bricks, flora, pits, floats. Level_1 and Level_2 are the main playable stages. The generic_level_script.gd emits enter/exit signals.",
+      "nodeIds": [
+        "file:scenes/levels/Level_1_Scene.tscn",
+        "file:scenes/levels/Level_2_Scene.tscn",
+        "file:scripts/generic_level_script.gd"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "World Scene & Game Flow",
+      "description": "World_Scene.tscn is the root scene (set in project.godot). It orchestrates level loading, character selection, and GUI including the PopupPanel.",
+      "nodeIds": [
+        "file:scenes/World_Scene.tscn",
+        "file:scenes/gui/PopupPanel.tscn"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Developer Tooling",
+      "description": "The project uses openspec for spec-driven change management, codegraph for symbol navigation, pre-commit hooks and CI to prevent hardcoded paths from leaking.",
+      "nodeIds": [
+        "pipeline:.github/workflows/lint-paths.yml",
+        "config:.pre-commit-config.yaml",
+        "config:.codegraph/config.json"
+      ]
+    }
+  ]
+}

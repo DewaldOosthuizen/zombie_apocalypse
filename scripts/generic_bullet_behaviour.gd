@@ -3,20 +3,20 @@ extends CharacterBody2D
 # variables
 var sprite
 
-var movementDirection = 1
+var movement_direction = 1
 var speed = 1200
 var power = 0
 var damage = 30
 
 var velocity = Vector2(0, 0)
-var noValidCollision = []
-var deltaTime = 0
+var no_valid_collision = []
+var delta_time = 0
 
-const bricksParticle_scene = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
+const bricks_particle_scene = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
 const blood_scene = preload("res://scenes/Blood_Particle_Scene.tscn")
 
 func _animate_bullet(delta):
-	deltaTime += delta
+	delta_time += delta
 	_set_speed(delta)
 	_animate()
 	
@@ -31,20 +31,20 @@ func _animate_bullet(delta):
 	_check_collision_objects()
 	_remove_if_brick(collider1)
 	
-	# Ensures bullet disapears upon hitting invalid objects
-	if (noValidCollision.size() == 2):
+	# Ensures bullet disappears upon hitting invalid objects
+	if (no_valid_collision.size() == 2):
 		self.queue_free()
 
 
 func _set_speed(delta):
-	velocity.x = speed * delta * movementDirection
+	velocity.x = speed * delta * movement_direction
 	velocity.y = 0
 
 
 func _create_muzzle(muzzle_scene):
 	var muzzle = muzzle_scene.instantiate()
 	
-	if (movementDirection == 1):
+	if (movement_direction == 1):
 		muzzle.position = self.position - Vector2(-20, 1)
 	else:
 		muzzle.position = self.position - Vector2(20, 1)
@@ -58,17 +58,17 @@ func _animate():
 
 func _remove_if_brick(object):
 	if (object and object.collider):
-		var objectParent = object.collider.get_parent()
-		if (objectParent.is_in_group("brick")):
-			objectParent.break_object()
+		var object_parent = object.collider.get_parent()
+		if (object_parent.is_in_group("brick")):
+			object_parent.break_object()
 			if (power < 1):
 				self.queue_free()
-		elif (objectParent.is_in_group("power_up_brick")):
-			objectParent.break_object()
+		elif (object_parent.is_in_group("power_up_brick")):
+			object_parent.break_object()
 			if (power < 1):
 				self.queue_free()
 		else:
-			noValidCollision.append(true)
+			no_valid_collision.append(true)
 
 
 func _check_collision_objects():
