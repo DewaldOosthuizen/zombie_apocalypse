@@ -14,10 +14,11 @@ var damage = 30
 
 var velocity = Vector2(0, 0)
 var no_valid_collision = []
+var delta_time: float = 0.0
+
 var _area2d: Area2D          # cached in _ready() to avoid per-frame scene tree traversal
 var _collision_shape: CollisionShape2D  # cached in _ready() to avoid per-frame scene tree traversal
 var _non_brick_hit_count: int = 0  # replaces noValidCollision array; counts non-brick surface hits
-var delta_time: float = 0.0
 
 
 func _ready():
