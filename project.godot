@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Retro_Apocalyse"
+config/name="Zombie Apocalypse"
 run/main_scene="res://scenes/World_Scene.tscn"
 config/icon="res://icon.png"
 
