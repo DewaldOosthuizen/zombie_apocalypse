@@ -55,7 +55,7 @@ func _connect_signals():
 	# get the end door for current level and listen for events, if main character enters the door
 	# the signal will emit and the next level will be created
 	var end_door = get_tree().get_nodes_in_group(\"end_door\")
-	if (!end_door.empty()):
+	if (!end_door.is_empty()):
 		end_door = end_door.front()
 		# connect end door signals
 		if(!end_door.is_connected(\"enteredEndDoor\", Callable(self, \"advance_to_next_level\"))):
@@ -63,7 +63,7 @@ func _connect_signals():
 			print(\":: end door connected ::\")
 			
 	character_node = get_tree().get_nodes_in_group(\"main_character\")
-	if (!character_node.empty()):
+	if (!character_node.is_empty()):
 		character_node = character_node.front()
 		_connect_to_character_signals(character_node)
 
@@ -149,7 +149,7 @@ func reset_current_scene(character):
 	print(\"== resetting the current scene ==\")
 	# remove level
 	var currentLevel = get_tree().get_nodes_in_group(\"level\")
-	if (!currentLevel.empty()):
+	if (!currentLevel.is_empty()):
 		currentLevel = currentLevel.front()
 		#get_tree().root.remove_child(currentLevel)
 		currentLevel.queue_free()
@@ -209,12 +209,6 @@ func setup_character():
 func setup_level():
 	print(\"== setup level ==\")
 	if (!self.is_queued_for_deletion()):
-		var levelNode = get_tree().get_nodes_in_group(\"level\")
-		if (!levelNode.empty()):
-			levelNode = levelNode.front()
-			get_tree().call_deferred(\"set_current_scene\", levelNode)
-	
-		# setup character for connected level
 		setup_character()
 
 
