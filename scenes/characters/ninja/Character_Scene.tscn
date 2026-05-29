@@ -210,12 +210,12 @@ func _ready():
 #		ammo = 10 # starting ammo
 #		energy = 0 # starting energy
 #		health = 100 # starting health
-#		maxJumpCount = 2 # maximum jump count for character
-#		mainCharacter = true # specify main character
-#		maxSpeed = 450   # set character max speed
-#		action1Damage = 20
-#		action2Damage = 25
-#		action3Damage = 10
+#		max_jump_count = 2 # maximum jump count for character
+#		main_character = true # specify main character
+#		max_speed = 450   # set character max speed
+#		action1_damage = 20
+#		action2_damage = 25
+#		action3_damage = 10
 		type = \"ninja\" # character type
 		velocity = Vector2(0, 0) # reset character velocity
 		facingDirection = 1
@@ -275,7 +275,7 @@ func control_character(delta):
 		repeatFrames = false;
 		._change_sprite_animation(\"slide\")
 		._slide_attack_collision()
-	elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !action3):
+	elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < max_jump_count and !action3):
 		currentJumpCount += 1
 		playerSprite.frame = 0
 		repeatFrames = false
@@ -286,10 +286,10 @@ func control_character(delta):
 		if (currentJumpCount > 1):
 			._change_sprite_animation(\"jump_glide\")
 			disableGravity = true
-			playerSpeedY = -(JUMPFORCE / 4)
+			player_speed_y = -(JUMPFORCE / 4)
 		else:
 			._change_sprite_animation(\"jump\")
-			playerSpeedY = -JUMPFORCE
+			player_speed_y = -JUMPFORCE
 		
 	elif (Input.is_action_pressed(\"move_left\")):
 		._move_left()
@@ -432,12 +432,12 @@ animations = [ {
 scale = Vector2( 2, 2 )
 z_index = 10
 script = SubResource( 1 )
-maxJumpCount = 2
-maxSpeed = 450
+max_jump_count = 2
+max_speed = 450
 ammo = 10
-action1Damage = 20
-action2Damage = 25
-mainCharacter = true
+action1_damage = 20
+action2_damage = 25
+main_character = true
 
 [node name="CharacterArea2D" type="Area2D" parent="."]
 position = Vector2( 1.26428, -2.04825 )
