@@ -54,28 +54,28 @@ func test_take_damage_does_not_set_blood_when_invincible():
 	assert_false(_char.blood, "blood flag must remain false when invincible")
 
 func test_invincibility_timer_increments_while_invincible():
-	# Safe: only reads invincibleTimer after delta — no playerSprite access
-	# because invincibleTimer (0 + 0.1) does NOT exceed invincibleTime (3)
+	# Safe: only reads invincible_timer after delta — no player_sprite access
+	# because invincible_timer (0 + 0.1) does NOT exceed invincible_time (3)
 	_char.invincible = true
-	_char.invincibleTimer = 0.0
-	_char.flickerTimer = 0.0
+	_char.invincible_timer = 0.0
+	_char.flicker_timer = 0.0
 	_char.blood = false     # guard against bloodParticle branch
-	# playerSprite is null but the reset branch (L172) is NOT reached
+	# player_sprite is null but the reset branch (L172) is NOT reached
 	_char._handle_timers(0.1)
-	assert_almost_eq(_char.invincibleTimer, 0.1, 0.001,
-		"invincibleTimer should increment by delta each frame")
+	assert_almost_eq(_char.invincible_timer, 0.1, 0.001,
+		"invincible_timer should increment by delta each frame")
 
 func test_invincibility_timer_resets_after_duration():
-	# playerSprite MUST be assigned — L173 executes playerSprite.visible = true
+	# player_sprite MUST be assigned — L173 executes player_sprite.visible = true
 	var stub_sprite = AnimatedSprite2D.new()
-	_char.playerSprite = stub_sprite
+	_char.player_sprite = stub_sprite
 	_char.invincible = true
-	_char.invincibleTimer = 3.1   # already past invincibleTime (3)
-	_char.flickerTimer = 0.0
+	_char.invincible_timer = 3.1   # already past invincible_time (3)
+	_char.flicker_timer = 0.0
 	_char.blood = false            # guard against bloodParticle branch
 	_char._handle_timers(0.0)
 	assert_false(_char.invincible,
-		"invincible must be cleared once invincibleTimer exceeds invincibleTime")
-	assert_eq(_char.invincibleTimer, 0,
-		"invincibleTimer must reset to 0 after expiry")
+		"invincible must be cleared once invincible_timer exceeds invincible_time")
+	assert_eq(_char.invincible_timer, 0,
+		"invincible_timer must reset to 0 after expiry")
 	stub_sprite.free()
