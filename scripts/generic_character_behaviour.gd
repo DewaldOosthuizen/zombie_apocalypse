@@ -1,5 +1,11 @@
 extends CharacterBody2D
 
+# signals
+signal reload(character)
+signal reposition()
+signal refresh_hud(character)
+signal character_ready(character)
+
 # Constants
 const GRAVITY = 800 # default gravity force
 const JUMPFORCE = 400 # default jump force
@@ -30,10 +36,10 @@ var player_speed_x = 0 # controlled by this script, speed on x-axis
 var player_speed_y = 0 # controlled by this script, speed on y-axis
 var facing_direction = 0 # controlled by this script, used for player sprite flip
 var movement_direction = 0 # direction in which the character is moving.
-var current_jump_count = 0 # checks if the character is busy jumping, the count being the amount of jumps
+var current_jump_count = 0 # checks if character is busy jumping; count = number of jumps
 
 var movement_multiplier = 800 # character movement multiplier
-var stationary_velocity = 0.2 # default velocity on ground with gravity sits at 0.22, anything under means the character is in the air
+var stationary_velocity = 0.2 # gravity sits at 0.22; anything under means character is in the air
 var velocity = Vector2(0, 0)
 
 # Timers
@@ -49,7 +55,7 @@ var glide_time = 0.6
 
 # Flags
 var blood = false # set to true to display blood and automatically reset to false afterwards
-var dazed = false # character cannot move when set dazed to true, will be driven by dazed time and timer
+var dazed = false # character cannot move when dazed; driven by dazed_time and dazed_timer
 var invincible = false # indicate whether the character can be hurt or not
 var repeat_frames = true # indicate whether current sprite frames should be repeated or not
 var disable_gravity = false # disable character gravity when set to true
@@ -68,13 +74,6 @@ var area_left_attack_collision_shape_2d
 var area_right_attack_collision_shape_2d
 var stand_collision_shape_2d
 var slide_collision_shape_2d
-
-# signals
-signal reload(character)
-signal reposition()
-signal refresh_hud(character)
-signal character_ready(character)
-
 
 # default character behaviour drive, used for main characters
 func _start_process(delta):
