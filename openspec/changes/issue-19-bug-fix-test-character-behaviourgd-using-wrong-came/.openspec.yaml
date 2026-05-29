@@ -1,0 +1,12 @@
+schema: spec-driven
+issue: 19
+title: "BUG: Fix test_character_behaviour.gd using wrong camelCase property names"
+created: "2026-05-30"
+repository: DewaldOosthuizen/zombie_apocalypse
+status: proposed
+priority: high
+category: bug-fix
+affected_files:
+  - tests/test_character_behaviour.gd
+ground_truth_files:
+  - scripts/generic_character_behaviour.gd
