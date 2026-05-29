@@ -1,5 +1,24 @@
 extends CharacterBody2D
 
+# Constants
+const GRAVITY = 800 # default gravity force
+const JUMPFORCE = 400 # default jump force
+const BLOOD_PARTICLE_SCENE = preload("res://scenes/Blood_Particle_Scene.tscn")
+const BONE_SCENE = preload("res://scenes/environment/Bone_Scene.tscn")
+
+# Export variables
+@export var max_jump_count = 1 # characters can only jump once by default
+@export var max_speed = 350 # character max speed, defaulted to 350
+@export var ammo = 0 # default starting ammo for characters
+@export var energy = 0 # energy gained from energy stones
+@export var max_energy = 100 # character max energy
+@export var health = 100 # character starts with 100 % health
+@export var max_health = 100 # character max health %
+@export var action1_damage = 30 # damage dealt with action 1
+@export var action2_damage = 20 # damage dealt with action 2
+@export var action3_damage = 10 # damage dealt with action 3
+@export var character_scale = Vector2(1, 1)
+@export var main_character = false # indicate whether the character should have main_character features
 
 var player_sprite # reference to character sprite image
 var blood_colour = Color("#b90b0b") # default blood color
@@ -17,27 +36,14 @@ var movement_multiplier = 800 # character movement multiplier
 var stationary_velocity = 0.2 # default velocity on ground with gravity sits at 0.22, anything under means the character is in the air
 var velocity = Vector2(0, 0)
 
-@export var max_jump_count = 1 # characters can only jump once by default
-@export var max_speed = 350 # character max speed, defaulted to 350 
-@export var ammo = 0 # default starting ammo for characters
-@export var energy = 0 # energy gained from energy stones
-@export var maxEnergy = 100 # character max energy
-@export var health = 100 # character starts with 100 % health
-@export var maxHealth = 100 # character max health %
-@export var action1_damage = 30 # damage dealt with action 1
-@export var action2_damage = 20 # damage dealt with action 2
-@export var action3_damage = 10 # damage dealt with action 3
-@export var character_scale = Vector2(1, 1)
-@export var main_character = false # indicate whether the character should have main_character features
-
 # Timers
 var death_time = 3
 var death_timer = 0
-var flicker_timer = 0;
-var invincible_time = 3;
-var invincible_timer = 0;
-var dazed_time = 2;
-var dazed_timer = 0;
+var flicker_timer = 0
+var invincible_time = 3
+var invincible_timer = 0
+var dazed_time = 2
+var dazed_timer = 0
 var glide_timer = 0
 var glide_time = 0.6
 
@@ -46,39 +52,29 @@ var blood = false # set to true to display blood and automatically reset to fals
 var dazed = false # character cannot move when set dazed to true, will be driven by dazed time and timer
 var invincible = false # indicate whether the character can be hurt or not
 var repeat_frames = true # indicate whether current sprite frames should be repeated or not
-var disable_gravity = false  # disable character gravity when set to true
+var disable_gravity = false # disable character gravity when set to true
 var action1 = false # mapped to z
 var action2 = false # mapped to x
 var action3 = false # mapped to control
 var shield_indicator = false # indicate if shield is destroyed
 
-# Constants
-const GRAVITY = 800 # default gravity force
-const JUMPFORCE = 400 # default jump force
-
-# preloaded scenes
-const blood_particle_scene = preload("res://scenes/Blood_Particle_Scene.tscn")
-const bone_scene = preload("res://scenes/environment/Bone_Scene.tscn")
-
 # scenes that can be changed
 var bullet_scene
 
 # Collision objects
-var AreaStandCollisionShape2D
-var AreaSlideCollisionShape2D 
-var AreaLeftAttackCollisionShape2D
-var AreaRightAttackCollisionShape2D
-var StandCollisionShape2D
-var SlideCollisionShape2D
+var area_stand_collision_shape_2d
+var area_slide_collision_shape_2d
+var area_left_attack_collision_shape_2d
+var area_right_attack_collision_shape_2d
+var stand_collision_shape_2d
+var slide_collision_shape_2d
 
-var _attack_area: Area2D      # cached in _setup_collision() to avoid per-frame scene tree traversal
-var _character_area: Area2D   # cached in _setup_collision() to avoid per-frame scene tree traversal
-
-#signals
+# signals
 signal reload(character)
 signal reposition()
 signal refresh_hud(character)
 signal character_ready(character)
+
 
 # default character behaviour drive, used for main characters
 func _start_process(delta):
@@ -88,7 +84,7 @@ func _start_process(delta):
 	# handle collision on the x-axis
 	var collided_object1 = move_and_collide(Vector2(velocity.x, 0))
 	_handle_collision(collided_object1, false)
-	
+
 	# handle collision on the y-axis
 	var collided_object2 = move_and_collide(Vector2(0, velocity.y))
 	_handle_collision(collided_object2, velocity.y > stationary_velocity)
@@ -102,27 +98,29 @@ func _animate_player(delta):
 		player_speed_x += movement_multiplier * delta
 	else:
 		player_speed_x -= movement_multiplier * 2 * delta
-	
+
 	#apply gravity to jump
 	if (disable_gravity):
 		player_speed_y += delta
 	else:
 		player_speed_y += GRAVITY * delta
-		
+
 	#stop player from keeping on increasing speed
 	player_speed_x = clamp(player_speed_x, 0, max_speed)
 	player_speed_y = clamp(player_speed_y, player_speed_y, max_speed * 3)
 	#set player speed
 	velocity.x = player_speed_x * delta * movement_direction
 	velocity.y = player_speed_y * delta
-	
-	if (!repeat_frames and player_sprite.frame < player_sprite.get_sprite_frames().get_frame_count(player_sprite.animation) - 1):
+
+	if (!repeat_frames and
+			player_sprite.frame < player_sprite.get_sprite_frames().get_frame_count(
+				player_sprite.animation) - 1):
 		player_sprite.play()
-	elif (repeat_frames): 
+	elif (repeat_frames):
 		player_sprite.play()
 	else:
 		player_sprite.stop()
-		
+
 	_handle_timers(delta)
 
 
@@ -132,7 +130,7 @@ func _handle_timers(delta):
 		if (glide_timer > glide_time):
 			glide_timer = 0
 			disable_gravity = false
-	
+
 	# creates a delay that the character remains dazed
 	if (dazed):
 		dazed_timer += delta
@@ -146,11 +144,11 @@ func _handle_timers(delta):
 		if (!invincible):
 			invincible = true
 			# create instance of blood and add it to the scene
-			var particleEffect = blood_particle_scene.instantiate()
-			particleEffect.modulate = blood_colour
-			particleEffect.get_node(".").set_emitting(true)
-			particleEffect.position = self.get_position()
-			get_tree().root.add_child(particleEffect)
+			var particle_effect = BLOOD_PARTICLE_SCENE.instantiate()
+			particle_effect.modulate = blood_colour
+			particle_effect.get_node(".").set_emitting(true)
+			particle_effect.position = self.get_position()
+			get_tree().root.add_child(particle_effect)
 			_emit_refresh_hud()
 
 	# check if player is dead
@@ -165,12 +163,12 @@ func _handle_timers(delta):
 			velocity.y = 1
 			death_timer = 0
 			_emit_reload()
-					
+
 	# Create flickering effect to indicate damage
 	if (invincible):
 		flicker_timer += delta
 		invincible_timer += delta
-		
+
 		if (invincible_timer > invincible_time):
 			player_sprite.visible = true
 			invincible = false
@@ -178,7 +176,7 @@ func _handle_timers(delta):
 			flicker_timer = 0
 			shield_indicator = false
 			player_sprite.modulate = Color("#ffffff")
-			
+
 	if(flicker_timer > 0.12 and health > 0):
 		if (shield_indicator):
 			# indicate shield has been depleted
@@ -186,7 +184,7 @@ func _handle_timers(delta):
 				player_sprite.modulate = Color("#1d68c9") # blues
 			else:
 				player_sprite.modulate = Color("#ffffff") # normal
-		elif ((snapped(health, 0.2) / snapped(maxHealth, 0.2) * 100) < 40):
+		elif ((snapped(health, 0.2) / snapped(max_health, 0.2) * 100) < 40):
 			# indicate that health has dropped below 40%
 			if(player_sprite.modulate == Color("#ffffff")):
 				player_sprite.modulate = Color("#dd1717") # red
@@ -201,10 +199,10 @@ func _handle_timers(delta):
 		flicker_timer = 0
 
 
-func _handle_collision(collidedObject, resetJump):
-	if (collidedObject):
+func _handle_collision(collided_object, reset_jump):
+	if (collided_object):
 		#if character is on the floor
-		if (resetJump):
+		if (reset_jump):
 			player_speed_y = 0
 			current_jump_count = 0
 
@@ -216,22 +214,22 @@ func _shoot_bullet(power):
 	bullet.damage = action1_damage
 	var bullet_sprite = bullet.get_node("AnimatedSprite2D")
 	ammo -= 1
-	
+
 	if (!player_sprite.flip_h):
 		bullet_sprite.flip_h = false
 		bullet.movement_direction = 1
-		bullet.position = self.get_position()  - Vector2(-20, 5)
+		bullet.position = self.get_position() - Vector2(-20, 5)
 	elif (player_sprite.flip_h):
-		bullet_sprite.flip_h = true;
+		bullet_sprite.flip_h = true
 		bullet.movement_direction = -1
-		bullet.position = self.get_position()  - Vector2(20, 5)
-		
-	#	Add the nodes to the current scene
+		bullet.position = self.get_position() - Vector2(20, 5)
+
+	# Add the nodes to the current scene
 	get_tree().root.add_child(bullet)
 
 
 func _area_checks():
-	var objects_in_attack_area = _attack_area.get_overlapping_bodies()
+	var objects_in_attack_area = get_node("AttackArea2D").get_overlapping_bodies()
 	if (objects_in_attack_area and objects_in_attack_area.size() != 0):
 		for body in objects_in_attack_area:
 			if (body and !body.is_queued_for_deletion() and health > 0):
@@ -246,8 +244,7 @@ func _area_checks():
 				elif ((parent.is_in_group("brick") or parent.is_in_group("power_up_brick"))):
 					parent.break_object()
 
-
-	var areas_in_character_area = _character_area.get_overlapping_areas()
+	var areas_in_character_area = get_node("CharacterArea2D").get_overlapping_areas()
 	if (areas_in_character_area and areas_in_character_area.size() != 0):
 		for area in areas_in_character_area:
 			if (area and !area.is_queued_for_deletion() and health > 0):
@@ -280,7 +277,7 @@ func _take_damage(damage_amount):
 		blood = true
 		if (energy > 0):
 			energy -= damage_amount
-			
+
 			if (energy <= 0):
 				health += energy # adding negative value, to deduct the difference from health
 				shield_indicator = true
@@ -293,7 +290,7 @@ func _daze():
 	dazed = true
 
 
-func _reset_character_sprite_states(delta):
+func _reset_character_sprite_states(_delta):
 	if (health <= 0):
 		_change_sprite_animation("dead")
 		repeat_frames = false
@@ -310,7 +307,7 @@ func _reset_character_sprite_states(delta):
 			disable_gravity = false
 			if (movement_direction == 0):
 				_change_sprite_animation("idle")
-			else: 
+			else:
 				_change_sprite_animation("walk")
 			_default_collision()
 	elif (!action1 and !action2 and !action3 and current_jump_count == 0):
@@ -318,44 +315,42 @@ func _reset_character_sprite_states(delta):
 		repeat_frames = true
 		if (movement_direction == 0):
 			_change_sprite_animation("idle")
-		else: 
+		else:
 			_change_sprite_animation("walk")
 		disable_gravity = false
 
 
 func _setup_collision():
-	AreaStandCollisionShape2D = get_node("CharacterArea2D/StandCollisionShape2D")
-	AreaSlideCollisionShape2D = get_node("AttackArea2D/SlideAttackCollisionShape2D")
-	AreaLeftAttackCollisionShape2D = get_node("AttackArea2D/LeftAttackCollisionShape2D")
-	AreaRightAttackCollisionShape2D = get_node("AttackArea2D/RightAttackCollisionShape2D")
-	StandCollisionShape2D = get_node("StandCollisionShape2D")
-	SlideCollisionShape2D = get_node("SlideCollisionShape2D")
-	_attack_area = get_node("AttackArea2D")
-	_character_area = get_node("CharacterArea2D")
+	area_stand_collision_shape_2d = get_node("CharacterArea2D/StandCollisionShape2D")
+	area_slide_collision_shape_2d = get_node("AttackArea2D/SlideAttackCollisionShape2D")
+	area_left_attack_collision_shape_2d = get_node("AttackArea2D/LeftAttackCollisionShape2D")
+	area_right_attack_collision_shape_2d = get_node("AttackArea2D/RightAttackCollisionShape2D")
+	stand_collision_shape_2d = get_node("StandCollisionShape2D")
+	slide_collision_shape_2d = get_node("SlideCollisionShape2D")
 	_default_collision()
-	
+
 
 func _default_collision():
-	AreaStandCollisionShape2D.disabled = false
-	AreaSlideCollisionShape2D.disabled = true
-	AreaLeftAttackCollisionShape2D.disabled = true
-	AreaRightAttackCollisionShape2D.disabled = true
-	StandCollisionShape2D.disabled = false
-	SlideCollisionShape2D.disabled = true
+	area_stand_collision_shape_2d.disabled = false
+	area_slide_collision_shape_2d.disabled = true
+	area_left_attack_collision_shape_2d.disabled = true
+	area_right_attack_collision_shape_2d.disabled = true
+	stand_collision_shape_2d.disabled = false
+	slide_collision_shape_2d.disabled = true
 
 
 func _melee_attack_collision():
 	if (action2 and facing_direction == 1):
-		AreaRightAttackCollisionShape2D.disabled = false
+		area_right_attack_collision_shape_2d.disabled = false
 	elif (action2 and facing_direction == -1):
-		AreaLeftAttackCollisionShape2D.disabled = false
+		area_left_attack_collision_shape_2d.disabled = false
 
 
 func _slide_attack_collision():
-	SlideCollisionShape2D.disabled = false
-	AreaSlideCollisionShape2D.disabled = false
-	StandCollisionShape2D.disabled = true
-	AreaStandCollisionShape2D.disabled = true
+	slide_collision_shape_2d.disabled = false
+	area_slide_collision_shape_2d.disabled = false
+	stand_collision_shape_2d.disabled = true
+	area_stand_collision_shape_2d.disabled = true
 
 
 func _change_sprite_animation(animation_text):
@@ -379,8 +374,8 @@ func _emit_reload():
 	if(main_character):
 		emit_signal("reload", self)
 	else:
-		var bones = bone_scene.instantiate()
-		bones.position = self.get_position()  - Vector2(0, -70)
+		var bones = BONE_SCENE.instantiate()
+		bones.position = self.get_position() - Vector2(0, -70)
 		get_tree().root.add_child(bones)
 		self.queue_free()
 

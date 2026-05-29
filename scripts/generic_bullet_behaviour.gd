@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+# Constants
+const BRICKS_PARTICLE_SCENE = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
+const BLOOD_SCENE = preload("res://scenes/Blood_Particle_Scene.tscn")
+
 # variables
 var sprite
 
@@ -14,8 +18,6 @@ var _collision_shape: CollisionShape2D  # cached in _ready() to avoid per-frame 
 var _non_brick_hit_count: int = 0  # replaces noValidCollision array; counts non-brick surface hits
 var delta_time = 0
 
-const bricks_particle_scene = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
-const blood_scene = preload("res://scenes/Blood_Particle_Scene.tscn")
 
 func _ready():
 	_area2d = get_node("Area2D")
@@ -25,18 +27,18 @@ func _animate_bullet(delta):
 	delta_time += delta
 	_set_speed(delta)
 	_animate()
-	
+
 	if (power == 0):
 		self.scale = Vector2(0.2, 0.2)
 	elif (power == 1):
 		self.scale = Vector2(0.21, 0.22)
 	elif (power == 2):
 		self.scale = Vector2(0.22, 0.23)
-		
+
 	var collider1 = move_and_collide(Vector2(velocity.x, velocity.y))
 	_check_collision_objects()
 	_remove_if_brick(collider1)
-	
+
 	# Ensures bullet disappears upon hitting invalid objects
 	if (_non_brick_hit_count >= 2):
 		self.queue_free()
@@ -49,12 +51,12 @@ func _set_speed(delta):
 
 func _create_muzzle(muzzle_scene):
 	var muzzle = muzzle_scene.instantiate()
-	
+
 	if (movement_direction == 1):
 		muzzle.position = self.position - Vector2(-20, 1)
 	else:
 		muzzle.position = self.position - Vector2(20, 1)
-	
+
 	get_tree().root.add_child(muzzle)
 
 
