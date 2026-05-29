@@ -1,9 +1,11 @@
 name: GUT Tests
 
+# Disabled: GUT tests exceed 1 hour on GitHub Actions (Godot headless
+# startup + GUT initialisation is too slow for CI). Run locally with
+# scripts/run_gut_tests.sh instead. Kept as workflow_dispatch so it
+# can still be triggered manually from the GitHub Actions UI if needed.
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
