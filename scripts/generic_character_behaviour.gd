@@ -207,6 +207,11 @@ func _handle_collision(collided_object, reset_jump):
 
 
 func _shoot_bullet(power):
+	if bullet_scene == null:
+		push_error("_shoot_bullet called but bullet_scene is not assigned on " + name)
+		return
+	if ammo <= 0:
+		return
 	action1 = true
 	var bullet = bullet_scene.instantiate()
 	bullet.power = power
