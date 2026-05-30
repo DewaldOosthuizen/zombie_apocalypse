@@ -30,12 +30,7 @@ func _animate_bullet(delta):
 	_set_speed(delta)
 	_animate()
 
-	if (power == 0):
-		self.scale = Vector2(0.2, 0.2)
-	elif (power == 1):
-		self.scale = Vector2(0.21, 0.22)
-	elif (power == 2):
-		self.scale = Vector2(0.22, 0.23)
+	self.scale = _get_scale_for_power(power)
 
 	var collider1 = move_and_collide(Vector2(velocity.x, velocity.y))
 	_check_collision_objects()
@@ -49,6 +44,15 @@ func _animate_bullet(delta):
 func _set_speed(delta):
 	velocity.x = speed * delta * movement_direction
 	velocity.y = 0
+
+
+func _get_scale_for_power(p: int) -> Vector2:
+	if p == 0:
+		return Vector2(0.2, 0.2)
+	elif p == 1:
+		return Vector2(0.21, 0.22)
+	else:
+		return Vector2(0.22, 0.23)
 
 
 func _create_muzzle(muzzle_scene):
