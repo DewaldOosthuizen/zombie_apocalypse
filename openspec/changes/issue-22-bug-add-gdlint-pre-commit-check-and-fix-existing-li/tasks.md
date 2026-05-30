@@ -1,51 +1,51 @@
-# Tasks: Add gdlint Pre-Commit Hook and Fix Existing Linting Violations
+# Tasks: Add gdlint Pre-commit Check and Fix Existing Linting Violations
 
-## Pre-Commit Configuration
+## Pre-commit and CI Enforcement
 
-- [ ] Add `gdlint` hook to `.pre-commit-config.yaml` under the existing `local` repo entry targeting `\.(gd)$` files (file: `.pre-commit-config.yaml`)
-- [ ] Verify `pre-commit run --all-files` passes with zero gdlint violations after all code fixes are applied
-
-## CI Workflow
-
-- [ ] Extend `gdlint` step in `.github/workflows/gdlint.yml` to cover `tests/` directory in addition to `scripts/` (file: `.github/workflows/gdlint.yml`, line 17)
+- [ ] Add `gdlint` hook to `.pre-commit-config.yaml` targeting `**/*.gd` files (file: `.pre-commit-config.yaml`)
+- [ ] Verify `gdlint` is installed in the dev environment (`pip install gdtoolkit`) and document in README or dev-setup notes
+- [ ] Create or extend a CI workflow to run `gdlint scripts/**/*.gd tests/**/*.gd` as a blocking step (file: `.github/workflows/ci.yml`)
+- [ ] Confirm `pre-commit run --all-files` passes with zero gdlint violations after all fixes are applied
 
 ## Named Constants — generic_character_behaviour.gd
 
-- [ ] Add constant `BULLET_OFFSET_X: int = 20` near the top of the constants block (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add constant `BULLET_OFFSET_Y: int = 5` near the top of the constants block (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Replace inline `Vector2(-20, 5)` with `Vector2(-BULLET_OFFSET_X, BULLET_OFFSET_Y)` (file: `scripts/generic_character_behaviour.gd`, line 225)
-- [ ] Replace inline `Vector2(20, 5)` with `Vector2(BULLET_OFFSET_X, BULLET_OFFSET_Y)` (file: `scripts/generic_character_behaviour.gd`, line 229)
-- [ ] Add constant `LOW_HEALTH_THRESHOLD_PERCENT: int = 40` (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add constant `HEALTH_SNAP_PRECISION: float = 0.2` (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add constant `PERCENT_SCALE: int = 100` (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Replace magic values `0.2`, `100`, `40` in health flicker condition with named constants (file: `scripts/generic_character_behaviour.gd`, line 186)
+- [ ] Declare `const MOVEMENT_DECELERATION_FACTOR = 2` in the constants block (file: `scripts/generic_character_behaviour.gd`, line ~10)
+- [ ] Declare `const HEALTH_SNAP_PRECISION = 0.2` in the constants block (file: `scripts/generic_character_behaviour.gd`)
+- [ ] Declare `const LOW_HEALTH_THRESHOLD_PERCENT = 40` in the constants block (file: `scripts/generic_character_behaviour.gd`)
+- [ ] Declare `const BULLET_OFFSET_X = 20` and `const BULLET_OFFSET_Y = 5` in the constants block (file: `scripts/generic_character_behaviour.gd`)
+- [ ] Replace inline `* 2` with `* MOVEMENT_DECELERATION_FACTOR` in `_animate_player()` (line ~99)
+- [ ] Replace inline `snapped(..., 0.2)` literals with `HEALTH_SNAP_PRECISION` in `_handle_timers()` (line ~186)
+- [ ] Replace `< 40` threshold literal with `< LOW_HEALTH_THRESHOLD_PERCENT` (line ~186)
+- [ ] Replace `Vector2(-20, 5)` and `Vector2(20, 5)` in `_shoot_bullet()` with constant-backed expressions (lines ~225, ~229)
 
 ## Named Constants — generic_bullet_behaviour.gd
 
-- [ ] Add constant `BULLET_SCALE_POWER_0: Vector2 = Vector2(0.2, 0.2)` (file: `scripts/generic_bullet_behaviour.gd`)
-- [ ] Add constant `BULLET_SCALE_POWER_1: Vector2 = Vector2(0.21, 0.22)` (file: `scripts/generic_bullet_behaviour.gd`)
-- [ ] Add constant `BULLET_SCALE_POWER_2: Vector2 = Vector2(0.22, 0.23)` (file: `scripts/generic_bullet_behaviour.gd`)
-- [ ] Replace the three inline `Vector2` scale literals with the new named constants (file: `scripts/generic_bullet_behaviour.gd`, lines 32–38)
+- [ ] Declare `const BULLET_SCALE_POWER_0`, `BULLET_SCALE_POWER_1`, `BULLET_SCALE_POWER_2` for the three scale vectors (file: `scripts/generic_bullet_behaviour.gd`, lines ~34–38)
+- [ ] Replace the three inline `Vector2` scale literals with the new constants in `_animate_bullet()` (lines ~34–38)
+- [ ] Declare `const MUZZLE_OFFSET_X = 20` and `const MUZZLE_OFFSET_Y = 1` (file: `scripts/generic_bullet_behaviour.gd`)
+- [ ] Replace inline `Vector2(-20, 1)` and `Vector2(20, 1)` in `_create_muzzle()` with constant-backed expressions (lines ~58–60)
 
-## Refactor _area_checks()
+## Refactor _area_checks() — generic_character_behaviour.gd
 
-- [ ] Add private function `_process_attack_area()` containing the AttackArea2D collision logic extracted from `_area_checks()` (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add private function `_process_character_area()` containing the CharacterArea2D collision logic extracted from `_area_checks()` (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Rewrite `_area_checks()` body to delegate to `_process_attack_area()` and `_process_character_area()` only (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Verify maximum nesting depth of `_process_attack_area()` and `_process_character_area()` is three or fewer levels
+- [ ] Extract attack-area collision logic into `_process_attack_area()` (file: `scripts/generic_character_behaviour.gd`, lines ~235–249)
+- [ ] Extract character-area collision logic into `_process_character_area()` (file: `scripts/generic_character_behaviour.gd`, lines ~251–264)
+- [ ] Extract innermost incoming-damage guard into `_apply_incoming_damage(parent)` to reduce nesting to max three levels
+- [ ] Replace body of `_area_checks()` with two delegation calls: `_process_attack_area()` and `_process_character_area()`
+- [ ] Verify nesting depth of each extracted function does not exceed three levels
 
-## Refactor _handle_timers()
+## Refactor _handle_timers() — generic_character_behaviour.gd
 
-- [ ] Add private function `_tick_glide_timer(delta)` containing glide-timer logic (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add private function `_tick_daze_timer(delta)` containing daze-timer logic (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add private function `_tick_blood_timer(delta)` containing blood/invincibility-spawn logic (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add private function `_tick_death_timer(delta)` containing death-timer and reload logic (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Add private function `_tick_invincibility_timer(delta)` containing flicker/invincibility-timer logic (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Rewrite `_handle_timers(delta)` to delegate to the five new timer functions only (file: `scripts/generic_character_behaviour.gd`)
-- [ ] Verify maximum nesting depth of `_handle_timers()` and each extracted function is three or fewer levels
+- [ ] Extract glide timer block into `_tick_glide_timer(delta)` (file: `scripts/generic_character_behaviour.gd`, lines ~127–131)
+- [ ] Extract daze timer block into `_tick_daze_timer(delta)` (lines ~133–138)
+- [ ] Extract blood/invincibility trigger block into `_tick_blood_timer(delta)` (lines ~140–151)
+- [ ] Extract death-state block into `_handle_death_state(delta)` (lines ~153–164)
+- [ ] Extract invincibility + flicker timer blocks into `_tick_invincibility_timer(delta)` (lines ~166–198)
+- [ ] Extract flicker colour-toggle logic into `_handle_flicker()` to eliminate nested conditionals
+- [ ] Replace body of `_handle_timers(delta)` with four delegation calls: `_tick_glide_timer`, `_tick_daze_timer`, `_tick_blood_timer`, `_tick_invincibility_timer`
+- [ ] Verify nesting depth of each extracted function does not exceed three levels
 
 ## Verification
 
-- [ ] Run `gdlint scripts/ tests/` locally and confirm zero violations
-- [ ] Run all GUT tests and confirm they pass without regression
-- [ ] Run `pre-commit run --all-files` and confirm zero failures
+- [ ] Run all existing GUT tests and confirm zero regressions after the refactor
+- [ ] Run `gdlint scripts/generic_character_behaviour.gd scripts/generic_bullet_behaviour.gd` locally and confirm zero violations
+- [ ] Run `pre-commit run --all-files` and confirm clean output
