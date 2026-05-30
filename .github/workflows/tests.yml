@@ -15,12 +15,23 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Cache Godot binary
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/godot
+          key: godot-4.6-stable
+
       - name: Install Godot 4
         run: |
-          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
-          unzip -q Godot_v4.3-stable_linux.x86_64.zip
-          sudo mv Godot_v4.3-stable_linux.x86_64 /usr/local/bin/godot
-          chmod +x /usr/local/bin/godot
+          if [ ! -f /usr/local/bin/godot ]; then
+            wget -q https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip
+            unzip -q Godot_v4.6-stable_linux.x86_64.zip
+            sudo mv Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot
+            chmod +x /usr/local/bin/godot
+          fi
+
+      - name: Import project assets
+        run: godot --headless --editor --quit || true
 
       - name: Run GUT tests headlessly
         run: |
