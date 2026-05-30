@@ -1,0 +1,6 @@
+REJECTED
+Reason: The proposal omits the flicker-sprite rendering block that follows the `if (invincible):` block in `_handle_timers`. In the actual source, after the invincibility-timer guard, there is a separate `if(flicker_timer > 0.12 and health > 0):` block that drives the sprite colour changes (shield blue, low-health red, and the visible/invisible toggle). This block is not nested inside `if (invincible):` — it is a sibling block in `_handle_timers`. The proposal's `_tick_invincibility_timer` early-returns when `not invincible`, so this flicker logic would be silently dropped when the extracted function is called after invincibility expires. The rewritten `_handle_timers` delegates to only five functions and never calls anything to handle this block.
+
+Fix required:
+- Include the `if(flicker_timer > 0.12 and health > 0):` block inside `_tick_invincibility_timer` (remove the early-return guard or add a second pass after the timer expiry logic), OR extract it into a dedicated `_tick_flicker_sprite(delta)` function and add that as a sixth call in `_handle_timers`. Either way the flicker logic must be preserved — it controls visible damage feedback and its loss is a visible regression.
+- Update the tasks list to explicitly account for this block so the implementer does not miss it.

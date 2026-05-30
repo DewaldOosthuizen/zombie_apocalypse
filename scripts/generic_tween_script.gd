@@ -54,7 +54,7 @@ func _change_y_direction():
 		move_direction_y = 1
 
 
-func _on_tween_completed(_object, _key):
+func _on_tween_completed():
 	_change_x_direction()
 	_change_y_direction()
 
