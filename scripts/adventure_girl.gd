@@ -16,14 +16,10 @@ func _ready():
 		_emit_character_ready()
 		_subscribe_to_signals()
 		print(":: " + type + " character spawned ::")
-		set_process(true)
-
-
-func _process(_delta):
-	_area_checks()
 
 
 func _physics_process(delta):
+	_area_checks()
 	control_character(delta)
 	_start_process(delta)
 

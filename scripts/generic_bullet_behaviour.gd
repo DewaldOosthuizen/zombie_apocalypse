@@ -3,6 +3,11 @@ extends CharacterBody2D
 # Constants
 const BRICKS_PARTICLE_SCENE = preload("res://scenes/environment/Brick_1_Particle_Scene.tscn")
 const BLOOD_SCENE = preload("res://scenes/Blood_Particle_Scene.tscn")
+const BULLET_SCALE_POWER_0 = Vector2(0.20, 0.20)
+const BULLET_SCALE_POWER_1 = Vector2(0.21, 0.22)
+const BULLET_SCALE_POWER_2 = Vector2(0.22, 0.23)
+const MUZZLE_OFFSET_X = 20
+const MUZZLE_OFFSET_Y = 1
 
 # variables
 var sprite
@@ -59,9 +64,9 @@ func _create_muzzle(muzzle_scene):
 	var muzzle = muzzle_scene.instantiate()
 
 	if (movement_direction == 1):
-		muzzle.position = self.position - Vector2(-20, 1)
+		muzzle.position = self.position - Vector2(-MUZZLE_OFFSET_X, MUZZLE_OFFSET_Y)
 	else:
-		muzzle.position = self.position - Vector2(20, 1)
+		muzzle.position = self.position - Vector2(MUZZLE_OFFSET_X, MUZZLE_OFFSET_Y)
 
 	get_tree().root.add_child(muzzle)
 

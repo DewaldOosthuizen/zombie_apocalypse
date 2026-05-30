@@ -6,3 +6,9 @@ repos:
         language: pygrep
         entry: '(/[h]ome/[^/]+/|C:\\[U]sers\\[^\\]+\\)'
         exclude: '^(.*\.md|openspec/).*'
+      - id: gdlint
+        name: GDScript lint
+        language: system
+        entry: gdlint
+        files: \.(gd)$
+        types: [file]
