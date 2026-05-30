@@ -159,6 +159,8 @@ func _tick_blood_timer():
 
 
 func _tick_invincibility_timer(delta):
+	if health <= 0:
+		_handle_death_state(delta)
 	if (invincible):
 		flicker_timer += delta
 		invincible_timer += delta
@@ -170,20 +172,20 @@ func _tick_invincibility_timer(delta):
 			flicker_timer = 0
 			shield_indicator = false
 			player_sprite.modulate = Color("#ffffff")
+	_handle_flicker()
 
 
 func _handle_death_state(delta):
-	if (health <= 0):
-		_change_sprite_animation("dead")
-		repeat_frames = false
-		dazed = false
-		death_timer += delta
-		velocity.x = 0
-		velocity.y = 0
-		if (death_timer > death_time):
-			velocity.y = 1
-			death_timer = 0
-			_emit_reload()
+	_change_sprite_animation("dead")
+	repeat_frames = false
+	dazed = false
+	death_timer += delta
+	velocity.x = 0
+	velocity.y = 0
+	if (death_timer > death_time):
+		velocity.y = 1
+		death_timer = 0
+		_emit_reload()
 
 
 func _handle_flicker():
@@ -214,9 +216,7 @@ func _handle_timers(delta):
 	_tick_glide_timer(delta)
 	_tick_daze_timer(delta)
 	_tick_blood_timer()
-	_handle_death_state(delta)
 	_tick_invincibility_timer(delta)
-	_handle_flicker()
 
 
 func _handle_collision(collided_object, reset_jump):
