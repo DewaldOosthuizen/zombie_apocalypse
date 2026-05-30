@@ -1,15 +1,24 @@
 name: GUT Tests
 
-# Disabled: GUT tests exceed 1 hour on GitHub Actions (Godot headless
-# startup + GUT initialisation is too slow for CI). Run locally with
-# scripts/run_gut_tests.sh instead. Kept as workflow_dispatch so it
-# can still be triggered manually from the GitHub Actions UI if needed.
+# GUT tests can be slow on GitHub Actions (Godot headless startup + GUT
+# initialisation). Triggers are path-scoped so the job runs only when
+# GDScript source or test files change. A 90-minute timeout caps worst-case
+# CI time. Run locally anytime with scripts/run_gut_tests.sh.
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '**.gd'
+      - 'tests/**'
+  pull_request:
+    paths:
+      - '**.gd'
+      - 'tests/**'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,7 +40,9 @@ jobs:
           fi
 
       - name: Import project assets
-        run: godot --headless --editor --quit || true
+        # Godot 4 headless --editor --quit does not guarantee exit 0 on success;
+        # '; true' explicitly allows a non-zero exit without silencing real failures.
+        run: godot --headless --editor --quit; true
 
       - name: Run GUT tests headlessly
         run: |

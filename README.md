@@ -83,3 +83,8 @@ Run all tests headlessly:
 
 Tests can also be run from inside the Godot editor via the GUT panel
 (Scene > GUT > Run All).
+
+The `.github/workflows/tests.yml` CI workflow runs automatically on push and
+pull_request when any `.gd` source file or file under `tests/` is modified.
+It can also be triggered manually from the GitHub Actions UI via
+`workflow_dispatch`. A 90-minute job timeout bounds worst-case CI time.
