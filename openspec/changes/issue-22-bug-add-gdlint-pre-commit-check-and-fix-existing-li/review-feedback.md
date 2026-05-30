@@ -1,6 +1,0 @@
-REJECTED
-Reason: The proposal's Issue 2 and the corresponding CI task are factually incorrect. A `.github/workflows/gdlint.yml` already exists and already runs `gdlint scripts/` on every push and pull_request — the claim that "gdlint is never executed in CI" is wrong. Blindly executing the task "Create or update a CI workflow file" without acknowledging the existing file risks creating a duplicate workflow or overwriting a working configuration. All other issues (1, 3, 4, 5, 6) are accurate — line numbers match, code matches, and the refactor approach is technically sound — but Issue 2 must be corrected before implementation proceeds.
-
-Fix required:
-- Issue 2 description must be revised: gdlint CI enforcement already exists in `.github/workflows/gdlint.yml`. The actual gap is that the existing step runs `gdlint scripts/` but does NOT cover `tests/**/*.gd`. The fix is to update the existing workflow's run command from `gdlint scripts/` to `gdlint scripts/ tests/` (or `gdlint scripts/**/*.gd tests/**/*.gd`), not to create a new CI file.
-- The corresponding task "Create or update a CI workflow file" must be updated to "Update `.github/workflows/gdlint.yml` to extend coverage to `tests/**/*.gd`" and the before/after diff should reflect the single-line change to the existing `gdlint.yml`, not a new file creation.
