@@ -11,6 +11,11 @@ const GRAVITY = 800 # default gravity force
 const JUMPFORCE = 400 # default jump force
 const BLOOD_PARTICLE_SCENE = preload("res://scenes/Blood_Particle_Scene.tscn")
 const BONE_SCENE = preload("res://scenes/environment/Bone_Scene.tscn")
+const MOVEMENT_DECELERATION_FACTOR = 2
+const HEALTH_SNAP_PRECISION = 0.2
+const LOW_HEALTH_THRESHOLD_PERCENT = 40
+const BULLET_OFFSET_X = 20
+const BULLET_OFFSET_Y = 5
 
 # Export variables
 @export var max_jump_count = 1 # characters can only jump once by default
@@ -96,7 +101,7 @@ func _animate_player(delta):
 	elif (movement_direction != 0):
 		player_speed_x += movement_multiplier * delta
 	else:
-		player_speed_x -= movement_multiplier * 2 * delta
+		player_speed_x -= movement_multiplier * MOVEMENT_DECELERATION_FACTOR * delta
 
 	#apply gravity to jump
 	if (disable_gravity):
@@ -123,21 +128,23 @@ func _animate_player(delta):
 	_handle_timers(delta)
 
 
-func _handle_timers(delta):
+func _tick_glide_timer(delta):
 	if (disable_gravity):
 		glide_timer += delta
 		if (glide_timer > glide_time):
 			glide_timer = 0
 			disable_gravity = false
 
-	# creates a delay that the character remains dazed
+
+func _tick_daze_timer(delta):
 	if (dazed):
 		dazed_timer += delta
 		if (dazed_timer > dazed_time):
 			dazed = false
 			dazed_timer = 0
 
-	# set blood to true to take damage
+
+func _tick_blood_timer():
 	if (blood):
 		blood = false
 		if (!invincible):
@@ -150,20 +157,8 @@ func _handle_timers(delta):
 			get_tree().root.add_child(particle_effect)
 			_emit_refresh_hud()
 
-	# check if player is dead
-	if (health <= 0):
-		_change_sprite_animation("dead")
-		repeat_frames = false
-		dazed = false
-		death_timer += delta
-		velocity.x = 0
-		velocity.y = 0
-		if (death_timer > death_time):
-			velocity.y = 1
-			death_timer = 0
-			_emit_reload()
 
-	# Create flickering effect to indicate damage
+func _tick_invincibility_timer(delta):
 	if (invincible):
 		flicker_timer += delta
 		invincible_timer += delta
@@ -176,26 +171,52 @@ func _handle_timers(delta):
 			shield_indicator = false
 			player_sprite.modulate = Color("#ffffff")
 
-	if(flicker_timer > 0.12 and health > 0):
+
+func _handle_death_state(delta):
+	if (health <= 0):
+		_change_sprite_animation("dead")
+		repeat_frames = false
+		dazed = false
+		death_timer += delta
+		velocity.x = 0
+		velocity.y = 0
+		if (death_timer > death_time):
+			velocity.y = 1
+			death_timer = 0
+			_emit_reload()
+
+
+func _handle_flicker():
+	if (flicker_timer > 0.12 and health > 0):
 		if (shield_indicator):
 			# indicate shield has been depleted
-			if(player_sprite.modulate == Color("#ffffff")):
+			if (player_sprite.modulate == Color("#ffffff")):
 				player_sprite.modulate = Color("#1d68c9") # blues
 			else:
 				player_sprite.modulate = Color("#ffffff") # normal
-		elif ((snapped(health, 0.2) / snapped(max_health, 0.2) * 100) < 40):
+		elif ((snapped(health, HEALTH_SNAP_PRECISION) / snapped(max_health, HEALTH_SNAP_PRECISION) * 100) \
+				< LOW_HEALTH_THRESHOLD_PERCENT):
 			# indicate that health has dropped below 40%
-			if(player_sprite.modulate == Color("#ffffff")):
+			if (player_sprite.modulate == Color("#ffffff")):
 				player_sprite.modulate = Color("#dd1717") # red
 			else:
 				player_sprite.modulate = Color("#ffffff") # normal
 		else:
-			if(player_sprite.visible):
+			if (player_sprite.visible):
 				player_sprite.visible = false
 			else:
 				player_sprite.visible = true
 
 		flicker_timer = 0
+
+
+func _handle_timers(delta):
+	_tick_glide_timer(delta)
+	_tick_daze_timer(delta)
+	_tick_blood_timer()
+	_handle_death_state(delta)
+	_tick_invincibility_timer(delta)
+	_handle_flicker()
 
 
 func _handle_collision(collided_object, reset_jump):
@@ -222,17 +243,17 @@ func _shoot_bullet(power):
 	if (!player_sprite.flip_h):
 		bullet_sprite.flip_h = false
 		bullet.movement_direction = 1
-		bullet.position = self.get_position() - Vector2(-20, 5)
+		bullet.position = self.get_position() - Vector2(-BULLET_OFFSET_X, BULLET_OFFSET_Y)
 	elif (player_sprite.flip_h):
 		bullet_sprite.flip_h = true
 		bullet.movement_direction = -1
-		bullet.position = self.get_position() - Vector2(20, 5)
+		bullet.position = self.get_position() - Vector2(BULLET_OFFSET_X, BULLET_OFFSET_Y)
 
 	# Add the nodes to the current scene
 	get_tree().root.add_child(bullet)
 
 
-func _area_checks():
+func _process_attack_area():
 	var objects_in_attack_area = get_node("AttackArea2D").get_overlapping_bodies()
 	if (objects_in_attack_area and objects_in_attack_area.size() != 0):
 		for body in objects_in_attack_area:
@@ -248,20 +269,31 @@ func _area_checks():
 				elif ((parent.is_in_group("brick") or parent.is_in_group("power_up_brick"))):
 					parent.break_object()
 
+
+func _apply_incoming_damage(parent):
+	if (parent.health > 0 and (parent.action1 or parent.action2 or parent.action3) and !dazed):
+		if (!action1 and !action2 and !action3):
+			if (parent.action1 and !action1):
+				_take_damage(parent.action1_damage)
+			elif (parent.action2):
+				_take_damage(parent.action2_damage)
+			elif (parent.action3):
+				_take_damage(parent.action3_damage)
+
+
+func _process_character_area():
 	var areas_in_character_area = get_node("CharacterArea2D").get_overlapping_areas()
 	if (areas_in_character_area and areas_in_character_area.size() != 0):
 		for area in areas_in_character_area:
 			if (area and !area.is_queued_for_deletion() and health > 0):
 				var parent = area.get_parent()
 				if (area.is_in_group("enemy_attack")):
-					if (parent.health > 0 and (parent.action1 or parent.action2 or parent.action3) and !dazed):
-						if (!action1 and !action2 and !action3):
-							if (parent.action1 and !action1):
-								_take_damage(parent.action1_damage)
-							elif (parent.action2):
-								_take_damage(parent.action2_damage)
-							elif (parent.action3):
-								_take_damage(parent.action3_damage)
+					_apply_incoming_damage(parent)
+
+
+func _area_checks():
+	_process_attack_area()
+	_process_character_area()
 
 
 func _move_left():
@@ -375,7 +407,7 @@ func _subscribe_to_signals():
 
 
 func _emit_reload():
-	if(main_character):
+	if (main_character):
 		emit_signal("reload", self)
 	else:
 		var bones = BONE_SCENE.instantiate()
@@ -385,7 +417,7 @@ func _emit_reload():
 
 
 func _emit_reposition():
-	if(main_character):
+	if (main_character):
 		emit_signal("reposition")
 	else:
 		self.queue_free()

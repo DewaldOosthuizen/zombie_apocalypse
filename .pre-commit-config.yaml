@@ -5,4 +5,10 @@ repos:
         name: No absolute home-directory paths
         language: pygrep
         entry: '(/[h]ome/[^/]+/|C:\\[U]sers\\[^\\]+\\)'
-        exclude: '^(.*\.md|openspec/).*'
+        exclude: '^(.*\\.md|openspec/).*'
+      - id: gdlint
+        name: GDScript lint
+        language: system
+        entry: gdlint
+        files: \.(gd)$
+        types: [file]
