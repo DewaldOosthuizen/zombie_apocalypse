@@ -3,13 +3,13 @@ extends "res://scripts/generic_character_behaviour.gd"
 func _ready():
 	type = "adventure_girl"
 	gender = "female"
+	player_sprite = get_node("AnimatedSprite")
 	if (!get_tree().root.is_queued_for_deletion()):
 		_setup_collision()
 		velocity = Vector2(0, 0)
 		facing_direction = 1
 		movement_direction = 1
 
-		player_sprite = get_node("AnimatedSprite")
 		_change_sprite_animation("idle")
 		bullet_scene = preload("res://scenes/characters/ninja/Bullet_Scene.tscn")
 

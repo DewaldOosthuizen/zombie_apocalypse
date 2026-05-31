@@ -98,8 +98,8 @@ script/source = "extends \"res://scripts/generic_character_behaviour.gd\"
 var bubbleSpaceReact
 var bubbleSpaceStopReact
 
-export var genders = ['female', 'male']
-export var allowMove = true
+@export var genders = ['female', 'male']
+@export var allowMove = true
 
 var moveDirections = [-1, 1]
 var defaultMaxSpeed
@@ -115,21 +115,21 @@ var no_collision_group = [\"bullet\"]
 func _ready():
 	type = \"zombie\"
 	gender = genders[randi()%genders.size()] # random gender
-	playerSprite = get_node(\"AnimatedSprite2D\")
-	._change_sprite_animation(\"idle\")
+	player_sprite = get_node(\"AnimatedSprite\")
+	super._change_sprite_animation(\"idle\")
 	bubbleSpaceReact = get_node(\"React - Area2D\")
 	bubbleSpaceStopReact = get_node(\"StopReact - Area2D2\")
-	repeatFrames = true
+	repeat_frames = true
 	defaultMaxSpeed = max_speed
-	invincibleTime = 1
-	dazedTime = 1.2
-	healthBar.max_value = maxHealth
-	energyBar.max_value = maxEnergy
+	invincible_time = 1
+	dazed_time = 1.2
+	healthBar.max_value = max_health
+	energyBar.max_value = max_energy
 	blood_colour = Color(\"#6a4040\")
 	self.scale = character_scale
 	
-	if (gender == 'female'):
-		playerSprite.scale = Vector2(0.13, 0.13)
+	if (gender == 'female' and player_sprite != null):
+		player_sprite.scale = Vector2(0.13, 0.13)
 		get_node(\"StopReact - Area2D2/FemaleCollisionShape2D\").disabled = false
 		get_node(\"StopReact - Area2D2/MaleCollisionShape2D\").disabled = true
 	
@@ -140,34 +140,36 @@ func _ready():
 func _subscribe_to_signals():
 	var enemy_barriers = get_tree().get_nodes_in_group(\"barrier\")
 	for i in enemy_barriers:
-		i.connect(\"touchedBarrier\", Callable(self, \"change_direction\"))
+		if i.has_signal(\"touchedBarrier\"):
+			i.connect(\"touchedBarrier\", Callable(self, \"change_direction\"))
 		
 	var enemy_saws = get_tree().get_nodes_in_group(\"enemy_saw\")
 	for i in enemy_saws:
-		i.connect(\"touchedSaw\", Callable(self, \"change_direction\"))
+		if i.has_signal(\"touchedSaw\"):
+			i.connect(\"touchedSaw\", Callable(self, \"change_direction\"))
 
 
 func _physics_process(delta):
-	._animate_player(delta)
+	super._animate_player(delta)
 	
 	if (!dazed):
-		if (movementDirection == 0 and !stopMove and allowMove):
+		if (movement_direction == 0 and !stopMove and allowMove):
 			if (moveDirections[randi()%2] == -1):
-				._move_left()
+				super._move_left()
 			else:
-				._move_right()
+				super._move_right()
 		
 		#warning-ignore:return_value_discarded
 		move_and_collide(Vector2(0, velocity.y))
 		var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
 		
 		if (collidedObject2 and health > 0):
-			if (collidedObject2.normal == Vector2(0,-1)):
+			if (collidedObject2.get_normal() == Vector2(0,-1)):
 				player_speed_y = 0
-			if (collidedObject2.normal == Vector2(1,0) and !_check_collision_group(collidedObject2.collider)):
-				._move_right()
-			elif (collidedObject2.normal == Vector2(-1,0) and !_check_collision_group(collidedObject2.collider)):
-				._move_left()
+			if (collidedObject2.get_normal() == Vector2(1,0) and !_check_collision_group(collidedObject2.get_collider())):
+				super._move_right()
+			elif (collidedObject2.get_normal() == Vector2(-1,0) and !_check_collision_group(collidedObject2.get_collider())):
+				super._move_left()
 
 func _process(delta):
 	
@@ -183,20 +185,20 @@ func _process(delta):
 		self.get_node(\"CollisionShape2D\").disabled = true
 	elif(action2 or dazed):
 		if (!dazed and action2):
-			._change_sprite_animation(\"attack\")
-			repeatFrames = true
+			super._change_sprite_animation(\"attack\")
+			repeat_frames = true
 		if(dazed):
-			._change_sprite_animation(\"idle\")
-			movementDirection = 0
+			super._change_sprite_animation(\"idle\")
+			movement_direction = 0
 			action1 = false
 			action2 = false
 			action3 = false
 	else:
-		if (movementDirection == 0):
-			._change_sprite_animation(\"idle\")
+		if (movement_direction == 0):
+			super._change_sprite_animation(\"idle\")
 		else:
-			._change_sprite_animation(\"walk\")
-			repeatFrames = true
+			super._change_sprite_animation(\"walk\")
+			repeat_frames = true
 			max_speed = defaultMaxSpeed
 
 
@@ -220,15 +222,15 @@ func _areaCheck():
 					
 					if (!stopMove):
 						if (body.position.x < self.position.x):
-							._move_left()
+							super._move_left()
 						elif (body.position.x > self.position.x):
-							._move_right()
+							super._move_right()
 					else:
 						if (body.position.x < self.position.x):
-							facingDirection = -1
+							facing_direction = -1
 						elif (body.position.x > self.position.x):
-							facingDirection = 1
-						movementDirection = 0
+							facing_direction = 1
+						movement_direction = 0
 					
 					if (max_speed <= defaultMaxSpeed):
 						max_speed *= 2
@@ -251,9 +253,9 @@ func change_direction(object1, object2):
 			pass
 		else:
 			if (self.position.x < object2.position.x):
-				._move_left()
+				super._move_left()
 			else:
-				._move_right()"
+				super._move_right()"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 0.575264, 36.62 )
@@ -330,9 +332,9 @@ script = SubResource( 1 )
 max_jump_count = 0
 max_speed = 150
 energy = 10
-maxEnergy = 10
+max_energy = 10
 health = 20
-maxHealth = 20
+max_health = 20
 action1_damage = 0
 action3_damage = 0
 character_scale = Vector2( 1.2, 1.2 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource path="res://resources/environment/lab/objects/Saw.png" type="Texture2D" id=1]
 
@@ -6,24 +6,23 @@
 script/source = "extends \"res://scripts/generic_tween_script.gd\"
 
 # variables
-var playerSprite
+var player_sprite
 var reactArea
 
 signal touchedSaw(object, saw)
 
 func _ready():
-	tweenNode = get_node(\"Tween\")
-	playerSprite = self.get_node(\"Sprite2D\")
+	player_sprite = self.get_node(\"Sprite\")
 	reactArea = get_node(\"Area2D\")
-	._set_initial_movement(self.position)
-	set_process(true)
+	super._set_initial_movement(self.position)
 	
 	
 #warning-ignore:unused_argument
 func _process(delta):
-	playerSprite.rotation += 5
+	if player_sprite != null:
+		player_sprite.rotation += 5
 	_area_check()
-	._start_tween_process()
+	super._start_tween_process()
 
 
 func _area_check():
@@ -53,8 +52,6 @@ script = SubResource( 1 )
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 1 )
-
-[node name="Tween" type="Tween" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )

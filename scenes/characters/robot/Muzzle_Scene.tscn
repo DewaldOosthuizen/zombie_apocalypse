@@ -15,7 +15,7 @@ animations = [ {
 } ]
 
 [sub_resource type="GDScript" id=2]
-script/source = "extends AnimatedSprite
+script/source = "extends AnimatedSprite2D
 
 func _ready():
 	set_process(true)

@@ -17,7 +17,6 @@ var speed = 1200
 var power = 0
 var damage = 30
 
-var velocity = Vector2(0, 0)
 var no_valid_collision = []
 var delta_time: float = 0.0
 
@@ -76,8 +75,8 @@ func _animate():
 
 
 func _remove_if_brick(object):
-	if (object and object.collider):
-		var object_parent = object.collider.get_parent()
+	if (object and object.get_collider()):
+		var object_parent = object.get_collider().get_parent()
 		if (object_parent.is_in_group("brick")):
 			object_parent.break_object()
 			if (power < 1):

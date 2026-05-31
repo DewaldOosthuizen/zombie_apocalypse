@@ -9,13 +9,13 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
 
-onready var muzzle = preload(\"res://scenes/characters/robot/Muzzle_Scene.tscn\")
+@onready var muzzle = preload(\"res://scenes/characters/robot/Muzzle_Scene.tscn\")
 
 func _ready():
 	sprite = get_node(\"AnimatedSprite\")
-	._create_muzzle(muzzle)
+	super._create_muzzle(muzzle)
 	set_process(true)
-	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
+	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", Callable(self, \"_screen_exited\"))
 
 
 func _screen_exited():
@@ -23,7 +23,7 @@ func _screen_exited():
 
 
 func _process(delta):
-	._animate_bullet(delta)"
+	super._animate_bullet(delta)"
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -64,4 +64,4 @@ position = Vector2( 3.01247, 1.758 )
 scale = Vector2( 2.10163, 3.05057 )
 shape = SubResource( 4 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

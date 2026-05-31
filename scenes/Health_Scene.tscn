@@ -21,10 +21,10 @@ func _process(delta):
 	if (objectsInArea):
 		for i in objectsInArea:
 			if (i.is_in_group(\"character\")):
-				if (i.health < i.maxHealth):
-					i.health += i.maxHealth * health / 100 # restore health percentage
-					if (i.health > i.maxHealth):
-						i.health = i.maxHealth
+				if (i.health < i.max_health):
+					i.health += i.max_health * health / 100 # restore health percentage
+					if (i.health > i.max_health):
+						i.health = i.max_health
 					
 					i._emit_refresh_hud()
 					self.queue_free()

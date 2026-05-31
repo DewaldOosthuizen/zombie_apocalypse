@@ -137,8 +137,8 @@ func create_level():
 	var level_scene = playable_levels[active_level - 1]
 	if (level_scene):
 		level_scene = level_scene.instantiate()
-		if (!level_scene.is_connected(\"entered_level\", Callable(self, \"setup_level\"))):
-			level_scene.connect(\"entered_level\", Callable(self, \"setup_level\"))
+		if (!level_scene.is_connected(\"level_entered\", Callable(self, \"setup_level\"))):
+			level_scene.connect(\"level_entered\", Callable(self, \"setup_level\"))
 #		if (!level_scene.is_connected(\"exit_level\", self, \"reset_current_scene\")):
 #			level_scene.connect(\"exit_level\", self, \"reset_current_scene\")
 		
@@ -232,12 +232,12 @@ func refresh_hud(character):
 	character_stats[\"character\"][\"type\"] = character.type
 	character_stats[\"character\"][\"gender\"] = character.gender
 	
-	health_label.text = str(character.health) + \"/\" + str(character.maxHealth)
-	energy_label.text = str(character.energy) + \"/\" + str(character.maxEnergy)
+	health_label.text = str(character.health) + \"/\" + str(character.max_health)
+	energy_label.text = str(character.energy) + \"/\" + str(character.max_energy)
 	health_bar.value = character.health
-	health_bar.max_value = character.maxHealth
+	health_bar.max_value = character.max_health
 	energy_bar.value = character.energy
-	energy_bar.max_value = character.maxEnergy
+	energy_bar.max_value = character.max_energy
 	ammo_indication.text = \"x\" + str(character.ammo)
 	
 	var characterBulletImage = load(\"res://resources/characters/\" + character_stats[\"character\"][\"type\"] + \"/objects/Bullet_000.png\")
@@ -268,7 +268,7 @@ bg_color = Color( 0.537255, 0.541176, 0.580392, 1 )
 [sub_resource type="ImageTexture" id=6]
 
 [node name="World" type="Node2D"]
-pause_mode = 2
+process_mode = 3
 position = Vector2( 0, -2.72073 )
 script = SubResource( 1 )
 
@@ -277,20 +277,20 @@ script = SubResource( 1 )
 ]]
 
 [node name="HealthImage" type="TextureRect" parent="CanvasLayer"]
-margin_left = 8.73007
-margin_top = 10.2581
-margin_right = 38.7301
-margin_bottom = 40.2581
+offset_left = 8.73007
+offset_top = 10.2581
+offset_right = 38.7301
+offset_bottom = 40.2581
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 1
 
 [node name="HealthProgress" type="ProgressBar" parent="CanvasLayer"]
-margin_left = 54.2301
-margin_top = 10.2581
-margin_right = 254.23
-margin_bottom = 40.2581
-rect_min_size = Vector2( 200, 0 )
+offset_left = 54.2301
+offset_top = 10.2581
+offset_right = 254.23
+offset_bottom = 40.2581
+custom_minimum_size = Vector2( 200, 0 )
 custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -298,29 +298,29 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 percent_visible = false
 
 [node name="EnergyImage" type="TextureRect" parent="CanvasLayer"]
-margin_left = 8.73007
-margin_top = 46.2581
-margin_right = 38.7301
-margin_bottom = 76.2581
+offset_left = 8.73007
+offset_top = 46.2581
+offset_right = 38.7301
+offset_bottom = 76.2581
 texture = ExtResource( 2 )
 expand = true
 
 [node name="EnergyProgress" type="ProgressBar" parent="CanvasLayer"]
-margin_left = 54.2301
-margin_top = 46.2581
-margin_right = 254.23
-margin_bottom = 76.2581
-rect_min_size = Vector2( 200, 0 )
+offset_left = 54.2301
+offset_top = 46.2581
+offset_right = 254.23
+offset_bottom = 76.2581
+custom_minimum_size = Vector2( 200, 0 )
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 percent_visible = false
 
 [node name="BulletImage" type="TextureRect" parent="CanvasLayer"]
-margin_left = 256.844
-margin_top = 9.23303
-margin_right = 296.844
-margin_bottom = 39.233
+offset_left = 256.844
+offset_top = 9.23303
+offset_right = 296.844
+offset_bottom = 39.233
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = SubResource( 6 )
@@ -328,33 +328,33 @@ expand = true
 stretch_mode = 6
 
 [node name="BulletCount" type="Label" parent="CanvasLayer"]
-margin_left = 297.844
-margin_top = 19.233
-margin_right = 306.844
-margin_bottom = 33.233
+offset_left = 297.844
+offset_top = 19.233
+offset_right = 306.844
+offset_bottom = 33.233
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "X"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
-margin_left = 5.84406
-margin_top = -720.767
-margin_right = 45.8441
-margin_bottom = -680.767
+offset_left = 5.84406
+offset_top = -720.767
+offset_right = 45.8441
+offset_bottom = -680.767
 
 [node name="EnergyLabel" type="Label" parent="CanvasLayer"]
-margin_left = 53.9417
-margin_top = 45.751
-margin_right = 106.942
-margin_bottom = 59.751
+offset_left = 53.9417
+offset_top = 45.751
+offset_right = 106.942
+offset_bottom = 59.751
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100/100"
 valign = 1
 
 [node name="HealthLabel" type="Label" parent="CanvasLayer"]
-margin_left = 53.9417
-margin_top = 10.981
-margin_right = 106.942
-margin_bottom = 24.981
+offset_left = 53.9417
+offset_top = 10.981
+offset_right = 106.942
+offset_bottom = 24.981
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100/100"
 valign = 1
@@ -362,7 +362,7 @@ valign = 1
 [node name="PopupPanel" parent="CanvasLayer" groups=[
 "popup",
 ] instance=ExtResource( 3 )]
-margin_left = 598.0
-margin_top = 735.0
-margin_right = 607.0
-margin_bottom = 757.0
+offset_left = 598.0
+offset_top = 735.0
+offset_right = 607.0
+offset_bottom = 757.0

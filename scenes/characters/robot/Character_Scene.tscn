@@ -88,8 +88,9 @@
 script/source = "extends \"res://scripts/generic_character_behaviour.gd\"
 
 func _ready():
+	player_sprite = get_node(\"AnimatedSprite\")
 	if (!get_tree().root.is_queued_for_deletion()):
-		._setup_collision() # set up collision shapes
+		super._setup_collision() # set up collision shapes
 #		ammo = 10 # starting ammo
 #		energy = 0 # starting energy
 #		health = 100 # starting health
@@ -98,81 +99,79 @@ func _ready():
 #		action2_damage = 20
 #		action3_damage = 10
 		velocity = Vector2(0, 0)
-		facingDirection = 1
-		movementDirection = 1
-		
-		playerSprite = get_node(\"AnimatedSprite\")
-		._change_sprite_animation(\"idle\")
+		facing_direction = 1
+		movement_direction = 1
+		super._change_sprite_animation(\"idle\")
 		bullet_scene = preload(\"res://scenes/characters/robot/Bullet_Scene.tscn\")
 		type = \"robot\"
 		blood_colour = Color(\"#0a0a0a\") # black
 		
-		._emit_character_ready()
-		._subscribe_to_signals()
+		super._emit_character_ready()
+		super._subscribe_to_signals()
 		print(\":: \" + type + \" character spawed ::\")
 
 
 func _physics_process(delta):
 	# check for character control
 	control_character(delta)
-	._start_process(delta)
+	super._start_process(delta)
 
 
 func control_character(delta):
 	# reset default behaviour
-	._reset_character_sprite_states(delta)
+	super._reset_character_sprite_states(delta)
 	
 	# Handle input events
 	if (!dazed and health > 0):
 		if (Input.is_action_just_pressed(\"action_1\") and !action1 and !action2 and !action3 and ammo > 0):
-			._shoot_bullet(2)
-			repeatFrames = false;
+			super._shoot_bullet(2)
+			repeat_frames = false;
 			
-			if (currentJumpCount > 0):
-				._change_sprite_animation(\"jump_shoot\")
-			elif (movementDirection != 0):
-				._change_sprite_animation(\"run_shoot\")
-			elif (movementDirection == 0):
-				._change_sprite_animation(\"shoot\")
+			if (current_jump_count > 0):
+				super._change_sprite_animation(\"jump_shoot\")
+			elif (movement_direction != 0):
+				super._change_sprite_animation(\"run_shoot\")
+			elif (movement_direction == 0):
+				super._change_sprite_animation(\"shoot\")
 		
-			._emit_refresh_hud()
+			super._emit_refresh_hud()
 		elif (Input.is_action_just_pressed(\"action_2\") and !action1 and !action2 and !action3):
 			action2 = true
-			repeatFrames = false;
-			._melee_attack_collision()
-			if (currentJumpCount > 0):
-				._change_sprite_animation(\"jump_melee\")
+			repeat_frames = false;
+			super._melee_attack_collision()
+			if (current_jump_count > 0):
+				super._change_sprite_animation(\"jump_melee\")
 			else:
-				._change_sprite_animation(\"melee\")
+				super._change_sprite_animation(\"melee\")
 				
-		elif (Input.is_action_just_pressed(\"action_3\") and movementDirection != 0 and !action3):
+		elif (Input.is_action_just_pressed(\"action_3\") and movement_direction != 0 and !action3):
 			action3 = true
-			repeatFrames = false;
-			._change_sprite_animation(\"slide\")
-			._slide_attack_collision()
-		elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < max_jump_count and !action3):
+			repeat_frames = false;
+			super._change_sprite_animation(\"slide\")
+			super._slide_attack_collision()
+		elif (Input.is_action_just_pressed(\"move_jump\") and current_jump_count < max_jump_count and !action3):
 			player_speed_y = -JUMPFORCE
-			currentJumpCount += 1
-			._change_sprite_animation(\"jump\")
-			playerSprite.frame = 0
-			repeatFrames = false
+			current_jump_count += 1
+			super._change_sprite_animation(\"jump\")
+			player_sprite.frame = 0
+			repeat_frames = false
 			action1 = false
 			action2 = false
 			action3 = false
 		elif (Input.is_action_pressed(\"move_left\")):
-			._move_left()
+			super._move_left()
 		elif (Input.is_action_pressed(\"move_right\")):
-			._move_right()
+			super._move_right()
 		elif (Input.is_action_pressed(\"respawn\")):
-			._emit_reposition()
+			super._emit_reposition()
 		else:
-			movementDirection = 0
+			movement_direction = 0
 			if (health <= 0):
-				._change_sprite_animation(\"dead\")
-				repeatFrames = false
-			elif (currentJumpCount == 0 and !action1 and !action2 and !action3):
-				._change_sprite_animation(\"idle\")
-				repeatFrames = true"
+				super._change_sprite_animation(\"dead\")
+				repeat_frames = false
+			elif (current_jump_count == 0 and !action1 and !action2 and !action3):
+				super._change_sprite_animation(\"idle\")
+				repeat_frames = true"
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 12.0227
@@ -252,7 +251,7 @@ scale = Vector2( 2, 2 )
 z_index = 10
 script = SubResource( 1 )
 ammo = 10
-maxEnergy = 200
+max_energy = 200
 action1_damage = 40
 main_character = true
 
@@ -302,5 +301,5 @@ frames = SubResource( 7 )
 animation = "male_robot_idle"
 speed_scale = 3.0
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2( -3.88801, -8.7262 )

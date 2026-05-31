@@ -34,7 +34,7 @@ func check_area():
 				if (!locked):
 					emit_signal(\"enteredEndDoor\")
 				else:
-					get_node(\"PopupPanel\").rect_position = Vector2(self.position.x - (spriteImage.texture.get_width() / 2), self.position.y - 130)
+					get_node(\"PopupPanel\").position = Vector2(self.position.x - (spriteImage.texture.get_width() / 2), self.position.y - 130)
 					get_node(\"PopupPanel\").show()
 			else:
 				get_node(\"PopupPanel\").hide()"

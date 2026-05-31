@@ -21,10 +21,10 @@ func _process(delta):
 	if (objectsInArea):
 		for i in objectsInArea:
 			if (i.is_in_group(\"character\")):
-				if (i.energy < i.maxEnergy):
-					i.energy += i.maxEnergy * energy / 100 # restore health percentage
-					if (i.energy > i.maxEnergy):
-						i.energy = i.maxEnergy
+				if (i.energy < i.max_energy):
+					i.energy += i.max_energy * energy / 100 # restore health percentage
+					if (i.energy > i.max_energy):
+						i.energy = i.max_energy
 					i._emit_refresh_hud()
 					self.queue_free()"
 

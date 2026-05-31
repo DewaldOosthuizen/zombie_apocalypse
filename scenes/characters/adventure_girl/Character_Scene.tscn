@@ -212,5 +212,5 @@ animation = "female_adventure_girl_idle"
 frame = 0
 speed_scale = 4.0
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2( -3.88801, -8.7262 )

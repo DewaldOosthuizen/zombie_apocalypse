@@ -8,7 +8,6 @@ extends Node2D
 @export var move_distance_y = 0
 @export var tween_duration = 4 # duration of tween moving from position
 
-var tween_node # set this node inside the _ready function of child node extending this script
 var tween_running = false
 var movement_position
 var trans_type = Tween.TRANS_LINEAR
@@ -17,18 +16,17 @@ var ease_type = Tween.EASE_IN_OUT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _start_tween_process():
-	if (tween_node and !tween_running && can_tween):
+	if (!tween_running && can_tween):
 		tween_running = true
 
-		# check if the signal is connected
-		if (!tween_node.is_connected("finished", Callable(self, "_on_tween_completed"))):
-			# connect the signal, once tween is completed it will call the _on_tween_completed method
-			tween_node.connect("finished", Callable(self, "_on_tween_completed"))
+		# Create a new Tween via the Node API (Godot 4 — Tween is not a scene node)
+		var tween = create_tween()
+		tween.finished.connect(_on_tween_completed)
 
 		# tween properties
-		var tween = tween_node.tween_property(self, "position", movement_position, tween_duration)
-		tween.set_trans(trans_type)
-		tween.set_ease(ease_type)
+		var tweener = tween.tween_property(self, "position", movement_position, tween_duration)
+		tweener.set_trans(trans_type)
+		tweener.set_ease(ease_type)
 
 
 func _set_initial_movement(init_position):

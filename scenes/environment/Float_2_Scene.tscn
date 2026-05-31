@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource path="res://resources/environment/desert/tile/14.png" type="Texture2D" id=1]
 [ext_resource path="res://resources/environment/desert/tile/15.png" type="Texture2D" id=2]
@@ -10,13 +10,11 @@ script/source = "extends \"res://scripts/generic_tween_script.gd\"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tweenNode = get_node(\"Tween\")
-	._set_initial_movement(self.position)
-	set_process(true)
+	super._set_initial_movement(self.position)
 
 
 func _process(delta):
-	._start_tween_process()"
+	super._start_tween_process()"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 190.048, 43.6754 )
@@ -46,4 +44,4 @@ position = Vector2( -25.8726, 12.6355 )
 position = Vector2( 30.6972, -2.70749 )
 shape = SubResource( 2 )
 
-[node name="Tween" type="Tween" parent="."]
+

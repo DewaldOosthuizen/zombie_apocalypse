@@ -45,7 +45,6 @@ var current_jump_count = 0 # checks if character is busy jumping; count = number
 
 var movement_multiplier = 800 # character movement multiplier
 var stationary_velocity = 0.2 # gravity sits at 0.22; anything under means character is in the air
-var velocity = Vector2(0, 0)
 
 # Timers
 var death_time = 3
@@ -82,6 +81,8 @@ var slide_collision_shape_2d
 
 # default character behaviour drive, used for main characters
 func _start_process(delta):
+	if player_sprite == null:
+		return
 	# set player speed, gravity and animate sprite
 	_animate_player(delta)
 
@@ -228,6 +229,8 @@ func _handle_collision(collided_object, reset_jump):
 
 
 func _shoot_bullet(power):
+	if player_sprite == null:
+		return
 	if bullet_scene == null:
 		push_error("_shoot_bullet called but bullet_scene is not assigned on " + name)
 		return
@@ -237,7 +240,7 @@ func _shoot_bullet(power):
 	var bullet = bullet_scene.instantiate()
 	bullet.power = power
 	bullet.damage = action1_damage
-	var bullet_sprite = bullet.get_node("AnimatedSprite2D")
+	var bullet_sprite = bullet.get_node("AnimatedSprite")
 	ammo -= 1
 
 	if (!player_sprite.flip_h):
@@ -299,12 +302,16 @@ func _area_checks():
 func _move_left():
 	facing_direction = -1
 	movement_direction = facing_direction
+	if player_sprite == null:
+		return
 	player_sprite.flip_h = true
 
 
 func _move_right():
 	facing_direction = 1
 	movement_direction = facing_direction
+	if player_sprite == null:
+		return
 	player_sprite.flip_h = false
 
 
@@ -327,6 +334,8 @@ func _daze():
 
 
 func _reset_character_sprite_states(_delta):
+	if player_sprite == null:
+		return
 	if (health <= 0):
 		_change_sprite_animation("dead")
 		repeat_frames = false
@@ -390,6 +399,8 @@ func _slide_attack_collision():
 
 
 func _change_sprite_animation(animation_text):
+	if player_sprite == null:
+		return
 	player_sprite.animation = gender + "_" + type + "_" + animation_text
 
 
