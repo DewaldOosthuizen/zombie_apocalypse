@@ -17,7 +17,6 @@ var speed = 1200
 var power = 0
 var damage = 30
 
-var no_valid_collision = []
 var delta_time: float = 0.0
 
 var _area2d: Area2D          # cached in _ready() to avoid per-frame scene tree traversal
@@ -52,11 +51,11 @@ func _set_speed(delta):
 
 func _get_scale_for_power(p: int) -> Vector2:
 	if p == 0:
-		return Vector2(0.2, 0.2)
+		return BULLET_SCALE_POWER_0
 	elif p == 1:
-		return Vector2(0.21, 0.22)
+		return BULLET_SCALE_POWER_1
 	else:
-		return Vector2(0.22, 0.23)
+		return BULLET_SCALE_POWER_2
 
 
 func _create_muzzle(muzzle_scene):
