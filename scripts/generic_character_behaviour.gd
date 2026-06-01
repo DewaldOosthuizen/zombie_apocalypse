@@ -133,7 +133,7 @@ func _animate_player(delta):
 	elif (repeat_frames):
 		player_sprite.play()
 	else:
-		player_sprite.stop()
+		player_sprite.pause()  # pause() holds the last frame; stop() resets to frame 0 causing animation to replay
 
 	_handle_timers(delta)
 
