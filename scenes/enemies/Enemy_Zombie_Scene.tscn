@@ -606,9 +606,9 @@ shape = SubResource("2")
 position = Vector2(0.715809, -5.54256)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("3")
-animation = &"female_zombie_walk"
-frame = 4
-speed_scale = 2.0
+animation = &"male_zombie_dead"
+frame_progress = 0.69779354
+speed_scale = 1.8
 
 [node name="React - Area2D" type="Area2D" parent="." unique_id=1983820189]
 
@@ -628,5 +628,7 @@ shape = SubResource("6")
 disabled = true
 
 [node name="HealthProgressBar" type="ProgressBar" parent="." unique_id=1288075477]
+metadata/_edit_use_anchors_ = true
 
 [node name="EnergyProgressBar" type="ProgressBar" parent="." unique_id=1396218138]
+metadata/_edit_use_anchors_ = true

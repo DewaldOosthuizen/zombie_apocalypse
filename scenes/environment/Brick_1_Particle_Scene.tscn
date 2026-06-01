@@ -18,8 +18,8 @@ radial_accel_min = 20.0
 radial_accel_max = 20.0
 damping_min = 50.0
 damping_max = 50.0
-scale_min = 4.5
-scale_max = 4.5
+scale_min = 0.5
+scale_max = 0.5
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends GPUParticles2D
