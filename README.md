@@ -7,6 +7,16 @@ from spreading.
 ## Requirements
 - Godot 4.x or later
 
+## Documentation
+
+Architecture Decision Documents (ADDs) capture significant design and technical decisions:
+
+- [docs/add/README.md](docs/add/README.md) — ADD index
+- [ADD-001: Godot 4 Migration](docs/add/add-001-godot4-migration.md)
+- [ADD-002: Generic Behaviour Scripts](docs/add/add-002-generic-behaviour-scripts.md)
+- [ADD-003: Multi-Character World Scene Design](docs/add/add-003-multi-character-design.md)
+- [ADD-004: GUT Testing Approach](docs/add/add-004-gut-testing-approach.md)
+
 ## Migration to Godot 4
 This project has been updated from Godot 3 to Godot 4, including:
 - Updated node types (CharacterBody2D, AnimatedSprite2D, Sprite2D)
@@ -43,10 +53,9 @@ This project has been updated from Godot 3 to Godot 4, including:
 
 ### ADVENTURE GIRL CONTROLS
 
-> **Status:** Work in progress — sprite assets are present
-> (Idle, Dead, Jump, Melee, Run, Shoot, Slide) but no playable scene exists yet.
-> Controls below reflect the shared input map and will be confirmed once the
-> character scene is implemented.
+> **Note:** Adventure Girl is launchable but incomplete. She currently borrows
+> the Ninja bullet scene and is missing a dedicated bullet scene, a jump-shoot
+> animation variant, and a jump-melee animation variant.
 
 * MOVEMENTS
   * A, LEFT ARROW        - move left
@@ -63,19 +72,21 @@ This project has been updated from Godot 3 to Godot 4, including:
 |----------------|--------------------|-----------------------------------------------|------------------|
 | Robot          | Yes                | Full set                                      | Playable         |
 | Male Ninja     | Yes                | Full set                                      | Playable         |
-| Adventure Girl | Yes                | Idle, Dead, Jump, Melee, Run, Shoot, Slide    | Playable         |
+| Adventure Girl | Yes                | Idle, Dead, Jump, Melee, Run, Shoot, Slide    | Playable (partial) |
 
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
 
-## Documentation
 
-Architecture Decision Documents (ADDs) capture significant design and technical decisions:
+## Known Gaps / Roadmap
 
-- [docs/add/README.md](docs/add/README.md) — ADD index
-- [ADD-001: Godot 4 Migration](docs/add/add-001-godot4-migration.md)
-- [ADD-002: Generic Behaviour Scripts](docs/add/add-002-generic-behaviour-scripts.md)
-- [ADD-003: Multi-Character World Scene Design](docs/add/add-003-multi-character-design.md)
-- [ADD-004: GUT Testing Approach](docs/add/add-004-gut-testing-approach.md)
+The following items are outstanding for Adventure Girl and are tracked as open GitHub Issues:
+
+- **Dedicated bullet scene** — Adventure Girl currently borrows the Ninja bullet scene.
+  A dedicated projectile scene and asset are needed. (Issue #41)
+- **Jump-shoot animation variant** — No jump-shoot animation exists yet; the character
+  falls back to the ground-shoot animation in mid-air. (Issue #42)
+- **Jump-melee animation variant** — No jump-melee animation exists yet; the character
+  falls back to the ground-melee animation in mid-air. (Issue #42)
 
 ## Running Tests
 
