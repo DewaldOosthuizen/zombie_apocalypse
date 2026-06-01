@@ -163,7 +163,7 @@ func _tick_blood_timer():
 			var particle_effect = BLOOD_PARTICLE_SCENE.instantiate()
 			particle_effect.modulate = blood_colour
 			particle_effect.get_node(".").set_emitting(true)
-			particle_effect.position = self.get_position()
+			particle_effect.position = self.get_position() - Vector2(0, 50)
 			get_tree().root.add_child(particle_effect)
 			_emit_refresh_hud()
 
