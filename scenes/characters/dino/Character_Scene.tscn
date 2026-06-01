@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dino_char_scene"]
+[gd_scene format=3 uid="uid://b0l66hpivlrnh"]
 
 [ext_resource type="Texture2D" uid="uid://dj83qs4dkjm5m" path="res://resources/characters/dino/Dead (1).png" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca4ac5nudgpji" path="res://resources/characters/dino/Dead (2).png" id="2"]
@@ -48,21 +48,15 @@
 [ext_resource type="Texture2D" uid="uid://b0shb6oq47gh0" path="res://resources/characters/dino/Walk (8).png" id="46"]
 [ext_resource type="Texture2D" uid="uid://b0ti7frpg65ns" path="res://resources/characters/dino/Walk (9).png" id="47"]
 [ext_resource type="Texture2D" uid="uid://xb5ic8wi3717" path="res://resources/characters/dino/Walk (10).png" id="48"]
-[ext_resource type="Script" uid="uid://f32994f4a21e4a" path="res://scripts/dino.gd" id="49"]
-
-[sub_resource type="CapsuleShape2D" id="1"]
-radius = 12.0227
-height = 28.0
+[ext_resource type="Script" uid="uid://byhv1j8gaprha" path="res://scripts/dino.gd" id="49"]
 
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 14.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(20, 20)
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(40, 10)
@@ -70,285 +64,240 @@ size = Vector2(40, 10)
 [sub_resource type="RectangleShape2D" id="6"]
 size = Vector2(28, 8)
 
-[sub_resource type="SpriteFrames" id="7"]
-animations = [
-  {
-  "frames": [
-    {
-    "duration": 1.0,
-    "texture": ExtResource("1")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("2")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("3")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("4")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("5")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("6")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("7")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("8")
-    },
-  ],
-  "loop": false,
-  "name": &"dino_dead",
-  "speed": 8.0,
-  },
-  {
-  "frames": [
-    {
-    "duration": 1.0,
-    "texture": ExtResource("9")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("10")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("11")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("12")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("13")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("14")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("15")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("16")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("17")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("18")
-    },
-  ],
-  "loop": true,
-  "name": &"dino_idle",
-  "speed": 8.0,
-  },
-  {
-  "frames": [
-    {
-    "duration": 1.0,
-    "texture": ExtResource("19")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("20")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("21")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("22")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("23")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("24")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("25")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("26")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("27")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("28")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("29")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("30")
-    },
-  ],
-  "loop": false,
-  "name": &"dino_jump",
-  "speed": 10.0,
-  },
-  {
-  "frames": [
-    {
-    "duration": 1.0,
-    "texture": ExtResource("31")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("32")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("33")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("34")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("35")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("36")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("37")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("38")
-    },
-  ],
-  "loop": true,
-  "name": &"dino_run",
-  "speed": 10.0,
-  },
-  {
-  "frames": [
-    {
-    "duration": 1.0,
-    "texture": ExtResource("39")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("40")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("41")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("42")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("43")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("44")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("45")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("46")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("47")
-    },
-    {
-    "duration": 1.0,
-    "texture": ExtResource("48")
-    },
-  ],
-  "loop": true,
-  "name": &"dino_walk",
-  "speed": 8.0,
-  },
-]
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 12.0227
+height = 28.0
 
-[node name="Dino_Character_Scene" type="CharacterBody2D" groups=["character", "main_character"]]
+[sub_resource type="SpriteFrames" id="7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}],
+"loop": false,
+"name": &"dino_dead",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18")
+}],
+"loop": true,
+"name": &"dino_idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30")
+}],
+"loop": false,
+"name": &"dino_jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38")
+}],
+"loop": true,
+"name": &"dino_run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48")
+}],
+"loop": true,
+"name": &"dino_walk",
+"speed": 8.0
+},
+{
+"frames": [
+  {
+  "duration": 1.0,
+  "texture": ExtResource("35")
+  },
+],
+"loop": false,
+"name": &"dino_tail_swipe",
+"speed": 1.0,
+}]
+
+[node name="Dino_Character_Scene" type="CharacterBody2D" unique_id=1773936330 groups=["character", "main_character"]]
 script = ExtResource("49")
-health = 150
-max_health = 150
-ammo = 0
-energy = 0
 max_jump_count = 2
 max_speed = 300
+health = 150
+max_health = 150
 
-[node name="CharacterArea2D" type="Area2D" parent="."]
+[node name="CharacterArea2D" type="Area2D" parent="." unique_id=1879216861]
 
-[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D"]
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D" unique_id=275190548]
 shape = SubResource("2")
 
-[node name="AttackArea2D" type="Area2D" parent="."]
+[node name="AttackArea2D" type="Area2D" parent="." unique_id=9563085]
 
-[node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-shape = SubResource("3")
+[node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=71185137]
 position = Vector2(-20, 0)
+shape = SubResource("3")
 disabled = true
 
-[node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-shape = SubResource("4")
+[node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1954272493]
 position = Vector2(20, 0)
+shape = SubResource("4")
 disabled = true
 
-[node name="SlideAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-shape = SubResource("5")
+[node name="SlideAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1501138574]
 position = Vector2(0, 10)
+shape = SubResource("5")
 disabled = true
 
-[node name="StompArea2D" type="Area2D" parent="."]
+[node name="StompArea2D" type="Area2D" parent="." unique_id=1537297288]
 
-[node name="StompCollisionShape2D" type="CollisionShape2D" parent="StompArea2D"]
-shape = SubResource("6")
+[node name="StompCollisionShape2D" type="CollisionShape2D" parent="StompArea2D" unique_id=1223633146]
 position = Vector2(0, 24)
+shape = SubResource("6")
 
-[node name="StandCollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="." unique_id=81527936]
 shape = SubResource("1")
 
-[node name="SlideCollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("5")
+[node name="SlideCollisionShape2D" type="CollisionShape2D" parent="." unique_id=110484005]
 position = Vector2(0, 10)
+shape = SubResource("5")
 disabled = true
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1542069650]
+position = Vector2(40, -37)
+scale = Vector2(0.30032167, 0.31776682)
 sprite_frames = SubResource("7")
 animation = &"dino_idle"
-scale = Vector2(1.2, 1.2)
 
-[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=314309989]

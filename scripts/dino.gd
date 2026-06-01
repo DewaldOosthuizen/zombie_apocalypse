@@ -2,15 +2,21 @@ extends "res://scripts/generic_character_behaviour.gd"
 
 # Dino character
 # - No gender prefix in animation names (dino_idle, dino_run, etc.)
-# - Assets: Dead, Idle, Jump, Run, Walk  — no Melee, Shoot, or Slide
-# - Action1 (shoot), Action2 (melee), Action3 (slide): all silenced
-# - Stomp mechanic: when falling downward and the StompArea2D at the
-#   dino's feet overlaps an enemy_character, that enemy is instantly killed.
+# - Assets: Dead, Idle, Jump, Run, Walk, tail_swipe (Run 5 x-flipped)
+# - Action1 (shoot): no-op — dino has no projectile weapon
+# - Action2 (melee): tail-swipe — flips sprite on x, holds Run(5) for 1s,
+#     activates melee attack hitbox so enemies in range take action2_damage
+# - Action3 (slide): no-op — dino does not slide
+# - Stomp mechanic: instant-kill any enemy_character under StompArea2D
+#     when falling at >= STOMP_MIN_VELOCITY px/s
 
 const STOMP_MIN_VELOCITY = 100.0  # minimum downward speed to trigger stomp
+const TAIL_SWIPE_DURATION = 1.0   # seconds to hold the tail-swipe frame
 
 var _stomp_area: Area2D
 var _stomped_this_jump := false  # prevent multi-kill on same landing
+var _tail_swipe_timer := 0.0     # counts up while tail-swipe is active
+var _pre_swipe_flip_h := false   # sprite flip before swipe — restored afterwards
 
 
 func _ready():
@@ -55,17 +61,25 @@ func _handle_input():
 	if Input.is_action_just_pressed("move_jump") and current_jump_count < max_jump_count:
 		player_speed_y = -JUMPFORCE
 		current_jump_count += 1
-		_stomped_this_jump = false  # reset stomp flag on each new jump
+		_stomped_this_jump = false
 		repeat_frames = false
 		_change_sprite_animation("jump")
 
-	# action1, action2, action3 intentionally silenced — dino has no shoot/melee/slide
+	# Tail-swipe melee: action_2, only when not already swiping
+	if Input.is_action_just_pressed("action_2") and not action2 and not action1 and not action3:
+		action2 = true
+		_tail_swipe_timer = 0.0
+		repeat_frames = false
+		_pre_swipe_flip_h = player_sprite.flip_h
+		# Invert sprite x to make it look like hitting with the tail
+		player_sprite.flip_h = not player_sprite.flip_h
+		_change_sprite_animation("tail_swipe")
+		_melee_attack_collision()
 
 
 # --- Stomp mechanic ------------------------------------------------------
 
 func _check_stomp():
-	# Only stomp when falling downward fast enough
 	if player_speed_y < STOMP_MIN_VELOCITY or _stomped_this_jump:
 		return
 	var bodies = _stomp_area.get_overlapping_bodies()
@@ -73,16 +87,15 @@ func _check_stomp():
 		if body == null or body.is_queued_for_deletion():
 			continue
 		if body.is_in_group("enemy_character") and body.health > 0:
-			body._take_damage(body.health + 1)  # instant kill regardless of enemy health
+			body._take_damage(body.health + 1)  # instant kill
 			body._daze()
 			_stomped_this_jump = true
-			# Small upward bounce to feel responsive
-			player_speed_y = -JUMPFORCE * 0.5
+			player_speed_y = -JUMPFORCE * 0.5  # small upward bounce
 			current_jump_count = 1  # allow one more jump after stomp
 
 
 # --- Animation override --------------------------------------------------
-# Dino has no gender prefix; animation names are dino_<anim> directly.
+# Dino uses dino_<anim> — no gender prefix.
 
 func _change_sprite_animation(animation_text):
 	if player_sprite == null:
@@ -97,46 +110,76 @@ func _reset_character_sprite_states(delta):
 		_change_sprite_animation("dead")
 		repeat_frames = false
 		disable_gravity = false
-	elif dazed:
+		return
+
+	if dazed:
 		_change_sprite_animation("idle")
 		disable_gravity = false
-	elif action1 or action2 or action3:
-		# All actions silenced — clear flags immediately
+		return
+
+	# Tail-swipe in progress — tick its timer and hold the frame
+	if action2:
+		_tail_swipe_timer += delta
+		if _tail_swipe_timer >= TAIL_SWIPE_DURATION:
+			# Swipe finished — restore sprite orientation and clear state
+			player_sprite.flip_h = _pre_swipe_flip_h
+			action2 = false
+			_tail_swipe_timer = 0.0
+			repeat_frames = true
+			disable_gravity = false
+			_default_collision()
+			if movement_direction == 0:
+				_change_sprite_animation("idle")
+			else:
+				_change_sprite_animation("run")
+		return  # do not fall through while swipe is active
+
+	if action1 or action3:
+		# Silenced actions — clear immediately
 		action1 = false
-		action2 = false
 		action3 = false
 		repeat_frames = true
 		disable_gravity = false
+		_default_collision()
 		if movement_direction == 0:
 			_change_sprite_animation("idle")
 		else:
 			_change_sprite_animation("run")
-		_default_collision()
-	elif current_jump_count > 0:
-		# In air — hold jump animation, do not override with idle/run
+		return
+
+	if current_jump_count > 0:
+		# In air — hold jump animation
 		_change_sprite_animation("jump")
-	elif not action1 and not action2 and not action3 and current_jump_count == 0:
-		_default_collision()
-		repeat_frames = true
-		if movement_direction == 0:
-			_change_sprite_animation("idle")
-		else:
-			_change_sprite_animation("run")
-		disable_gravity = false
+		return
+
+	# Grounded and idle/running
+	_default_collision()
+	repeat_frames = true
+	disable_gravity = false
+	if movement_direction == 0:
+		_change_sprite_animation("idle")
+	else:
+		_change_sprite_animation("run")
+
+
+# --- Melee override: activate hitbox for tail-swipe ----------------------
+
+func _melee_attack_collision():
+	# Tail swipe hits behind the dino (opposite to facing direction)
+	# because the sprite is flipped — activate the opposite-side hitbox.
+	if facing_direction == 1:
+		area_left_attack_collision_shape_2d.disabled = false
+	else:
+		area_right_attack_collision_shape_2d.disabled = false
 
 
 # --- No-op action overrides (document intent explicitly) -----------------
 
-# Dino has no projectile weapon — silently ignore shoot requests.
+# Dino has no projectile weapon.
 func _shoot_bullet(_power):
 	pass
 
 
-# Dino has no melee attack — action2 never activates attack collision.
-func _melee_attack_collision():
-	pass
-
-
-# Dino has no slide — action3 is a no-op.
+# Dino does not slide.
 func _slide_attack_collision():
 	pass
