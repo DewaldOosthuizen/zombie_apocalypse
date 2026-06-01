@@ -91,6 +91,12 @@ func _ready():
 	player_sprite = get_node(\"AnimatedSprite\")
 	if (!get_tree().root.is_queued_for_deletion()):
 		super._setup_collision() # set up collision shapes
+		# STAT OWNERSHIP: starting ammo, energy, and health are intentionally
+		# set via @export Inspector values serialised in this .tscn file
+		# (e.g. ammo = 10 in the node properties below). The base-class
+		# defaults in generic_character_behaviour.gd are fallbacks only.
+		# Un-comment the lines below ONLY if you want code to override
+		# the Inspector values at runtime.
 #		ammo = 10 # starting ammo
 #		energy = 0 # starting energy
 #		health = 100 # starting health
