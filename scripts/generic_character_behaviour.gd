@@ -72,6 +72,8 @@ var shield_indicator = false # indicate if shield is destroyed
 var bullet_scene
 
 # Collision objects
+var _attack_area_2d: Area2D
+var _character_area_2d: Area2D
 var area_stand_collision_shape_2d
 var area_slide_collision_shape_2d
 var area_left_attack_collision_shape_2d
@@ -257,7 +259,7 @@ func _shoot_bullet(power):
 
 
 func _process_attack_area():
-	var objects_in_attack_area = get_node("AttackArea2D").get_overlapping_bodies()
+	var objects_in_attack_area = _attack_area_2d.get_overlapping_bodies()
 	if (objects_in_attack_area and objects_in_attack_area.size() != 0):
 		for body in objects_in_attack_area:
 			if (body and !body.is_queued_for_deletion() and health > 0):
@@ -285,7 +287,7 @@ func _apply_incoming_damage(parent):
 
 
 func _process_character_area():
-	var areas_in_character_area = get_node("CharacterArea2D").get_overlapping_areas()
+	var areas_in_character_area = _character_area_2d.get_overlapping_areas()
 	if (areas_in_character_area and areas_in_character_area.size() != 0):
 		for area in areas_in_character_area:
 			if (area and !area.is_queued_for_deletion() and health > 0):
@@ -366,6 +368,8 @@ func _reset_character_sprite_states(_delta):
 
 
 func _setup_collision():
+	_attack_area_2d    = get_node("AttackArea2D")
+	_character_area_2d = get_node("CharacterArea2D")
 	area_stand_collision_shape_2d = get_node("CharacterArea2D/StandCollisionShape2D")
 	area_slide_collision_shape_2d = get_node("AttackArea2D/SlideAttackCollisionShape2D")
 	area_left_attack_collision_shape_2d = get_node("AttackArea2D/LeftAttackCollisionShape2D")
