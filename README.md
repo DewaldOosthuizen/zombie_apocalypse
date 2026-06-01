@@ -51,11 +51,7 @@ This project has been updated from Godot 3 to Godot 4, including:
   * Z:       - shoot
   * X:       - melee
 
-### ADVENTURE GIRL CONTROLS
-
-> **Note:** Adventure Girl is launchable but incomplete. She currently borrows
-> the Ninja bullet scene and is missing a dedicated bullet scene, a jump-shoot
-> animation variant, and a jump-melee animation variant.
+### RANGER CONTROLS
 
 * MOVEMENTS
   * A, LEFT ARROW        - move left
@@ -63,30 +59,34 @@ This project has been updated from Godot 3 to Godot 4, including:
   * W, SPACE, UP ARROW   - jump
 * ATTACKS
   * CTRL   - slide
-  * Z      - shoot
-  * X      - melee
+  * Z      - shoot (female only; male falls back to female animation)
+  * X      - melee (female only; male falls back to female animation)
 
 ## Characters
 
-| Character      | Scene file present | Animations available                          | Status           |
-|----------------|--------------------|-----------------------------------------------|------------------|
-| Robot          | Yes                | Full set                                      | Playable         |
-| Male Ninja     | Yes                | Full set                                      | Playable         |
-| Adventure Girl | Yes                | Idle, Dead, Jump, Melee, Run, Shoot, Slide    | Playable (partial) |
+| Character      | Scene file present | Animations available                          | Status     |
+|----------------|--------------------|-----------------------------------------------|------------|
+| Robot          | Yes                | Full set                                      | Playable   |
+| Female Ninja   | Yes                | Full set                                      | Playable   |
+| Male Ninja     | Yes                | Full set                                      | Playable   |
+| Female Ranger  | Yes                | Dead, Idle, Jump, Melee, Run, Shoot, Slide    | Playable   |
+| Male Ranger    | Yes                | Dead, Idle, Jump, Run, Slide                  | Playable (Melee/Shoot fall back to female animations) |
 
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
 
 
 ## Known Gaps / Roadmap
 
-The following items are outstanding for Adventure Girl and are tracked as open GitHub Issues:
+The following items are outstanding for the Ranger character and are tracked as open GitHub Issues:
 
-- **Dedicated bullet scene** — Adventure Girl currently borrows the Ninja bullet scene.
-  A dedicated projectile scene and asset are needed. (Issue #41)
+- **Dedicated bullet scene** — Ranger currently borrows the Ninja bullet scene.
+  A dedicated projectile scene and asset are needed.
+- **Male Ranger Melee/Shoot animations** — No male-specific Melee or Shoot animation assets
+  exist; the male ranger falls back to female animations for those actions.
 - **Jump-shoot animation variant** — No jump-shoot animation exists yet; the character
-  falls back to the ground-shoot animation in mid-air. (Issue #42)
+  falls back to the ground-shoot animation in mid-air.
 - **Jump-melee animation variant** — No jump-melee animation exists yet; the character
-  falls back to the ground-melee animation in mid-air. (Issue #42)
+  falls back to the ground-melee animation in mid-air.
 
 ## Running Tests
 

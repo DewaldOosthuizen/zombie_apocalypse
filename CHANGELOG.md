@@ -5,9 +5,26 @@ For the full commit history see the repository log.
 
 ## Unreleased
 
-- Corrected project name in project.godot (was "Retro_Apocalyse", now "Zombie Apocalypse")
-- Documented Adventure Girl character (WIP) in README
-- Added Characters overview table to README
+- Replaced Adventure Girl character with Ranger (female and male variants)
+  - Female Ranger: full animation set (Dead, Idle, Jump, Melee, Run, Shoot, Slide)
+  - Male Ranger: Dead, Idle, Jump, Run, Slide (Melee/Shoot fall back to female assets)
+  - Renamed scene directory: `scenes/characters/adventure_girl/` -> `scenes/characters/ranger/`
+  - Renamed script: `scripts/adventure_girl.gd` -> `scripts/ranger.gd`
+  - Removed old `resources/characters/adventure_girl/` assets
+- Fixed player never spawning: `Level_1_Scene.tscn` inline `_ready(): pass` suppressed
+  `level_entered` signal; changed to `super._ready()`
+- Fixed death animation looping: replaced `AnimatedSprite2D.stop()` with `pause()` to hold
+  last frame on death
+- Fixed blood particles: corrected scale (4.5 -> 0.5) and spawn position offset
+- Fixed brick particles: corrected scale (4.5 -> 0.5)
+- Fixed Tab key not switching characters: corrected keycode from 4194305 (ESC) to 4194306 (TAB)
+- Fixed Robot unable to take or deal melee damage: wired `_area_checks()` into `_physics_process`
+- Fixed `Array.empty()` -> `Array.is_empty()` in Ammo_Scene (Godot 4 API)
+- Fixed pit falls not killing characters: added Y-threshold check (`PIT_DEATH_THRESHOLD = 900`)
+- Fixed Ranger (ex Adventure Girl) walk invisible: base class resolved `"walk"` but assets use
+  `"run"`; override in `ranger.gd` maps the animation name correctly
+- Fixed Ranger slide never stopping: set `loop = false` on slide animations
+- Added `scripts/verify.sh` for full local CI replication (gdlint + path guard + GUT tests)
 
 ## 0.2
 
