@@ -27,7 +27,7 @@ script/source = "extends \"res://scripts/generic_level_script.gd\"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	super._ready()  # emits level_entered so World_Scene.setup_level() runs
 
 "
 
