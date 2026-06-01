@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://b5pp8qm3hxd0p"]
 
-[ext_resource path="res://resources/characters/ninja/objects/Bullet_000.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://b2rllkflt1tow" path="res://resources/characters/ninja/objects/Bullet_000.png" id="1"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
 
 func _ready():
+	super._ready()  # caches _area2d and _collision_shape in base class
 	sprite = get_node(\"AnimatedSprite\")
 	set_process(true)
 	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", Callable(self, \"_screen_exited\"))
@@ -16,45 +17,47 @@ func _screen_exited():
 
 
 func _process(delta):
-	super._animate_bullet(delta)"
+	super._animate_bullet(delta)
+"
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 1 ) ],
+[sub_resource type="SpriteFrames" id="2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
 "loop": true,
-"name": "bullet",
+"name": &"bullet",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 0.482462, 2.0077 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(0.964924, 4.0154)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15.6892, 1.57776 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(31.3784, 3.15552)
 
-[node name="Bullet" type="CharacterBody2D" groups=[
-"bullet",
-]]
-scale = Vector2( 0.3, 0.3 )
-script = SubResource( 1 )
+[node name="Bullet" type="CharacterBody2D" unique_id=1507184395 groups=["bullet"]]
+scale = Vector2(0.3, 0.3)
+script = SubResource("1")
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-frames = SubResource( 2 )
-animation = "bullet"
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=822737253]
+sprite_frames = SubResource("2")
+animation = &"bullet"
 speed_scale = 1.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.346504, 2.97649 )
-scale = Vector2( 4.88204, 12.9419 )
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=791651732]
+position = Vector2(-0.346504, 2.97649)
+scale = Vector2(4.88204, 12.9419)
+shape = SubResource("3")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( -10.3074, -5.49092 )
-scale = Vector2( 4.92382, 3.08256 )
+[node name="Area2D" type="Area2D" parent="." unique_id=1089265634]
+position = Vector2(-10.3074, -5.49092)
+scale = Vector2(4.92382, 3.08256)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 3.01247, 1.758 )
-scale = Vector2( 2.10163, 3.05057 )
-shape = SubResource( 4 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=40433910]
+position = Vector2(3.01247, 1.758)
+scale = Vector2(2.10163, 3.05057)
+shape = SubResource("4")
 
-[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=229175810]

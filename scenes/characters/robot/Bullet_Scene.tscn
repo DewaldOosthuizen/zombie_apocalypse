@@ -12,6 +12,7 @@ script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
 @onready var muzzle = preload(\"res://scenes/characters/robot/Muzzle_Scene.tscn\")
 
 func _ready():
+	super._ready()  # caches _area2d and _collision_shape in base class
 	sprite = get_node(\"AnimatedSprite\")
 	super._create_muzzle(muzzle)
 	set_process(true)
