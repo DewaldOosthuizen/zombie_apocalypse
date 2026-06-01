@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3 uid="uid://wxyoojdwpc6v"]
 
-[ext_resource path="res://resources/environment/forest/tiles/13.png" type="Texture2D" id=1]
-[ext_resource path="res://resources/environment/forest/tiles/14.png" type="Texture2D" id=2]
-[ext_resource path="res://resources/environment/forest/tiles/15.png" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://c48bk4tjey2fl" path="res://resources/environment/forest/tiles/13.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c4usqk7mxddp4" path="res://resources/environment/forest/tiles/14.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://nrm6jrvkqbb5" path="res://resources/environment/forest/tiles/15.png" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends \"res://scripts/generic_tween_script.gd\"
 
 # Called when the node enters the scene tree for the first time.
@@ -13,48 +13,45 @@ func _ready():
 
 
 func _process(delta):
-	super._start_tween_process()"
+	super._start_tween_process()
+"
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 190.643, 18.1159 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(381.286, 36.2318)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 185.73, 11.7442 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(371.46, 23.4884)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 140.334, 19.6884 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(280.668, 39.3768)
 
-[node name="Float" type="Node2D" groups=[
-"float",
-]]
-scale = Vector2( 0.7, 0.7 )
-script = SubResource( 1 )
+[node name="Float" type="Node2D" unique_id=1788978801 groups=["float"]]
+scale = Vector2(0.7, 0.7)
+script = SubResource("1")
 
-[node name="1" type="Sprite2D" parent="."]
-position = Vector2( -124.398, 12.4544 )
-texture = ExtResource( 1 )
+[node name="1" type="Sprite2D" parent="." unique_id=1902938893]
+position = Vector2(-124.398, 12.4544)
+texture = ExtResource("1")
 
-[node name="2" type="Sprite2D" parent="."]
-position = Vector2( 3.35141, 12.4835 )
-texture = ExtResource( 2 )
+[node name="2" type="Sprite2D" parent="." unique_id=1976543484]
+position = Vector2(3.35141, 12.4835)
+texture = ExtResource("2")
 
-[node name="3" type="Sprite2D" parent="."]
-position = Vector2( 130.604, 12.4835 )
-texture = ExtResource( 3 )
+[node name="3" type="Sprite2D" parent="." unique_id=601507315]
+position = Vector2(130.604, 12.4835)
+texture = ExtResource("3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( -25.8726, 12.6355 )
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=597992426]
+position = Vector2(-25.8726, 12.6355)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 28.8042, -29.2064 )
-shape = SubResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=340077796]
+position = Vector2(28.8042, -29.2064)
+shape = SubResource("2")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 29.5073, -1.70235 )
-shape = SubResource( 3 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1952744847]
+position = Vector2(29.5073, -1.70235)
+shape = SubResource("3")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 27.8683, 27.2375 )
-shape = SubResource( 4 )
-
-
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1186444469]
+position = Vector2(27.8683, 27.2375)
+shape = SubResource("4")

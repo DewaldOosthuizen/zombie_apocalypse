@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://dvlrsd0d3mvkd"]
 
-[ext_resource path="res://resources/environment/desert/tile/14.png" type="Texture2D" id=1]
-[ext_resource path="res://resources/environment/desert/tile/15.png" type="Texture2D" id=2]
-[ext_resource path="res://resources/environment/desert/tile/16.png" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://d33coakrvudlt" path="res://resources/environment/desert/tile/14.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cl2uyfl0isldj" path="res://resources/environment/desert/tile/15.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cpw0tyl03lp5w" path="res://resources/environment/desert/tile/16.png" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends \"res://scripts/generic_tween_script.gd\"
 
 
@@ -14,34 +14,31 @@ func _ready():
 
 
 func _process(delta):
-	super._start_tween_process()"
+	super._start_tween_process()
+"
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 190.048, 43.6754 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(380.096, 87.3508)
 
-[node name="Float" type="Node2D" groups=[
-"float",
-]]
-scale = Vector2( 0.7, 0.7 )
-script = SubResource( 1 )
+[node name="Float" type="Node2D" unique_id=1713525395 groups=["float"]]
+scale = Vector2(0.7, 0.7)
+script = SubResource("1")
 
-[node name="1" type="Sprite2D" parent="."]
-position = Vector2( -121.194, 12.5911 )
-texture = ExtResource( 1 )
+[node name="1" type="Sprite2D" parent="." unique_id=1344008450]
+position = Vector2(-121.194, 12.5911)
+texture = ExtResource("1")
 
-[node name="2" type="Sprite2D" parent="."]
-position = Vector2( 3.35141, 12.4835 )
-texture = ExtResource( 2 )
+[node name="2" type="Sprite2D" parent="." unique_id=1678975996]
+position = Vector2(3.35141, 12.4835)
+texture = ExtResource("2")
 
-[node name="3" type="Sprite2D" parent="."]
-position = Vector2( 130.604, 12.4835 )
-texture = ExtResource( 3 )
+[node name="3" type="Sprite2D" parent="." unique_id=682129275]
+position = Vector2(130.604, 12.4835)
+texture = ExtResource("3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( -25.8726, 12.6355 )
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=564570173]
+position = Vector2(-25.8726, 12.6355)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 30.6972, -2.70749 )
-shape = SubResource( 2 )
-
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1418483356]
+position = Vector2(30.6972, -2.70749)
+shape = SubResource("2")

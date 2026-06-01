@@ -1,97 +1,97 @@
-[gd_scene load_steps=101 format=3]
+[gd_scene format=3 uid="uid://dke3stdm7s014"]
 
-[ext_resource path="res://resources/characters/zombie/male/Attack (1).png" type="Texture2D" id=1]
-[ext_resource path="res://resources/characters/zombie/male/Attack (2).png" type="Texture2D" id=2]
-[ext_resource path="res://resources/characters/zombie/male/Attack (3).png" type="Texture2D" id=3]
-[ext_resource path="res://resources/characters/zombie/male/Attack (4).png" type="Texture2D" id=4]
-[ext_resource path="res://resources/characters/zombie/male/Attack (5).png" type="Texture2D" id=5]
-[ext_resource path="res://resources/characters/zombie/male/Attack (6).png" type="Texture2D" id=6]
-[ext_resource path="res://resources/characters/zombie/male/Attack (7).png" type="Texture2D" id=7]
-[ext_resource path="res://resources/characters/zombie/male/Attack (8).png" type="Texture2D" id=8]
-[ext_resource path="res://resources/characters/zombie/female/Attack (1).png" type="Texture2D" id=9]
-[ext_resource path="res://resources/characters/zombie/female/Attack (2).png" type="Texture2D" id=10]
-[ext_resource path="res://resources/characters/zombie/female/Attack (3).png" type="Texture2D" id=11]
-[ext_resource path="res://resources/characters/zombie/female/Attack (4).png" type="Texture2D" id=12]
-[ext_resource path="res://resources/characters/zombie/female/Attack (5).png" type="Texture2D" id=13]
-[ext_resource path="res://resources/characters/zombie/female/Attack (6).png" type="Texture2D" id=14]
-[ext_resource path="res://resources/characters/zombie/female/Attack (7).png" type="Texture2D" id=15]
-[ext_resource path="res://resources/characters/zombie/female/Attack (8).png" type="Texture2D" id=16]
-[ext_resource path="res://resources/characters/zombie/male/Idle (1).png" type="Texture2D" id=17]
-[ext_resource path="res://resources/characters/zombie/male/Idle (2).png" type="Texture2D" id=18]
-[ext_resource path="res://resources/characters/zombie/male/Idle (3).png" type="Texture2D" id=19]
-[ext_resource path="res://resources/characters/zombie/male/Idle (4).png" type="Texture2D" id=20]
-[ext_resource path="res://resources/characters/zombie/male/Idle (5).png" type="Texture2D" id=21]
-[ext_resource path="res://resources/characters/zombie/male/Idle (6).png" type="Texture2D" id=22]
-[ext_resource path="res://resources/characters/zombie/male/Idle (7).png" type="Texture2D" id=23]
-[ext_resource path="res://resources/characters/zombie/male/Idle (8).png" type="Texture2D" id=24]
-[ext_resource path="res://resources/characters/zombie/male/Idle (9).png" type="Texture2D" id=25]
-[ext_resource path="res://resources/characters/zombie/male/Idle (10).png" type="Texture2D" id=26]
-[ext_resource path="res://resources/characters/zombie/male/Idle (11).png" type="Texture2D" id=27]
-[ext_resource path="res://resources/characters/zombie/male/Idle (12).png" type="Texture2D" id=28]
-[ext_resource path="res://resources/characters/zombie/male/Idle (13).png" type="Texture2D" id=29]
-[ext_resource path="res://resources/characters/zombie/male/Idle (14).png" type="Texture2D" id=30]
-[ext_resource path="res://resources/characters/zombie/male/Idle (15).png" type="Texture2D" id=31]
-[ext_resource path="res://resources/characters/zombie/female/Idle (1).png" type="Texture2D" id=32]
-[ext_resource path="res://resources/characters/zombie/female/Idle (2).png" type="Texture2D" id=33]
-[ext_resource path="res://resources/characters/zombie/female/Idle (3).png" type="Texture2D" id=34]
-[ext_resource path="res://resources/characters/zombie/female/Idle (4).png" type="Texture2D" id=35]
-[ext_resource path="res://resources/characters/zombie/female/Idle (5).png" type="Texture2D" id=36]
-[ext_resource path="res://resources/characters/zombie/female/Idle (6).png" type="Texture2D" id=37]
-[ext_resource path="res://resources/characters/zombie/female/Idle (7).png" type="Texture2D" id=38]
-[ext_resource path="res://resources/characters/zombie/female/Idle (8).png" type="Texture2D" id=39]
-[ext_resource path="res://resources/characters/zombie/female/Idle (9).png" type="Texture2D" id=40]
-[ext_resource path="res://resources/characters/zombie/female/Idle (10).png" type="Texture2D" id=41]
-[ext_resource path="res://resources/characters/zombie/female/Idle (11).png" type="Texture2D" id=42]
-[ext_resource path="res://resources/characters/zombie/female/Idle (12).png" type="Texture2D" id=43]
-[ext_resource path="res://resources/characters/zombie/female/Idle (13).png" type="Texture2D" id=44]
-[ext_resource path="res://resources/characters/zombie/female/Idle (14).png" type="Texture2D" id=45]
-[ext_resource path="res://resources/characters/zombie/female/Idle (15).png" type="Texture2D" id=46]
-[ext_resource path="res://resources/characters/zombie/female/Dead (1).png" type="Texture2D" id=47]
-[ext_resource path="res://resources/characters/zombie/female/Dead (2).png" type="Texture2D" id=48]
-[ext_resource path="res://resources/characters/zombie/female/Dead (3).png" type="Texture2D" id=49]
-[ext_resource path="res://resources/characters/zombie/female/Dead (4).png" type="Texture2D" id=50]
-[ext_resource path="res://resources/characters/zombie/female/Dead (5).png" type="Texture2D" id=51]
-[ext_resource path="res://resources/characters/zombie/female/Dead (6).png" type="Texture2D" id=52]
-[ext_resource path="res://resources/characters/zombie/female/Dead (7).png" type="Texture2D" id=53]
-[ext_resource path="res://resources/characters/zombie/female/Dead (8).png" type="Texture2D" id=54]
-[ext_resource path="res://resources/characters/zombie/female/Dead (9).png" type="Texture2D" id=55]
-[ext_resource path="res://resources/characters/zombie/female/Dead (10).png" type="Texture2D" id=56]
-[ext_resource path="res://resources/characters/zombie/female/Dead (11).png" type="Texture2D" id=57]
-[ext_resource path="res://resources/characters/zombie/female/Dead (12).png" type="Texture2D" id=58]
-[ext_resource path="res://resources/characters/zombie/male/Walk (1).png" type="Texture2D" id=59]
-[ext_resource path="res://resources/characters/zombie/male/Walk (2).png" type="Texture2D" id=60]
-[ext_resource path="res://resources/characters/zombie/male/Walk (3).png" type="Texture2D" id=61]
-[ext_resource path="res://resources/characters/zombie/male/Walk (4).png" type="Texture2D" id=62]
-[ext_resource path="res://resources/characters/zombie/male/Walk (5).png" type="Texture2D" id=63]
-[ext_resource path="res://resources/characters/zombie/male/Walk (6).png" type="Texture2D" id=64]
-[ext_resource path="res://resources/characters/zombie/male/Walk (7).png" type="Texture2D" id=65]
-[ext_resource path="res://resources/characters/zombie/male/Walk (8).png" type="Texture2D" id=66]
-[ext_resource path="res://resources/characters/zombie/male/Walk (9).png" type="Texture2D" id=67]
-[ext_resource path="res://resources/characters/zombie/male/Walk (10).png" type="Texture2D" id=68]
-[ext_resource path="res://resources/characters/zombie/female/Walk (1).png" type="Texture2D" id=69]
-[ext_resource path="res://resources/characters/zombie/female/Walk (2).png" type="Texture2D" id=70]
-[ext_resource path="res://resources/characters/zombie/female/Walk (3).png" type="Texture2D" id=71]
-[ext_resource path="res://resources/characters/zombie/female/Walk (4).png" type="Texture2D" id=72]
-[ext_resource path="res://resources/characters/zombie/female/Walk (5).png" type="Texture2D" id=73]
-[ext_resource path="res://resources/characters/zombie/female/Walk (6).png" type="Texture2D" id=74]
-[ext_resource path="res://resources/characters/zombie/female/Walk (7).png" type="Texture2D" id=75]
-[ext_resource path="res://resources/characters/zombie/female/Walk (8).png" type="Texture2D" id=76]
-[ext_resource path="res://resources/characters/zombie/female/Walk (9).png" type="Texture2D" id=77]
-[ext_resource path="res://resources/characters/zombie/female/Walk (10).png" type="Texture2D" id=78]
-[ext_resource path="res://resources/characters/zombie/male/Dead (1).png" type="Texture2D" id=79]
-[ext_resource path="res://resources/characters/zombie/male/Dead (2).png" type="Texture2D" id=80]
-[ext_resource path="res://resources/characters/zombie/male/Dead (3).png" type="Texture2D" id=81]
-[ext_resource path="res://resources/characters/zombie/male/Dead (4).png" type="Texture2D" id=82]
-[ext_resource path="res://resources/characters/zombie/male/Dead (5).png" type="Texture2D" id=83]
-[ext_resource path="res://resources/characters/zombie/male/Dead (6).png" type="Texture2D" id=84]
-[ext_resource path="res://resources/characters/zombie/male/Dead (7).png" type="Texture2D" id=85]
-[ext_resource path="res://resources/characters/zombie/male/Dead (8).png" type="Texture2D" id=86]
-[ext_resource path="res://resources/characters/zombie/male/Dead (9).png" type="Texture2D" id=87]
-[ext_resource path="res://resources/characters/zombie/male/Dead (10).png" type="Texture2D" id=88]
-[ext_resource path="res://resources/characters/zombie/male/Dead (11).png" type="Texture2D" id=89]
-[ext_resource path="res://resources/characters/zombie/male/Dead (12).png" type="Texture2D" id=90]
+[ext_resource type="Texture2D" uid="uid://bq1ah3hlpvl3b" path="res://resources/characters/zombie/male/Attack (1).png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bafs6868q5qcu" path="res://resources/characters/zombie/male/Attack (2).png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dr36h80jr8yg7" path="res://resources/characters/zombie/male/Attack (3).png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bpgye15uuer55" path="res://resources/characters/zombie/male/Attack (4).png" id="4"]
+[ext_resource type="Texture2D" uid="uid://you5ngenw7j4" path="res://resources/characters/zombie/male/Attack (5).png" id="5"]
+[ext_resource type="Texture2D" uid="uid://c7marqlr62ods" path="res://resources/characters/zombie/male/Attack (6).png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bhjvsr61ljtro" path="res://resources/characters/zombie/male/Attack (7).png" id="7"]
+[ext_resource type="Texture2D" uid="uid://ditv4dws4eb3r" path="res://resources/characters/zombie/male/Attack (8).png" id="8"]
+[ext_resource type="Texture2D" uid="uid://c14bhaa22svtn" path="res://resources/characters/zombie/female/Attack (1).png" id="9"]
+[ext_resource type="Texture2D" uid="uid://clu0w44gc7h7d" path="res://resources/characters/zombie/female/Attack (2).png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bihp6mhlu20e8" path="res://resources/characters/zombie/female/Attack (3).png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dqkn1u8nlnlcc" path="res://resources/characters/zombie/female/Attack (4).png" id="12"]
+[ext_resource type="Texture2D" uid="uid://7dieib6733cl" path="res://resources/characters/zombie/female/Attack (5).png" id="13"]
+[ext_resource type="Texture2D" uid="uid://d2qtgf6jvpa3l" path="res://resources/characters/zombie/female/Attack (6).png" id="14"]
+[ext_resource type="Texture2D" uid="uid://8xshcwxw5837" path="res://resources/characters/zombie/female/Attack (7).png" id="15"]
+[ext_resource type="Texture2D" uid="uid://j0ls6vf8gqqh" path="res://resources/characters/zombie/female/Attack (8).png" id="16"]
+[ext_resource type="Texture2D" uid="uid://nl6huwwkjcxw" path="res://resources/characters/zombie/male/Idle (1).png" id="17"]
+[ext_resource type="Texture2D" uid="uid://dtsykgwnfdcwy" path="res://resources/characters/zombie/male/Idle (2).png" id="18"]
+[ext_resource type="Texture2D" uid="uid://bwgocmxbn8hs2" path="res://resources/characters/zombie/male/Idle (3).png" id="19"]
+[ext_resource type="Texture2D" uid="uid://ccdehm2qodupm" path="res://resources/characters/zombie/male/Idle (4).png" id="20"]
+[ext_resource type="Texture2D" uid="uid://bmmsgh1jppj2j" path="res://resources/characters/zombie/male/Idle (5).png" id="21"]
+[ext_resource type="Texture2D" uid="uid://bgbhl8mruwe8" path="res://resources/characters/zombie/male/Idle (6).png" id="22"]
+[ext_resource type="Texture2D" uid="uid://ck5olrt5v6e1a" path="res://resources/characters/zombie/male/Idle (7).png" id="23"]
+[ext_resource type="Texture2D" uid="uid://dcpbqbi6owubs" path="res://resources/characters/zombie/male/Idle (8).png" id="24"]
+[ext_resource type="Texture2D" uid="uid://b33rhc53v4iv" path="res://resources/characters/zombie/male/Idle (9).png" id="25"]
+[ext_resource type="Texture2D" uid="uid://ccuot7s1f1bsx" path="res://resources/characters/zombie/male/Idle (10).png" id="26"]
+[ext_resource type="Texture2D" uid="uid://2hvnrdh3whjr" path="res://resources/characters/zombie/male/Idle (11).png" id="27"]
+[ext_resource type="Texture2D" uid="uid://dp5ergutlkaxg" path="res://resources/characters/zombie/male/Idle (12).png" id="28"]
+[ext_resource type="Texture2D" uid="uid://ctxehbbdrul1j" path="res://resources/characters/zombie/male/Idle (13).png" id="29"]
+[ext_resource type="Texture2D" uid="uid://c2ram0rijq24i" path="res://resources/characters/zombie/male/Idle (14).png" id="30"]
+[ext_resource type="Texture2D" uid="uid://ykor0x7n85r0" path="res://resources/characters/zombie/male/Idle (15).png" id="31"]
+[ext_resource type="Texture2D" uid="uid://d2k6h6yrit8fg" path="res://resources/characters/zombie/female/Idle (1).png" id="32"]
+[ext_resource type="Texture2D" uid="uid://rbr3x26ye234" path="res://resources/characters/zombie/female/Idle (2).png" id="33"]
+[ext_resource type="Texture2D" uid="uid://ci2pc0re7v4ol" path="res://resources/characters/zombie/female/Idle (3).png" id="34"]
+[ext_resource type="Texture2D" uid="uid://tg0hl8bsj0fq" path="res://resources/characters/zombie/female/Idle (4).png" id="35"]
+[ext_resource type="Texture2D" uid="uid://c4x4ow3hopfuu" path="res://resources/characters/zombie/female/Idle (5).png" id="36"]
+[ext_resource type="Texture2D" uid="uid://dvwhf5djslkdl" path="res://resources/characters/zombie/female/Idle (6).png" id="37"]
+[ext_resource type="Texture2D" uid="uid://ur7im5vg5f8b" path="res://resources/characters/zombie/female/Idle (7).png" id="38"]
+[ext_resource type="Texture2D" uid="uid://dhr054jydjk8m" path="res://resources/characters/zombie/female/Idle (8).png" id="39"]
+[ext_resource type="Texture2D" uid="uid://dg27wsc13swke" path="res://resources/characters/zombie/female/Idle (9).png" id="40"]
+[ext_resource type="Texture2D" uid="uid://dai6nvvu8jlip" path="res://resources/characters/zombie/female/Idle (10).png" id="41"]
+[ext_resource type="Texture2D" uid="uid://dj3i6pedc7b1q" path="res://resources/characters/zombie/female/Idle (11).png" id="42"]
+[ext_resource type="Texture2D" uid="uid://738xgf4137tj" path="res://resources/characters/zombie/female/Idle (12).png" id="43"]
+[ext_resource type="Texture2D" uid="uid://brijq63ventck" path="res://resources/characters/zombie/female/Idle (13).png" id="44"]
+[ext_resource type="Texture2D" uid="uid://ctg2010dmvo8i" path="res://resources/characters/zombie/female/Idle (14).png" id="45"]
+[ext_resource type="Texture2D" uid="uid://cfngjgpt4gpck" path="res://resources/characters/zombie/female/Idle (15).png" id="46"]
+[ext_resource type="Texture2D" uid="uid://b2apiav4pce32" path="res://resources/characters/zombie/female/Dead (1).png" id="47"]
+[ext_resource type="Texture2D" uid="uid://bcn8tyj05rwji" path="res://resources/characters/zombie/female/Dead (2).png" id="48"]
+[ext_resource type="Texture2D" uid="uid://drfki3202ulk6" path="res://resources/characters/zombie/female/Dead (3).png" id="49"]
+[ext_resource type="Texture2D" uid="uid://m0wbg3q8f20i" path="res://resources/characters/zombie/female/Dead (4).png" id="50"]
+[ext_resource type="Texture2D" uid="uid://6de86ighu7yp" path="res://resources/characters/zombie/female/Dead (5).png" id="51"]
+[ext_resource type="Texture2D" uid="uid://biq208qq70jf1" path="res://resources/characters/zombie/female/Dead (6).png" id="52"]
+[ext_resource type="Texture2D" uid="uid://cng5u0oyvolo5" path="res://resources/characters/zombie/female/Dead (7).png" id="53"]
+[ext_resource type="Texture2D" uid="uid://2cyr4cld715" path="res://resources/characters/zombie/female/Dead (8).png" id="54"]
+[ext_resource type="Texture2D" uid="uid://npexw13fhmv1" path="res://resources/characters/zombie/female/Dead (9).png" id="55"]
+[ext_resource type="Texture2D" uid="uid://cysuukfa43mxx" path="res://resources/characters/zombie/female/Dead (10).png" id="56"]
+[ext_resource type="Texture2D" uid="uid://0yxfi4pghqgs" path="res://resources/characters/zombie/female/Dead (11).png" id="57"]
+[ext_resource type="Texture2D" uid="uid://bfqxjkb3akksi" path="res://resources/characters/zombie/female/Dead (12).png" id="58"]
+[ext_resource type="Texture2D" uid="uid://bcrqi3s5etsxb" path="res://resources/characters/zombie/male/Walk (1).png" id="59"]
+[ext_resource type="Texture2D" uid="uid://ds3jlx8d7svkv" path="res://resources/characters/zombie/male/Walk (2).png" id="60"]
+[ext_resource type="Texture2D" uid="uid://dxay3ldqdxnsu" path="res://resources/characters/zombie/male/Walk (3).png" id="61"]
+[ext_resource type="Texture2D" uid="uid://vsa0wmk2um5r" path="res://resources/characters/zombie/male/Walk (4).png" id="62"]
+[ext_resource type="Texture2D" uid="uid://cytyf4mra7qsi" path="res://resources/characters/zombie/male/Walk (5).png" id="63"]
+[ext_resource type="Texture2D" uid="uid://b357vniyqcuh6" path="res://resources/characters/zombie/male/Walk (6).png" id="64"]
+[ext_resource type="Texture2D" uid="uid://v20ebrmm7vbc" path="res://resources/characters/zombie/male/Walk (7).png" id="65"]
+[ext_resource type="Texture2D" uid="uid://cohfkaqbsggu8" path="res://resources/characters/zombie/male/Walk (8).png" id="66"]
+[ext_resource type="Texture2D" uid="uid://p2qsm55pc7g0" path="res://resources/characters/zombie/male/Walk (9).png" id="67"]
+[ext_resource type="Texture2D" uid="uid://bp31d5wfd3rux" path="res://resources/characters/zombie/male/Walk (10).png" id="68"]
+[ext_resource type="Texture2D" uid="uid://bt70j1keq42xm" path="res://resources/characters/zombie/female/Walk (1).png" id="69"]
+[ext_resource type="Texture2D" uid="uid://bubcqeld1xbsk" path="res://resources/characters/zombie/female/Walk (2).png" id="70"]
+[ext_resource type="Texture2D" uid="uid://b12pvrcp1lbi6" path="res://resources/characters/zombie/female/Walk (3).png" id="71"]
+[ext_resource type="Texture2D" uid="uid://bovewwqb5u8sl" path="res://resources/characters/zombie/female/Walk (4).png" id="72"]
+[ext_resource type="Texture2D" uid="uid://opwurxovsstp" path="res://resources/characters/zombie/female/Walk (5).png" id="73"]
+[ext_resource type="Texture2D" uid="uid://mk78b87f7sf7" path="res://resources/characters/zombie/female/Walk (6).png" id="74"]
+[ext_resource type="Texture2D" uid="uid://bxmkty388hbe8" path="res://resources/characters/zombie/female/Walk (7).png" id="75"]
+[ext_resource type="Texture2D" uid="uid://mxg6vdxdkrac" path="res://resources/characters/zombie/female/Walk (8).png" id="76"]
+[ext_resource type="Texture2D" uid="uid://dqm224wn1b0ki" path="res://resources/characters/zombie/female/Walk (9).png" id="77"]
+[ext_resource type="Texture2D" uid="uid://231efj360cqv" path="res://resources/characters/zombie/female/Walk (10).png" id="78"]
+[ext_resource type="Texture2D" uid="uid://u0l7301h7suv" path="res://resources/characters/zombie/male/Dead (1).png" id="79"]
+[ext_resource type="Texture2D" uid="uid://k0jfv0cnta1d" path="res://resources/characters/zombie/male/Dead (2).png" id="80"]
+[ext_resource type="Texture2D" uid="uid://d3qx2o8c700la" path="res://resources/characters/zombie/male/Dead (3).png" id="81"]
+[ext_resource type="Texture2D" uid="uid://co6e2t3jcrapr" path="res://resources/characters/zombie/male/Dead (4).png" id="82"]
+[ext_resource type="Texture2D" uid="uid://51ed822eowlp" path="res://resources/characters/zombie/male/Dead (5).png" id="83"]
+[ext_resource type="Texture2D" uid="uid://cnj4lfbjxw477" path="res://resources/characters/zombie/male/Dead (6).png" id="84"]
+[ext_resource type="Texture2D" uid="uid://utvequsyxcfg" path="res://resources/characters/zombie/male/Dead (7).png" id="85"]
+[ext_resource type="Texture2D" uid="uid://ch30giv8vqiji" path="res://resources/characters/zombie/male/Dead (8).png" id="86"]
+[ext_resource type="Texture2D" uid="uid://d0vsgphyaylwx" path="res://resources/characters/zombie/male/Dead (9).png" id="87"]
+[ext_resource type="Texture2D" uid="uid://b85mmlhcbri08" path="res://resources/characters/zombie/male/Dead (10).png" id="88"]
+[ext_resource type="Texture2D" uid="uid://dwv7p8uhhq2qp" path="res://resources/characters/zombie/male/Dead (11).png" id="89"]
+[ext_resource type="Texture2D" uid="uid://nn2ie6l67yta" path="res://resources/characters/zombie/male/Dead (12).png" id="90"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends \"res://scripts/generic_character_behaviour.gd\"
 
 # variables
@@ -255,80 +255,338 @@ func change_direction(object1, object2):
 			if (self.position.x < object2.position.x):
 				super._move_left()
 			else:
-				super._move_right()"
+				super._move_right()
+"
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 0.575264, 36.62 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(1.150528, 73.24)
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+[sub_resource type="SpriteFrames" id="3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16")
+}],
 "loop": true,
-"name": "male_zombie_attack",
+"name": &"female_zombie_attack",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58")
+}],
 "loop": true,
-"name": "female_zombie_attack",
+"name": &"female_zombie_dead",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46")
+}],
 "loop": true,
-"name": "male_zombie_idle",
+"name": &"female_zombie_idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ) ],
-"loop": true,
-"name": "female_zombie_idle",
-"speed": 5.0
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("69")
 }, {
-"frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ) ],
-"loop": true,
-"name": "female_zombie_dead",
-"speed": 5.0
+"duration": 1.0,
+"texture": ExtResource("70")
 }, {
-"frames": [ ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ) ],
-"loop": true,
-"name": "male_zombie_walk",
-"speed": 5.0
+"duration": 1.0,
+"texture": ExtResource("71")
 }, {
-"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ) ],
+"duration": 1.0,
+"texture": ExtResource("72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78")
+}],
 "loop": true,
-"name": "female_zombie_walk",
+"name": &"female_zombie_walk",
 "speed": 4.98
 }, {
-"frames": [ ExtResource( 79 ), ExtResource( 80 ), ExtResource( 81 ), ExtResource( 82 ), ExtResource( 83 ), ExtResource( 84 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 87 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 90 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}],
 "loop": true,
-"name": "male_zombie_dead",
+"name": &"male_zombie_attack",
 "speed": 5.0
-} ]
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("79")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90")
+}],
+"loop": true,
+"name": &"male_zombie_dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31")
+}],
+"loop": true,
+"name": &"male_zombie_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68")
+}],
+"loop": true,
+"name": &"male_zombie_walk",
+"speed": 5.0
+}]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 112.876, 32.9578 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(225.752, 65.9156)
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 21.948, 32.4114 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(43.896, 64.8228)
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 22.8576, 33.7305 )
+[sub_resource type="RectangleShape2D" id="6"]
+size = Vector2(45.7152, 67.461)
 
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.866667, 0.0901961, 0.0901961, 1 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.113725, 0.223529, 0.647059, 1 )
-
-[sub_resource type="StyleBoxFlat" id=10]
-
-[node name="Enemy" type="CharacterBody2D" groups=[
-"character",
-"enemy_character",
-]]
-position = Vector2( -0.0189209, 1.0983 )
-scale = Vector2( 1.2, 1.2 )
-script = SubResource( 1 )
+[node name="Enemy" type="CharacterBody2D" unique_id=1930762684 groups=["character", "enemy_character"]]
+position = Vector2(-0.0189209, 1.0983)
+scale = Vector2(1.2, 1.2)
+script = SubResource("1")
 max_jump_count = 0
 max_speed = 150
 energy = 10
@@ -337,59 +595,38 @@ health = 20
 max_health = 20
 action1_damage = 0
 action3_damage = 0
-character_scale = Vector2( 1.2, 1.2 )
+character_scale = Vector2(1.2, 1.2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-editor/display_folded = true
-position = Vector2( -1.51142, -6.65097 )
-scale = Vector2( 5.65976, 0.847504 )
-shape = SubResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=720207807]
+position = Vector2(-1.51142, -6.65097)
+scale = Vector2(5.65976, 0.847504)
+shape = SubResource("2")
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-editor/display_folded = true
-position = Vector2( 0.715809, -5.54256 )
-scale = Vector2( 0.15, 0.15 )
-frames = SubResource( 3 )
-animation = "female_zombie_walk"
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=91291646]
+position = Vector2(0.715809, -5.54256)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("3")
+animation = &"female_zombie_walk"
 frame = 4
 speed_scale = 2.0
 
-[node name="React - Area2D" type="Area2D" parent="."]
+[node name="React - Area2D" type="Area2D" parent="." unique_id=1983820189]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="React - Area2D"]
-position = Vector2( 0, -10.6946 )
-shape = SubResource( 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="React - Area2D" unique_id=630850455]
+position = Vector2(0, -10.6946)
+shape = SubResource("4")
 
-[node name="StopReact - Area2D2" type="Area2D" parent="." groups=[
-"enemy_attack",
-]]
+[node name="StopReact - Area2D2" type="Area2D" parent="." unique_id=1756766065 groups=["enemy_attack"]]
 
-[node name="MaleCollisionShape2D" type="CollisionShape2D" parent="StopReact - Area2D2"]
-position = Vector2( -2.42448, -2.8969 )
-shape = SubResource( 5 )
+[node name="MaleCollisionShape2D" type="CollisionShape2D" parent="StopReact - Area2D2" unique_id=2003793255]
+position = Vector2(-2.42448, -2.8969)
+shape = SubResource("5")
 
-[node name="FemaleCollisionShape2D" type="CollisionShape2D" parent="StopReact - Area2D2"]
-position = Vector2( -1.84445, -2.17231 )
-shape = SubResource( 6 )
+[node name="FemaleCollisionShape2D" type="CollisionShape2D" parent="StopReact - Area2D2" unique_id=2101999073]
+position = Vector2(-1.84445, -2.17231)
+shape = SubResource("6")
 disabled = true
 
-[node name="HealthProgressBar" type="ProgressBar" parent="."]
-margin_left = -18.4746
-margin_top = -63.6433
-margin_right = 104.525
-margin_bottom = -32.6433
-rect_scale = Vector2( 0.3, 0.3 )
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
-percent_visible = false
+[node name="HealthProgressBar" type="ProgressBar" parent="." unique_id=1288075477]
 
-[node name="EnergyProgressBar" type="ProgressBar" parent="."]
-margin_left = -18.4167
-margin_top = -53.3971
-margin_right = 104.583
-margin_bottom = -22.3971
-rect_scale = Vector2( 0.3, 0.3 )
-custom_styles/fg = SubResource( 9 )
-custom_styles/bg = SubResource( 10 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-percent_visible = false
+[node name="EnergyProgressBar" type="ProgressBar" parent="." unique_id=1396218138]

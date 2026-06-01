@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene format=3 uid="uid://csg3ln8ff4k3x"]
 
-[ext_resource path="res://resources/hud/health/Health1.png" type="Texture2D" id=1]
-[ext_resource path="res://resources/hud/power/Power1.png" type="Texture2D" id=2]
-[ext_resource path="res://scenes/gui/PopupPanel.tscn" type="PackedScene" id=3]
+[ext_resource type="Texture2D" uid="uid://vlak8eqwks1e" path="res://resources/hud/health/Health1.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c4gljq8ylj0bh" path="res://resources/hud/power/Power1.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/gui/PopupPanel.tscn" id="3"]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id="1"]
 script/source = "extends Node2D
 
 var active_level = 0 # starting level
@@ -96,7 +96,7 @@ func handle_events():
 	
 		newCharacter.gender = character_stats[\"character\"][\"gender\"]
 		_connect_to_character_signals(newCharacter)
-		camera.current = true
+		camera.enabled = true
 		newCharacter.add_child(camera)
 		get_tree().root.add_child(newCharacter)
 
@@ -201,7 +201,7 @@ func setup_character():
 	character_node = (character_stats[\"character\"][\"scene\"]).instantiate()
 	reset_character_position()
 	character_node.gender = character_stats[\"character\"][\"gender\"]
-	camera.current = true
+	camera.enabled = true
 	character_node.add_child(camera)
 	get_tree().root.add_child(character_node)
 	_connect_to_character_signals(character_node)
@@ -251,118 +251,87 @@ func refresh_hud(character):
 	if (!character_stats[\"loaded\"]):
 		character_stats[\"loaded\"] = true
 	
-	print(character_stats)"
+	print(character_stats)
+"
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.866667, 0.0901961, 0.0901961, 1 )
+[sub_resource type="ImageTexture" id="6"]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.537255, 0.541176, 0.580392, 1 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.113725, 0.223529, 0.647059, 1 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.537255, 0.541176, 0.580392, 1 )
-
-[sub_resource type="ImageTexture" id=6]
-
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=599528976]
 process_mode = 3
-position = Vector2( 0, -2.72073 )
-script = SubResource( 1 )
+position = Vector2(0, -2.72073)
+script = SubResource("1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." groups=[
-"status_bar",
-]]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1116574490 groups=["status_bar"]]
 
-[node name="HealthImage" type="TextureRect" parent="CanvasLayer"]
+[node name="HealthImage" type="TextureRect" parent="CanvasLayer" unique_id=1188412474]
 offset_left = 8.73007
 offset_top = 10.2581
 offset_right = 38.7301
 offset_bottom = 40.2581
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1
 stretch_mode = 1
 
-[node name="HealthProgress" type="ProgressBar" parent="CanvasLayer"]
+[node name="HealthProgress" type="ProgressBar" parent="CanvasLayer" unique_id=1645771780]
+custom_minimum_size = Vector2(200, 0)
 offset_left = 54.2301
 offset_top = 10.2581
 offset_right = 254.23
 offset_bottom = 40.2581
-custom_minimum_size = Vector2( 200, 0 )
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-percent_visible = false
 
-[node name="EnergyImage" type="TextureRect" parent="CanvasLayer"]
+[node name="EnergyImage" type="TextureRect" parent="CanvasLayer" unique_id=942051596]
 offset_left = 8.73007
 offset_top = 46.2581
 offset_right = 38.7301
 offset_bottom = 76.2581
-texture = ExtResource( 2 )
-expand = true
+texture = ExtResource("2")
+expand_mode = 1
 
-[node name="EnergyProgress" type="ProgressBar" parent="CanvasLayer"]
+[node name="EnergyProgress" type="ProgressBar" parent="CanvasLayer" unique_id=646392728]
+custom_minimum_size = Vector2(200, 0)
 offset_left = 54.2301
 offset_top = 46.2581
 offset_right = 254.23
 offset_bottom = 76.2581
-custom_minimum_size = Vector2( 200, 0 )
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-percent_visible = false
 
-[node name="BulletImage" type="TextureRect" parent="CanvasLayer"]
+[node name="BulletImage" type="TextureRect" parent="CanvasLayer" unique_id=1582224390]
 offset_left = 256.844
 offset_top = 9.23303
 offset_right = 296.844
 offset_bottom = 39.233
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = SubResource( 6 )
-expand = true
+texture = SubResource("6")
+expand_mode = 1
 stretch_mode = 6
 
-[node name="BulletCount" type="Label" parent="CanvasLayer"]
+[node name="BulletCount" type="Label" parent="CanvasLayer" unique_id=202211585]
 offset_left = 297.844
 offset_top = 19.233
 offset_right = 306.844
 offset_bottom = 33.233
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "X"
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=1838438403]
 offset_left = 5.84406
 offset_top = -720.767
 offset_right = 45.8441
 offset_bottom = -680.767
 
-[node name="EnergyLabel" type="Label" parent="CanvasLayer"]
+[node name="EnergyLabel" type="Label" parent="CanvasLayer" unique_id=801714581]
 offset_left = 53.9417
 offset_top = 45.751
 offset_right = 106.942
 offset_bottom = 59.751
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100/100"
-valign = 1
+vertical_alignment = 1
 
-[node name="HealthLabel" type="Label" parent="CanvasLayer"]
+[node name="HealthLabel" type="Label" parent="CanvasLayer" unique_id=1422004416]
 offset_left = 53.9417
 offset_top = 10.981
 offset_right = 106.942
 offset_bottom = 24.981
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "100/100"
-valign = 1
+vertical_alignment = 1
 
-[node name="PopupPanel" parent="CanvasLayer" groups=[
-"popup",
-] instance=ExtResource( 3 )]
-offset_left = 598.0
-offset_top = 735.0
-offset_right = 607.0
-offset_bottom = 757.0
+[node name="PopupPanel" parent="CanvasLayer" unique_id=1897764575 groups=["popup"] instance=ExtResource("3")]

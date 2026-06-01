@@ -2,9 +2,9 @@
 
 [node name="Camera2D" type="Camera2D"]
 position = Vector2( 0, -71 )
-current = true
+enabled = true
 zoom = Vector2( 1.1, 1.1 )
 limit_bottom = 800
-limit_smoothed = true
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
+position_smoothing_enabled = true
+drag_horizontal_enabled = false
+drag_vertical_enabled = false
