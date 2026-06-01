@@ -94,7 +94,15 @@ This project uses [GUT](https://github.com/bitwes/Gut) for unit testing.
 
 Prerequisites: Godot 4.x installed and on your PATH.
 
-Run all tests headlessly:
+The preferred way to run GUT tests locally is via the convenience wrapper:
+
+    bash scripts/run_gut_tests.sh
+
+To use a specific Godot binary, set the `GODOT` environment variable:
+
+    GODOT=/path/to/godot bash scripts/run_gut_tests.sh
+
+Under the hood the script calls:
 
     godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
       -gdir=res://tests \
@@ -109,3 +117,34 @@ The `.github/workflows/tests.yml` CI workflow runs automatically on push and
 pull_request when any `.gd` source file or file under `tests/` is modified.
 It can also be triggered manually from the GitHub Actions UI via
 `workflow_dispatch`. A 90-minute job timeout bounds worst-case CI time.
+
+## Local Verification
+
+`scripts/verify.sh` is the single entry point for replicating the full CI
+pipeline locally. It runs gdlint, the absolute-path guard, and the GUT test
+suite in sequence — exactly what CI does on every push and pull request.
+
+### Prerequisites
+
+- Python 3.x with gdtoolkit: `pip install gdtoolkit`
+- Godot 4.x on your PATH, **or** let `scripts/download_gut.sh` auto-download
+  it (the script places the binary at `./bin/godot`).
+
+### Usage
+
+Run the full CI-equivalent pipeline:
+
+    bash scripts/verify.sh
+
+To run only the lint and path checks (skip the Godot test run):
+
+    SKIP_TESTS=1 bash scripts/verify.sh
+
+### What each step does
+
+1. **gdlint** (`scripts/` and `tests/`) — checks GDScript style and syntax,
+   mirroring `.github/workflows/ci.yml`.
+2. **Absolute-path guard** — scans source files for hard-coded home-directory
+   paths, mirroring `.github/workflows/lint-paths.yml`.
+3. **GUT headless tests** (via `scripts/run_gut_tests.sh`) — runs the full
+   unit-test suite headlessly, mirroring `.github/workflows/tests.yml`.
