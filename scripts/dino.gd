@@ -11,7 +11,7 @@ extends "res://scripts/generic_character_behaviour.gd"
 #     when falling at >= STOMP_MIN_VELOCITY px/s
 
 const STOMP_MIN_VELOCITY = 100.0  # minimum downward speed to trigger stomp
-const TAIL_SWIPE_DURATION = 1.0   # seconds to hold the tail-swipe frame
+const TAIL_SWIPE_DURATION = 0.2   # quick tail-swipe hold time
 
 var _stomp_area: Area2D
 var _stomped_this_jump := false  # prevent multi-kill on same landing
