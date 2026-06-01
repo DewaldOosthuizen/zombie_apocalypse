@@ -103,7 +103,7 @@
 [ext_resource type="Texture2D" uid="uid://cyeibyw0ybt02" path="res://resources/characters/ranger/male/Slide__007.png" id="101"]
 [ext_resource type="Texture2D" uid="uid://dwbdhlb8wahuh" path="res://resources/characters/ranger/male/Slide__008.png" id="102"]
 [ext_resource type="Texture2D" uid="uid://bma41yjwugd6w" path="res://resources/characters/ranger/male/Slide__009.png" id="103"]
-[ext_resource type="Script" uid="uid://b61a0sxa863fx" path="res://scripts/ranger.gd" id="104"]
+[ext_resource type="Script" uid="uid://d1oa1ufs576h2" path="res://scripts/ranger.gd" id="104"]
 
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 12.0227
