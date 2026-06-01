@@ -20,8 +20,15 @@ const BULLET_OFFSET_Y = 5
 # Export variables
 @export var max_jump_count = 1 # characters can only jump once by default
 @export var max_speed = 350 # character max speed, defaulted to 350
-@export var ammo = 0 # default starting ammo for characters
-@export var energy = 0 # energy gained from energy stones
+# STAT OWNERSHIP MODEL: ammo, energy, and health starting values are set
+# per-character via the Godot Inspector (@export). The values here are base-class
+# fallbacks only. Each character scene (ninja, robot, adventure_girl) overrides
+# ammo and other stats by serialising @export values in its own .tscn file.
+# When authoring a new character, set your starting stats in the Inspector for
+# that character's scene — do NOT rely on these fallback defaults unless zero/100
+# is intentionally correct for that stat.
+@export var ammo = 0 # base-class fallback — override per character via Inspector
+@export var energy = 0 # base-class fallback — override per character via Inspector
 @export var max_energy = 100 # character max energy
 @export var health = 100 # character starts with 100 % health
 @export var max_health = 100 # character max health %

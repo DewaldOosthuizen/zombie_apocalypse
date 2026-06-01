@@ -64,10 +64,11 @@ func _connect_signals():
 			end_door.connect(\"enteredEndDoor\", Callable(self, \"advance_to_next_level\"))
 			print(\":: end door connected ::\")
 			
-	character_node = get_tree().get_nodes_in_group(\"main_character\")
-	if (!character_node.is_empty()):
-		character_node = character_node.front()
+	var found = get_tree().get_nodes_in_group(\"main_character\")
+	if (!found.is_empty()):
+		character_node = found.front()
 		_connect_to_character_signals(character_node)
+	# character_node is NOT touched when the group is empty — preserves the valid node reference
 
 
 func handle_events():
@@ -203,8 +204,8 @@ func setup_character():
 	character_node.gender = character_stats[\"character\"][\"gender\"]
 	camera.enabled = true
 	character_node.add_child(camera)
-	get_tree().root.add_child(character_node)
 	_connect_to_character_signals(character_node)
+	get_tree().root.add_child(character_node)
 	refresh_hud(character_node)
 
 
