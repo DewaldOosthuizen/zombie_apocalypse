@@ -318,8 +318,8 @@ radius = 12.0227
 height = 24.2472
 
 [sub_resource type="CapsuleShape2D" id="3"]
-radius = 4.658105
-height = 9.31621
+radius = 6.3585243
+height = 29.518467
 
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(23.5508, 26.9866)
@@ -1117,13 +1117,13 @@ position = Vector2(1.26428, -2.04825)
 scale = Vector2(0.838769, 1.05019)
 
 [node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=531410784]
-position = Vector2(-18.6913, -2.7241)
+position = Vector2(-18.198431, 0.045943987)
 scale = Vector2(1.5, 1)
 shape = SubResource("3")
 disabled = true
 
 [node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=385877808]
-position = Vector2(12.7088, -2.7241)
+position = Vector2(9.818817, 0.045944214)
 scale = Vector2(1.5, 1)
 shape = SubResource("3")
 disabled = true
@@ -1144,12 +1144,11 @@ shape = SubResource("6")
 one_way_collision_margin = 50.0
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1700397467]
-position = Vector2(-0.0317154, 0)
+position = Vector2(9, 0.49999988)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("7")
 animation = &"female_ninja_melee"
-frame = 2
 speed_scale = 4.0
 
 [node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1779117566]
-position = Vector2(-3.88801, -8.7262)
+position = Vector2(0, -0.5)

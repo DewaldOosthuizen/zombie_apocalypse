@@ -603,11 +603,11 @@ scale = Vector2(5.65976, 0.847504)
 shape = SubResource("2")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=91291646]
-position = Vector2(0.715809, -5.54256)
+position = Vector2(5.0157676, -3.4152498)
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("3")
 animation = &"male_zombie_dead"
-frame_progress = 0.69779354
+frame_progress = 0.54976153
 speed_scale = 1.8
 
 [node name="React - Area2D" type="Area2D" parent="." unique_id=1983820189]

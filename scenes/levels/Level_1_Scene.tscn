@@ -444,7 +444,7 @@ position = Vector2(0, -3.57628e-06)
 scale = Vector2(3, 1)
 
 [node name="Pit1" parent="Pits" unique_id=1485509149 instance=ExtResource("14")]
-position = Vector2(1084.76, 785.02)
+position = Vector2(1084.6667, 770.99994)
 scale = Vector2(3, 5)
 
 [node name="Pit2" parent="Pits" unique_id=445555712 instance=ExtResource("14")]
@@ -908,7 +908,7 @@ position = Vector2(7409.91, 678.217)
 [node name="Enemy_barriers" type="Node2D" parent="." unique_id=803649422]
 
 [node name="Enemy_barrier" parent="Enemy_barriers" unique_id=1797950583 instance=ExtResource("20")]
-position = Vector2(3481.46, 710.775)
+position = Vector2(3478, 696)
 
 [node name="Enemy_barrier11" parent="Enemy_barriers" unique_id=663937524 instance=ExtResource("20")]
 position = Vector2(3065.92, -386.216)

@@ -179,18 +179,19 @@ func control_character(delta):
 				repeat_frames = false
 			elif (current_jump_count == 0 and !action1 and !action2 and !action3):
 				super._change_sprite_animation(\"idle\")
-				repeat_frames = true"
+				repeat_frames = true
+"
+
+[sub_resource type="CapsuleShape2D" id="3"]
+radius = 10.431954
+height = 24.837986
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(23.5508, 24.1916)
 
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 12.0227
 height = 24.2472
-
-[sub_resource type="CapsuleShape2D" id="3"]
-radius = 4.658105
-height = 9.31621
-
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(23.5508, 24.1916)
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(6.7032, 37.0922)
@@ -545,26 +546,18 @@ max_energy = 200
 action1_damage = 40
 main_character = true
 
-[node name="CharacterArea2D" type="Area2D" parent="." unique_id=1464799475]
-position = Vector2(1.26428, -2.04825)
-scale = Vector2(0.838769, 1.05019)
-
-[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D" unique_id=278622608]
-position = Vector2(-3.44696, 2.78102)
-shape = SubResource("2")
-
 [node name="AttackArea2D" type="Area2D" parent="." unique_id=1862167656]
 position = Vector2(1.26428, -2.04825)
 scale = Vector2(0.838769, 1.05019)
 
 [node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1782344045]
-position = Vector2(-20.951, -2.7241)
+position = Vector2(-19.986767, 3.378674)
 scale = Vector2(1.2, 1)
 shape = SubResource("3")
 disabled = true
 
 [node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1824741261]
-position = Vector2(14.7892, -2.7241)
+position = Vector2(12.203264, 4.330883)
 scale = Vector2(1.2, 1)
 shape = SubResource("3")
 disabled = true
@@ -573,6 +566,14 @@ disabled = true
 position = Vector2(-4.19786, 7.46876)
 shape = SubResource("4")
 disabled = true
+
+[node name="CharacterArea2D" type="Area2D" parent="." unique_id=1464799475]
+position = Vector2(1.26428, -2.04825)
+scale = Vector2(0.838769, 1.05019)
+
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D" unique_id=278622608]
+position = Vector2(-3.44696, 2.78102)
+shape = SubResource("2")
 
 [node name="StandCollisionShape2D" type="CollisionShape2D" parent="." unique_id=2057886651]
 position = Vector2(-2.31413, 0.391424)
@@ -585,10 +586,11 @@ shape = SubResource("6")
 [node name="Camera2D" parent="." unique_id=1969391913 instance=ExtResource("1")]
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=808012833]
-position = Vector2(-0.0317154, 0)
+position = Vector2(-1, 0.49999988)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("7")
-animation = &"male_robot_idle"
+animation = &"male_robot_melee"
+frame_progress = 0.4262224
 speed_scale = 3.0
 
 [node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=939439000]
