@@ -35,6 +35,7 @@ func _physics_process(delta):
 	if health > 0:
 		super._area_checks()
 		_check_stomp()
+	_reset_character_sprite_states(delta)
 
 
 # --- Input ---------------------------------------------------------------
@@ -51,7 +52,7 @@ func _handle_input():
 	else:
 		movement_direction = 0
 
-	if Input.is_action_just_pressed("jump") and current_jump_count < max_jump_count:
+	if Input.is_action_just_pressed("move_jump") and current_jump_count < max_jump_count:
 		player_speed_y = -JUMPFORCE
 		current_jump_count += 1
 		_stomped_this_jump = false  # reset stomp flag on each new jump
@@ -100,7 +101,7 @@ func _reset_character_sprite_states(delta):
 		_change_sprite_animation("idle")
 		disable_gravity = false
 	elif action1 or action2 or action3:
-		# All actions silenced — clear flags and return to movement state
+		# All actions silenced — clear flags immediately
 		action1 = false
 		action2 = false
 		action3 = false
@@ -111,6 +112,9 @@ func _reset_character_sprite_states(delta):
 		else:
 			_change_sprite_animation("run")
 		_default_collision()
+	elif current_jump_count > 0:
+		# In air — hold jump animation, do not override with idle/run
+		_change_sprite_animation("jump")
 	elif not action1 and not action2 and not action3 and current_jump_count == 0:
 		_default_collision()
 		repeat_frames = true
