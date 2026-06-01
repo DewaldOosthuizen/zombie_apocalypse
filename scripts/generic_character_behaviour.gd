@@ -16,6 +16,7 @@ const HEALTH_SNAP_PRECISION = 0.2
 const LOW_HEALTH_THRESHOLD_PERCENT = 40
 const BULLET_OFFSET_X = 20
 const BULLET_OFFSET_Y = 5
+const PIT_DEATH_THRESHOLD = 900 # Y position below which a character is considered to have fallen into a pit
 
 # Export variables
 @export var max_jump_count = 1 # characters can only jump once by default
@@ -102,6 +103,10 @@ func _start_process(delta):
 	# handle collision on the y-axis
 	var collided_object2 = move_and_collide(Vector2(0, velocity.y))
 	_handle_collision(collided_object2, velocity.y > stationary_velocity)
+
+	# pit detection — if character falls below the level floor, trigger death/respawn
+	if position.y > PIT_DEATH_THRESHOLD:
+		_emit_reposition()
 
 
 func _animate_player(delta):
