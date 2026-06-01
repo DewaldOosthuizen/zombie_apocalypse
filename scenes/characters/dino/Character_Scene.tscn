@@ -1,0 +1,354 @@
+[gd_scene format=3 uid="uid://dino_char_scene"]
+
+[ext_resource type="Texture2D" uid="uid://dj83qs4dkjm5m" path="res://resources/characters/dino/Dead (1).png" id="1"]
+[ext_resource type="Texture2D" uid="uid://ca4ac5nudgpji" path="res://resources/characters/dino/Dead (2).png" id="2"]
+[ext_resource type="Texture2D" uid="uid://jjkjjxp45421" path="res://resources/characters/dino/Dead (3).png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bctlkcj2c0pyf" path="res://resources/characters/dino/Dead (4).png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cm012ljc2kej4" path="res://resources/characters/dino/Dead (5).png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cps6rki7x6kl0" path="res://resources/characters/dino/Dead (6).png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dqpbww8nq72wi" path="res://resources/characters/dino/Dead (7).png" id="7"]
+[ext_resource type="Texture2D" uid="uid://b32ycacyw6nux" path="res://resources/characters/dino/Dead (8).png" id="8"]
+[ext_resource type="Texture2D" uid="uid://nwtxe18llv4g" path="res://resources/characters/dino/Idle (1).png" id="9"]
+[ext_resource type="Texture2D" uid="uid://b4n0scnrru54b" path="res://resources/characters/dino/Idle (2).png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dcp8e3lgkgrgt" path="res://resources/characters/dino/Idle (3).png" id="11"]
+[ext_resource type="Texture2D" uid="uid://28kpek5pm421" path="res://resources/characters/dino/Idle (4).png" id="12"]
+[ext_resource type="Texture2D" uid="uid://dycm6r48o3ave" path="res://resources/characters/dino/Idle (5).png" id="13"]
+[ext_resource type="Texture2D" uid="uid://didkaf7iilsbi" path="res://resources/characters/dino/Idle (6).png" id="14"]
+[ext_resource type="Texture2D" uid="uid://2o4kdqgmsmbf" path="res://resources/characters/dino/Idle (7).png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bmh78c4nf3mqd" path="res://resources/characters/dino/Idle (8).png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bg1tdy21mk5mh" path="res://resources/characters/dino/Idle (9).png" id="17"]
+[ext_resource type="Texture2D" uid="uid://dwv118hkp2yd1" path="res://resources/characters/dino/Idle (10).png" id="18"]
+[ext_resource type="Texture2D" uid="uid://d1hvorpwpv760" path="res://resources/characters/dino/Jump (1).png" id="19"]
+[ext_resource type="Texture2D" uid="uid://blp4cwbb2tlxy" path="res://resources/characters/dino/Jump (2).png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dggt871sc8rtd" path="res://resources/characters/dino/Jump (3).png" id="21"]
+[ext_resource type="Texture2D" uid="uid://m5jbss4nf0pn" path="res://resources/characters/dino/Jump (4).png" id="22"]
+[ext_resource type="Texture2D" uid="uid://5vom80gmit0r" path="res://resources/characters/dino/Jump (5).png" id="23"]
+[ext_resource type="Texture2D" uid="uid://b7t030474l5fj" path="res://resources/characters/dino/Jump (6).png" id="24"]
+[ext_resource type="Texture2D" uid="uid://dbh4o4eg0y504" path="res://resources/characters/dino/Jump (7).png" id="25"]
+[ext_resource type="Texture2D" uid="uid://bigc8t36f08bt" path="res://resources/characters/dino/Jump (8).png" id="26"]
+[ext_resource type="Texture2D" uid="uid://bre7jia0nby5b" path="res://resources/characters/dino/Jump (9).png" id="27"]
+[ext_resource type="Texture2D" uid="uid://b72r6gdotq8d3" path="res://resources/characters/dino/Jump (10).png" id="28"]
+[ext_resource type="Texture2D" uid="uid://dkxsupoocli6t" path="res://resources/characters/dino/Jump (11).png" id="29"]
+[ext_resource type="Texture2D" uid="uid://dbmchvr6ghcqr" path="res://resources/characters/dino/Jump (12).png" id="30"]
+[ext_resource type="Texture2D" uid="uid://frwselywdfwj" path="res://resources/characters/dino/Run (1).png" id="31"]
+[ext_resource type="Texture2D" uid="uid://cia1f0aaxbn80" path="res://resources/characters/dino/Run (2).png" id="32"]
+[ext_resource type="Texture2D" uid="uid://bubbrq72m1soa" path="res://resources/characters/dino/Run (3).png" id="33"]
+[ext_resource type="Texture2D" uid="uid://btiui4tk7a254" path="res://resources/characters/dino/Run (4).png" id="34"]
+[ext_resource type="Texture2D" uid="uid://d4iid2emx7o3i" path="res://resources/characters/dino/Run (5).png" id="35"]
+[ext_resource type="Texture2D" uid="uid://bxd8g6nai1p04" path="res://resources/characters/dino/Run (6).png" id="36"]
+[ext_resource type="Texture2D" uid="uid://btypkir3s5mgn" path="res://resources/characters/dino/Run (7).png" id="37"]
+[ext_resource type="Texture2D" uid="uid://bakop8uwqj6vu" path="res://resources/characters/dino/Run (8).png" id="38"]
+[ext_resource type="Texture2D" uid="uid://ds0iihlhn8c6d" path="res://resources/characters/dino/Walk (1).png" id="39"]
+[ext_resource type="Texture2D" uid="uid://d33bx3do332mi" path="res://resources/characters/dino/Walk (2).png" id="40"]
+[ext_resource type="Texture2D" uid="uid://dhm3kyuk3i5b3" path="res://resources/characters/dino/Walk (3).png" id="41"]
+[ext_resource type="Texture2D" uid="uid://3cb4kekccfvd" path="res://resources/characters/dino/Walk (4).png" id="42"]
+[ext_resource type="Texture2D" uid="uid://dfm2h0ll5bper" path="res://resources/characters/dino/Walk (5).png" id="43"]
+[ext_resource type="Texture2D" uid="uid://dbds8fnyxsl2o" path="res://resources/characters/dino/Walk (6).png" id="44"]
+[ext_resource type="Texture2D" uid="uid://b46xvwlry7drs" path="res://resources/characters/dino/Walk (7).png" id="45"]
+[ext_resource type="Texture2D" uid="uid://b0shb6oq47gh0" path="res://resources/characters/dino/Walk (8).png" id="46"]
+[ext_resource type="Texture2D" uid="uid://b0ti7frpg65ns" path="res://resources/characters/dino/Walk (9).png" id="47"]
+[ext_resource type="Texture2D" uid="uid://xb5ic8wi3717" path="res://resources/characters/dino/Walk (10).png" id="48"]
+[ext_resource type="Script" uid="uid://f32994f4a21e4a" path="res://scripts/dino.gd" id="49"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 12.0227
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 14.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(40, 10)
+
+[sub_resource type="RectangleShape2D" id="6"]
+size = Vector2(28, 8)
+
+[sub_resource type="SpriteFrames" id="7"]
+animations = [
+  {
+  "frames": [
+    {
+    "duration": 1.0,
+    "texture": ExtResource("1")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("2")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("3")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("4")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("5")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("6")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("7")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("8")
+    },
+  ],
+  "loop": false,
+  "name": &"dino_dead",
+  "speed": 8.0,
+  },
+  {
+  "frames": [
+    {
+    "duration": 1.0,
+    "texture": ExtResource("9")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("10")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("11")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("12")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("13")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("14")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("15")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("16")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("17")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("18")
+    },
+  ],
+  "loop": true,
+  "name": &"dino_idle",
+  "speed": 8.0,
+  },
+  {
+  "frames": [
+    {
+    "duration": 1.0,
+    "texture": ExtResource("19")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("20")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("21")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("22")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("23")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("24")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("25")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("26")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("27")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("28")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("29")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("30")
+    },
+  ],
+  "loop": false,
+  "name": &"dino_jump",
+  "speed": 10.0,
+  },
+  {
+  "frames": [
+    {
+    "duration": 1.0,
+    "texture": ExtResource("31")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("32")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("33")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("34")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("35")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("36")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("37")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("38")
+    },
+  ],
+  "loop": true,
+  "name": &"dino_run",
+  "speed": 10.0,
+  },
+  {
+  "frames": [
+    {
+    "duration": 1.0,
+    "texture": ExtResource("39")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("40")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("41")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("42")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("43")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("44")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("45")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("46")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("47")
+    },
+    {
+    "duration": 1.0,
+    "texture": ExtResource("48")
+    },
+  ],
+  "loop": true,
+  "name": &"dino_walk",
+  "speed": 8.0,
+  },
+]
+
+[node name="Dino_Character_Scene" type="CharacterBody2D" groups=["character", "main_character"]]
+script = ExtResource("49")
+health = 150
+max_health = 150
+ammo = 0
+energy = 0
+max_jump_count = 2
+max_speed = 300
+
+[node name="CharacterArea2D" type="Area2D" parent="."]
+
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D"]
+shape = SubResource("2")
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+
+[node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("3")
+position = Vector2(-20, 0)
+disabled = true
+
+[node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("4")
+position = Vector2(20, 0)
+disabled = true
+
+[node name="SlideAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("5")
+position = Vector2(0, 10)
+disabled = true
+
+[node name="StompArea2D" type="Area2D" parent="."]
+
+[node name="StompCollisionShape2D" type="CollisionShape2D" parent="StompArea2D"]
+shape = SubResource("6")
+position = Vector2(0, 24)
+
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="SlideCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("5")
+position = Vector2(0, 10)
+disabled = true
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("7")
+animation = &"dino_idle"
+scale = Vector2(1.2, 1.2)
+
+[node name="VisibilityNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

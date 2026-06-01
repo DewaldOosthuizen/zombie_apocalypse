@@ -23,7 +23,8 @@ var characters = [
 	{\"type\": \"ninja\", \"gender\": \"male\", \"scene\": ninja_scene},
 	{\"type\": \"robot\", \"gender\": \"male\", \"scene\": robot_scene},
 	{\"type\": \"ranger\", \"gender\": \"female\", \"scene\": ranger_scene}, 
-	{\"type\": \"ranger\", \"gender\": \"male\", \"scene\": ranger_scene}
+	{\"type\": \"ranger\", \"gender\": \"male\", \"scene\": ranger_scene},
+	{\"type\": \"dino\", \"gender\": \"\", \"scene\": dino_scene}
 ]
 
 var character_stats = {
