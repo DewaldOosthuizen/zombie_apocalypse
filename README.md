@@ -67,6 +67,16 @@ This project has been updated from Godot 3 to Godot 4, including:
 
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
 
+## Documentation
+
+Architecture Decision Documents (ADDs) capture significant design and technical decisions:
+
+- [docs/add/README.md](docs/add/README.md) — ADD index
+- [ADD-001: Godot 4 Migration](docs/add/add-001-godot4-migration.md)
+- [ADD-002: Generic Behaviour Scripts](docs/add/add-002-generic-behaviour-scripts.md)
+- [ADD-003: Multi-Character World Scene Design](docs/add/add-003-multi-character-design.md)
+- [ADD-004: GUT Testing Approach](docs/add/add-004-gut-testing-approach.md)
+
 ## Running Tests
 
 This project uses [GUT](https://github.com/bitwes/Gut) for unit testing.

@@ -74,8 +74,22 @@ The game loads to Level 1 automatically with a character that can be controlled 
 │   ├── environment/           # Environment art (winter, desert, forest, etc.)
 │   ├── hud/                   # UI graphics (health, power bars)
 │   └── levels/                # Level tilesets
+├── docs/                      # Project documentation
+│   └── add/                   # Architecture Decision Documents (ADDs)
+│       ├── README.md          # ADD index
+│       ├── add-001-godot4-migration.md
+│       ├── add-002-generic-behaviour-scripts.md
+│       ├── add-003-multi-character-design.md
+│       └── add-004-gut-testing-approach.md
 └── export_presets.cfg         # Export settings for Linux/Windows builds
 ```
+
+### Documentation
+
+Architecture Decision Documents (ADDs) in `docs/add/` record significant design and technical
+decisions made during the project's evolution. Each ADD covers Status, Context, Decision,
+Alternatives Considered, and Consequences. See [docs/add/README.md](../docs/add/README.md) for
+the full index.
 
 ### Key Files to Understand:
 - `scenes/World_Scene.tscn` - Main game controller, handles character switching and level management
