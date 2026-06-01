@@ -37,10 +37,10 @@ func _physics_process(delta):
 	if player_sprite == null:
 		return
 	_handle_input()
+	_check_stomp()            # capture velocity before _start_process resets it on landing
 	super._start_process(delta)
 	if health > 0:
 		super._area_checks()
-		_check_stomp()
 	_reset_character_sprite_states(delta)
 
 
@@ -165,12 +165,11 @@ func _reset_character_sprite_states(delta):
 # --- Melee override: activate hitbox for tail-swipe ----------------------
 
 func _melee_attack_collision():
-	# Tail swipe hits behind the dino (opposite to facing direction)
-	# because the sprite is flipped — activate the opposite-side hitbox.
+	# Activate the hitbox on the side the dino is facing.
 	if facing_direction == 1:
-		area_left_attack_collision_shape_2d.disabled = false
-	else:
 		area_right_attack_collision_shape_2d.disabled = false
+	else:
+		area_left_attack_collision_shape_2d.disabled = false
 
 
 # --- No-op action overrides (document intent explicitly) -----------------

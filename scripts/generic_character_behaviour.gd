@@ -162,6 +162,7 @@ func _tick_daze_timer(delta):
 func _tick_blood_timer():
 	if (blood):
 		blood = false
+		_emit_refresh_hud()  # always update HUD on hit, even during i-frames
 		if (!invincible):
 			invincible = true
 			# create instance of blood and add it to the scene
@@ -170,7 +171,6 @@ func _tick_blood_timer():
 			particle_effect.get_node(".").set_emitting(true)
 			particle_effect.position = self.get_position() - Vector2(0, 50)
 			get_tree().root.add_child(particle_effect)
-			_emit_refresh_hud()
 
 
 func _tick_invincibility_timer(delta):

@@ -11,6 +11,7 @@ var active_level = 0 # starting level
 var ninja_scene = preload(\"res://scenes/characters/ninja/Character_Scene.tscn\")
 var robot_scene = preload(\"res://scenes/characters/robot/Character_Scene.tscn\")
 var ranger_scene = preload(\"res://scenes/characters/ranger/Character_Scene.tscn\")
+var dino_scene = preload(\"res://scenes/characters/dino/Character_Scene.tscn\")
 
 var playable_levels = [
 	preload(\"res://scenes/levels/Level_1_Scene.tscn\"),
