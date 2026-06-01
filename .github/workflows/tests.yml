@@ -1,19 +1,12 @@
 name: GUT Tests
 
-# GUT tests can be slow on GitHub Actions (Godot headless startup + GUT
-# initialisation). Triggers are path-scoped so the job runs only when
-# GDScript source or test files change. A 90-minute timeout caps worst-case
-# CI time. Run locally anytime with scripts/run_gut_tests.sh.
+# Automated push/pull_request triggers have been removed intentionally.
+# Running Godot headless on GitHub Actions is slow and resource-intensive;
+# contributors should run tests locally using scripts/download_gut.sh and
+# scripts/run_gut_tests.sh before merging.  The job can still be triggered
+# manually via the Actions tab (workflow_dispatch) when a CI run is needed.
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '**.gd'
-      - 'tests/**'
-  pull_request:
-    paths:
-      - '**.gd'
-      - 'tests/**'
 
 jobs:
   test:

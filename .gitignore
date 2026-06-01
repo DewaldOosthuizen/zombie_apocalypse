@@ -30,3 +30,7 @@ data_*/
 .understand-anything/diff-overlay.json
 # workspace-orchestrator managed entries
 graphify-out/cache/
+
+# Godot headless binaries downloaded by scripts/download_gut.sh
+bin/godot
+bin/Godot_v*
