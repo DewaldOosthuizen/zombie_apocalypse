@@ -97,3 +97,126 @@ func test_invincibility_timer_resets_after_duration():
 	assert_eq(_char.invincible_timer, 0,
 		"invincible_timer must reset to 0 after expiry")
 	stub_sprite.free()
+
+
+# ---------------------------------------------------------------------------
+# _apply_incoming_damage tests
+# ---------------------------------------------------------------------------
+
+func _make_attacker() -> Object:
+	# Returns a bare generic_character_behaviour instance configured as an
+	# attacker with action1 active and positive health so most tests get a
+	# "should deal damage" baseline.
+	var attacker = load("res://scripts/generic_character_behaviour.gd").new()
+	attacker.health = 100
+	attacker.action1 = true
+	attacker.action2 = false
+	attacker.action3 = false
+	attacker.action1_damage = 30
+	attacker.action2_damage = 20
+	attacker.action3_damage = 10
+	return attacker
+
+
+func test_apply_incoming_damage_reduces_health_when_action1_active():
+	# Target starts healthy, attacker has action1 active → target takes action1_damage.
+	_char.health = 100
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = false
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 70,
+		"health must drop by action1_damage (30) when attacker has action1 active")
+	attacker.free()
+
+
+func test_apply_incoming_damage_blocked_when_target_is_dazed():
+	# When the target (self) is dazed _apply_incoming_damage must do nothing.
+	_char.health = 100
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = true
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 100,
+		"health must be unchanged when target is dazed")
+	attacker.free()
+
+
+func test_apply_incoming_damage_blocked_when_parent_health_zero():
+	# Attacker with health == 0 must not deal any damage.
+	_char.health = 100
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = false
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	attacker.health = 0
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 100,
+		"health must be unchanged when attacker health is 0")
+	attacker.free()
+
+
+func test_apply_incoming_damage_uses_action2_damage():
+	# Attacker with action2 active → target takes action2_damage.
+	_char.health = 100
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = false
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	attacker.action1 = false
+	attacker.action2 = true
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 80,
+		"health must drop by action2_damage (20) when attacker has action2 active")
+	attacker.free()
+
+
+func test_apply_incoming_damage_uses_action3_damage():
+	# Attacker with action3 active → target takes action3_damage.
+	_char.health = 100
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = false
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	attacker.action1 = false
+	attacker.action3 = true
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 90,
+		"health must drop by action3_damage (10) when attacker has action3 active")
+	attacker.free()
+
+
+func test_apply_incoming_damage_no_damage_when_attacker_has_zero_health():
+	# Mirrors test_apply_incoming_damage_blocked_when_parent_health_zero —
+	# explicitly verifies the attacker-health guard from the spec requirement.
+	_char.health = 50
+	_char.energy = 0
+	_char.invincible = false
+	_char.dazed = false
+	_char.action1 = false
+	_char.action2 = false
+	_char.action3 = false
+	var attacker = _make_attacker()
+	attacker.health = 0
+	attacker.action1 = true
+	_char._apply_incoming_damage(attacker)
+	assert_eq(_char.health, 50,
+		"health must be unchanged when attacker health is 0")
+	attacker.free()
