@@ -96,19 +96,19 @@ Prerequisites: Godot 4.x installed and on your PATH.
 
 The preferred way to run GUT tests locally is via the convenience wrapper:
 
-    bash scripts/run_gut_tests.sh
+	bash scripts/run_gut_tests.sh
 
 To use a specific Godot binary, set the `GODOT` environment variable:
 
-    GODOT=/path/to/godot bash scripts/run_gut_tests.sh
+	GODOT=/path/to/godot bash scripts/run_gut_tests.sh
 
 Under the hood the script calls:
 
-    godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
-      -gdir=res://tests \
-      -gprefix=test_ \
-      -gsuffix=.gd \
-      -gexit
+	godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+	  -gdir=res://tests \
+	  -gprefix=test_ \
+	  -gsuffix=.gd \
+	  -gexit
 
 Tests can also be run from inside the Godot editor via the GUT panel
 (Scene > GUT > Run All).
@@ -134,11 +134,11 @@ suite in sequence — exactly what CI does on every push and pull request.
 
 Run the full CI-equivalent pipeline:
 
-    bash scripts/verify.sh
+	bash scripts/verify.sh
 
 To run only the lint and path checks (skip the Godot test run):
 
-    SKIP_TESTS=1 bash scripts/verify.sh
+	SKIP_TESTS=1 bash scripts/verify.sh
 
 ### What each step does
 

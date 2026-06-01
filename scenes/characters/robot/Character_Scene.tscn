@@ -121,6 +121,8 @@ func _physics_process(delta):
 	# check for character control
 	control_character(delta)
 	super._start_process(delta)
+	if (health > 0):
+		super._area_checks()
 
 
 func control_character(delta):
