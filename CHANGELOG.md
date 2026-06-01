@@ -11,7 +11,7 @@ For the full commit history see the repository log.
 
 ## 0.2
 
-- Migrated project from Godot 3 to Godot 4
+- Migrated project from Godot 3 to Godot 4 (see [ADD-001](docs/add/add-001-godot4-migration.md))
 - Updated node types: CharacterBody2D, AnimatedSprite2D, Sprite2D
 - Modernised GDScript syntax (@export, @onready, Callable)
 - Updated signal connections and scene instantiation
