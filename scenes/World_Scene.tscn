@@ -69,9 +69,11 @@ func _connect_signals():
 			
 	var found = get_tree().get_nodes_in_group(\"main_character\")
 	if (!found.is_empty()):
-		character_node = found.front()
-		_connect_to_character_signals(character_node)
-	# character_node is NOT touched when the group is empty — preserves the valid node reference
+		var candidate = found.front()
+		if not candidate.is_queued_for_deletion():
+			character_node = candidate
+			_connect_to_character_signals(character_node)
+	# character_node is only updated if the candidate is not about to be freed
 
 
 func handle_events():
