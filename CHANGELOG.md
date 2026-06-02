@@ -1,6 +1,9 @@
 # Changelog — Zombie Apocalypse
 
 All notable changes to **Zombie Apocalypse** are documented here.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and release headings follow Semantic Versioning with an `Unreleased` section for
+work in progress.
 For the full commit history see the repository log.
 
 ## Unreleased
