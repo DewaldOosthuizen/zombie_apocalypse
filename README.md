@@ -73,23 +73,23 @@ This project has been updated from Godot 3 to Godot 4, including:
 | Female Ninja   | Yes                | Full set                                      | Playable   |
 | Male Ninja     | Yes                | Full set                                      | Playable   |
 | Female Ranger  | Yes                | Dead, Idle, Jump, Melee, Run, Shoot, Slide    | Playable   |
-| Male Ranger    | Yes                | Dead, Idle, Jump, Run, Slide                  | Playable (Melee/Shoot fall back to female animations) |
+| Male Ranger    | Yes                | Dead, Idle, Jump, Run, Slide                  | Playable (Melee/Shoot falls back to female animations) |
 
 ![image](https://github.com/user-attachments/assets/d4f90d48-03f8-4e04-872e-633b077a57d1)
 
 
 ## Known Gaps / Roadmap
 
-The following items are outstanding for the Ranger character and are tracked as open GitHub Issues:
+This is still a work in progress and is meant as a learning project.
+There are still a lot of features outstanding, as well as some gaps after the Godot 4 migration that
+affected existing functionality.
 
-- **Dedicated bullet scene** — Ranger currently borrows the Ninja bullet scene.
-  A dedicated projectile scene and asset are needed.
-- **Male Ranger Melee/Shoot animations** — No male-specific Melee or Shoot animation assets
-  exist; the male ranger falls back to female animations for those actions.
-- **Jump-shoot animation variant** — No jump-shoot animation exists yet; the character
-  falls back to the ground-shoot animation in mid-air.
-- **Jump-melee animation variant** — No jump-melee animation exists yet; the character
-  falls back to the ground-melee animation in mid-air.
+- levels are no longer cycling as they should
+- Some particle scenes are no longer behaving as they should
+- Pits are no longer triggering character deaths
+- Needs a main menu where the game can be started from, character selection, and general settings
+- More levels
+- etc
 
 ## Running Tests
 
@@ -105,7 +105,7 @@ To use a specific Godot binary, set the `GODOT` environment variable:
 
 	GODOT=/path/to/godot bash scripts/run_gut_tests.sh
 
-Under the hood the script calls:
+Under the hood, the script calls:
 
 	godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
 	  -gdir=res://tests \
@@ -119,7 +119,7 @@ Tests can also be run from inside the Godot editor via the GUT panel
 The `.github/workflows/tests.yml` CI workflow runs automatically on push and
 pull_request when any `.gd` source file or file under `tests/` is modified.
 It can also be triggered manually from the GitHub Actions UI via
-`workflow_dispatch`. A 90-minute job timeout bounds worst-case CI time.
+`workflow_dispatch`. A 90-minute job timeout bounds the worst-case CI time.
 
 ## Local Verification
 
