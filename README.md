@@ -12,6 +12,7 @@ from spreading.
 Architecture Decision Documents (ADDs) capture significant design and technical decisions:
 
 - [docs/add/README.md](docs/add/README.md) — ADD index
+- [CHANGELOG.md](CHANGELOG.md) — release history and unreleased changes
 - [ADD-001: Godot 4 Migration](docs/add/add-001-godot4-migration.md)
 - [ADD-002: Generic Behaviour Scripts](docs/add/add-002-generic-behaviour-scripts.md)
 - [ADD-003: Multi-Character World Scene Design](docs/add/add-003-multi-character-design.md)
