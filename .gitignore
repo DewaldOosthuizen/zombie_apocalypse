@@ -33,3 +33,12 @@ bin/Godot_v*
 .understand-anything/diff-overlay.json
 graphify-out/cache/
 # workspace-orchestrator managed entries
+# BEGIN workspace-orchestrator
+.hermes_tmp_prompt.txt
+graphify-out/cache/
+.understand-anything/intermediate/
+.understand-anything/diff-overlay.json
+.codegraph/*.db
+.codegraph/cache/
+openspec/
+# END workspace-orchestrator
