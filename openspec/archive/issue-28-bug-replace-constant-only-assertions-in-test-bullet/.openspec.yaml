@@ -1,8 +1,0 @@
-schema: spec-driven
-created: 2026-05-30
-issue: 28
-title: "BUG: Replace constant-only assertions in test_bullet_behaviour.gd with real bullet node behaviour tests"
-status: proposed
-affected_files:
-  - tests/test_bullet_behaviour.gd
-  - scripts/generic_bullet_behaviour.gd
