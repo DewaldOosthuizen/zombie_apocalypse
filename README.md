@@ -151,3 +151,10 @@ To run only the lint and path checks (skip the Godot test run):
    paths, mirroring `.github/workflows/lint-paths.yml`.
 3. **GUT headless tests** (via `scripts/run_gut_tests.sh`) — runs the full
    unit-test suite headlessly, mirroring `.github/workflows/tests.yml`.
+
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for
+the full workflow, including how to pick up an issue, branch naming conventions,
+local validation steps, and the pull request process.
