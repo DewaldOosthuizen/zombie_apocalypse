@@ -27,6 +27,11 @@ data_*/
 bin/godot
 bin/Godot_v*
 
+# VS Code settings
+.vscode/
+.lh
+.history
+
 # BEGIN workspace-orchestrator
 .hermes_tmp_prompt.txt
 graphify-out/cache/
