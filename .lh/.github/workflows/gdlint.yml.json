@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/gdlint.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1780687308199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1780687308199,
+            "name": "Commit-0",
+            "content": "name: GDScript Lint\n\non:\n  push:\n    branches: [\"main\"]\n  pull_request:\n    branches: [\"main\"]\n\npermissions:\n  contents: read\n\njobs:\n  gdlint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.11\"\n      - name: Install gdtoolkit\n        run: pip install gdtoolkit\n      - name: GDScript lint\n        run: gdlint scripts/\n"
+        }
+    ]
+}
