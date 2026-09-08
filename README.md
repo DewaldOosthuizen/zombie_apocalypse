@@ -116,34 +116,61 @@ Under the hood, the script calls:
 Tests can also be run from inside the Godot editor via the GUT panel
 (Scene > GUT > Run All).
 
-The `.github/workflows/pr_gate.yml` workflow runs the same test suite
-automatically on every pull request (gdlint -> path-guard -> GUT tests,
-fanned into a `pr-gate-summary` required check). A 90-minute job timeout
-bounds the worst-case CI time. See [CI / Release Pipeline](#ci--release-pipeline)
-below for the full picture, including releases.
+The `.github/workflows/pr_gate.yml` workflow runs gdlint and the absolute-path
+guard automatically on every pull request. **The GUT test job is commented
+out in CI** (both `pr_gate.yml` and `release.yml`) because the full headless
+suite runs too long. Contributors **must** run the GUT test suite locally
+(see above) and confirm it passes before raising a PR. See
+[CI / Release Pipeline](#ci--release-pipeline) below for the full picture,
+including releases.
 
 ## Local Verification
 
 `scripts/verify.sh` is the single entry point for replicating the full CI
 pipeline locally. It runs gdlint, the absolute-path guard, and the GUT test
-suite in sequence — exactly what `pr_gate.yml` does on every pull request.
+suite in sequence — the GUT step is required locally even though it is
+commented out of `pr_gate.yml` in CI (see below).
+
+## Building Locally
+
+CI no longer builds or uploads Godot export binaries (the exported
+Linux/X11 + Windows Desktop artifacts were large and unnecessary to ship
+via GitHub Actions). To produce a local build:
+
+1. Install Godot 4.6-stable (matching the `config/features` pin in
+   `project.godot`) and the matching export templates for that version.
+2. Import project assets once so the editor caches are populated:
+
+	godot --headless --editor --quit
+
+3. Export the platform build(s) you need:
+
+	mkdir -p build/linux build/windows
+	godot --headless --export-release "Linux/X11" build/linux/zombie-apocalypse.x86_64
+	godot --headless --export-release "Windows Desktop" build/windows/zombie-apocalypse.exe
+
+   Export preset names come from `export_presets.cfg` in the repo root.
+   Cross-exporting to Windows from Linux requires the Windows export
+   templates to be installed even though you are running on Linux.
 
 ## CI / Release Pipeline
 
 - **`.github/workflows/pr_gate.yml`** — runs on every pull request:
-  `gdlint` and `path-guard` run in parallel, then `test` (GUT, headless
-  Godot) runs once both pass, then `pr-gate-summary` fans in all three and
-  is the required status check.
+  `gdlint` and `path-guard` run in parallel, then `pr-gate-summary` fans in
+  both and is the required status check. **GUT tests are commented out**
+  (they ran too long for the PR gate); contributors must run them locally
+  before raising a PR (see [Running Tests](#running-tests)).
 - **`.github/workflows/release.yml`** — runs on push to `main` (and
   `workflow_dispatch`): re-validates the exact commit being released
-  (`gdlint` + `test`, duplicated from `pr_gate.yml` since a merge commit is
-  not identical to its PR head), then builds Linux/X11 and Windows Desktop
-  exports via `barichello/godot-ci:4.6`, computes the next
-  [CalVer](https://calver.org/) tag (`YYYY.MM.DD[.N]`), bumps
-  `config/version` in `project.godot`, commits + tags + pushes, and
-  publishes a GitHub Release with both binaries attached. If `HEAD` is
-  already tagged, the release step is skipped (no duplicate releases on a
-  no-op push).
+  (`gdlint` only — GUT tests are commented out here too, same reasoning),
+  then builds Linux/X11 and Windows Desktop exports via
+  `barichello/godot-ci:4.6`, computes the next [CalVer](https://calver.org/)
+  tag (`YYYY.MM.DD[.N]`), bumps `config/version` in `project.godot`,
+  commits + tags + pushes, and publishes a GitHub Release. **Build
+  artifacts are not uploaded to the workflow run or attached to the
+  Release** — see [Building Locally](#building-locally) to produce your
+  own binaries. If `HEAD` is already tagged, the release step is skipped
+  (no duplicate releases on a no-op push).
 - Godot version is pinned to **4.6-stable** across both workflows; bump the
   pin in both files together with `project.godot`'s `config/features` entry.
 
@@ -170,8 +197,9 @@ To run only the lint and path checks (skip the Godot test run):
 2. **Absolute-path guard** — scans source files for hard-coded home-directory
    paths, mirroring the `path-guard` job in `.github/workflows/pr_gate.yml`.
 3. **GUT headless tests** (via `scripts/run_gut_tests.sh`) — runs the full
-   unit-test suite headlessly, mirroring the `test` job in
-   `.github/workflows/pr_gate.yml`.
+   unit-test suite headlessly. This step is **not** run in CI (commented
+   out of `pr_gate.yml`/`release.yml` — it runs too long); running it here
+   locally before every PR is the required substitute.
 
 
 ## Contributing

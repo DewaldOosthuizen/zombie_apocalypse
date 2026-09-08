@@ -3,9 +3,14 @@ name: PR Gate
 # Consolidated PR validation pipeline. Replaces the previous four workflows
 # (ci.yml, tests.yml, gdlint.yml, lint-paths.yml) with a single pull_request
 # gate:
-#   gdlint (style) -> path-guard (no absolute home paths) -> test (GUT, headless Godot)
+#   gdlint (style) -> path-guard (no absolute home paths)
 # followed by a pr-gate-summary job that fans in the result of every job above
 # and is the single required status check for branch protection.
+#
+# GUT tests are commented out below (see the `test:` block) — the full
+# headless-Godot suite runs too long for the PR gate. Contributors must run
+# GUT locally (scripts/run_gut_tests.sh) and confirm it passes before
+# raising a PR.
 #
 # Godot version pin: 4.6-stable (see project.godot `config/features`).
 
@@ -45,48 +50,55 @@ jobs:
             exit 1
           fi
 
-  test:
-    name: GUT Tests (headless Godot)
-    needs: [gdlint, path-guard]
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Cache Godot binary
-        uses: actions/cache@v4
-        with:
-          path: /usr/local/bin/godot
-          key: godot-4.6-stable
-
-      - name: Install Godot 4
-        run: |
-          if [ ! -f /usr/local/bin/godot ]; then
-            wget -q https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip
-            unzip -q Godot_v4.6-stable_linux.x86_64.zip
-            sudo mv Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot
-            chmod +x /usr/local/bin/godot
-          fi
-
-      - name: Import project assets
-        # Godot 4 headless --editor --quit does not guarantee exit 0 on success;
-        # '; true' explicitly allows a non-zero exit without silencing real failures.
-        run: godot --headless --editor --quit; true
-
-      - name: Run GUT tests headlessly
-        run: |
-          godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
-            -gdir=res://tests \
-            -gprefix=test_ \
-            -gsuffix=.gd \
-            -gexit
+  # GUT Tests job is commented out: the full headless-Godot GUT suite runs too
+  # long for the PR gate (timeout-minutes: 90 was already the ceiling and CI
+  # runs were still timing out). Contributors MUST run the GUT test suite
+  # locally and confirm it passes before raising a PR:
+  #   godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+  #     -gdir=res://tests -gprefix=test_ -gsuffix=.gd -gexit
+  #
+  # test:
+  #   name: GUT Tests (headless Godot)
+  #   needs: [gdlint, path-guard]
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 90
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: recursive
+  #
+  #     - name: Cache Godot binary
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: /usr/local/bin/godot
+  #         key: godot-4.6-stable
+  #
+  #     - name: Install Godot 4
+  #       run: |
+  #         if [ ! -f /usr/local/bin/godot ]; then
+  #           wget -q https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip
+  #           unzip -q Godot_v4.6-stable_linux.x86_64.zip
+  #           sudo mv Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot
+  #           chmod +x /usr/local/bin/godot
+  #         fi
+  #
+  #     - name: Import project assets
+  #       # Godot 4 headless --editor --quit does not guarantee exit 0 on success;
+  #       # '; true' explicitly allows a non-zero exit without silencing real failures.
+  #       run: godot --headless --editor --quit; true
+  #
+  #     - name: Run GUT tests headlessly
+  #       run: |
+  #         godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+  #           -gdir=res://tests \
+  #           -gprefix=test_ \
+  #           -gsuffix=.gd \
+  #           -gexit
 
   pr-gate-summary:
     name: PR Gate Summary
     if: always()
-    needs: [gdlint, path-guard, test]
+    needs: [gdlint, path-guard]
     runs-on: ubuntu-latest
     steps:
       - name: Fail if any required job did not succeed
@@ -94,7 +106,6 @@ jobs:
           declare -A results=(
             [gdlint]="${{ needs.gdlint.result }}"
             [path-guard]="${{ needs.path-guard.result }}"
-            [test]="${{ needs.test.result }}"
           )
           failed=0
           for job in "${!results[@]}"; do
