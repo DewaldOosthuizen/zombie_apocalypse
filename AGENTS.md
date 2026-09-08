@@ -5,14 +5,16 @@ to orient themselves in this repository efficiently.
 
 <!-- graph-tools-start -->
 
-## graphify
+## Code Exploration
+
+### graphify
 
 graphify-out/ not yet generated for this repo.
 
-## understand-anything
+### understand-anything
 
-.understand-anything/knowledge-graph.json is present.
-Use it for layered architecture questions (layers, communities, entry points).
+.understand-anything/knowledge-graph.json is present. Use it for layered architecture questions
+(layers, communities, entry points).
 
 ```bash
 # Launch the interactive dashboard
@@ -21,14 +23,15 @@ GRAPH_DIR=$(pwd) npx vite --host 127.0.0.1
 ```
 
 For prose questions load the skill:
+
 ```
 skill: understand-chat
 ```
 
-## codegraph
+### codegraph
 
-.codegraph/ is present. Use it FIRST for any symbol lookup,
-call tracing, or targeted context gathering before opening source files.
+.codegraph/ is present. Use it FIRST for any symbol lookup, call tracing, or targeted context
+gathering before opening source files.
 
 ```bash
 codegraph context "<task description>" -p .   # focused file+symbol context
@@ -44,3 +47,11 @@ Decision order for code tasks:
   4. Read raw source    — only the 1-2 files that actually matter.
 
 <!-- graph-tools-end -->
+
+---
+
+## CI / CD
+
+Documentation for the CI/CD pipeline lives in [docs/index.md](docs/index.md).
+Authoritative rules (verification, review, conventions) live in
+[openspec/config.yaml](openspec/config.yaml).
