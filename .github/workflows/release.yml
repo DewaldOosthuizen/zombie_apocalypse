@@ -1,0 +1,262 @@
+name: Release
+#
+# CalVer release pipeline for zombie_apocalypse.
+#
+# On every push to main (and on manual dispatch) this workflow:
+#   1. validation      - re-runs gdlint + GUT tests against the exact commit
+#                        being released (not just the PR head that merged).
+#   2. validation-gate  - fan-in summary; fails the run if validation failed.
+#   3. build            - exports Godot Linux/X11 + Windows Desktop binaries
+#                        via barichello/godot-ci (Godot 4.6-stable, matching
+#                        the pin used in pr_gate.yml).
+#   4. version-tag-release - computes the next CalVer tag (YYYY.MM.DD[.N]),
+#                        skips the release if HEAD is already tagged/released,
+#                        bumps `config/version` in project.godot, commits,
+#                        pushes main + the new tag, then creates a GitHub
+#                        Release with the build artifacts attached.
+#
+# Godot version pin: 4.6-stable (see project.godot `config/features` and
+# .github/workflows/pr_gate.yml).
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  gdlint:
+    name: GDScript Lint (release commit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install gdtoolkit
+        run: pip install gdtoolkit
+      - name: GDScript lint
+        run: gdlint scripts/ tests/
+
+  test:
+    name: GUT Tests (release commit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Cache Godot binary
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/godot
+          key: godot-4.6-stable
+
+      - name: Install Godot 4
+        run: |
+          if [ ! -f /usr/local/bin/godot ]; then
+            wget -q https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip
+            unzip -q Godot_v4.6-stable_linux.x86_64.zip
+            sudo mv Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot
+            chmod +x /usr/local/bin/godot
+          fi
+
+      - name: Import project assets
+        run: godot --headless --editor --quit; true
+
+      - name: Run GUT tests headlessly
+        run: |
+          godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+            -gdir=res://tests \
+            -gprefix=test_ \
+            -gsuffix=.gd \
+            -gexit
+
+  validation-gate:
+    name: Validation Gate
+    if: always()
+    needs: [gdlint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if validation did not succeed
+        run: |
+          declare -A results=(
+            [gdlint]="${{ needs.gdlint.result }}"
+            [test]="${{ needs.test.result }}"
+          )
+          failed=0
+          for job in "${!results[@]}"; do
+            result="${results[$job]}"
+            echo "$job: $result"
+            if [ "$result" != "success" ]; then
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then
+            echo "Validation failed; refusing to build/release this commit."
+            exit 1
+          fi
+          echo "Validation succeeded."
+
+  build:
+    name: Build Godot export artifacts
+    needs: validation-gate
+    runs-on: ubuntu-latest
+    container:
+      # export_presets.cfg (Linux/X11 + Windows Desktop presets) is present
+      # in this repo, pinned to the same Godot 4.6-stable release used by
+      # the test job above, via the community godot-ci export templates image.
+      image: barichello/godot-ci:4.6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Prepare export template config
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/4.6.stable \
+             ~/.local/share/godot/export_templates/4.6.stable
+
+      - name: Create build output directories
+        run: |
+          mkdir -v -p build/linux build/windows
+
+      - name: Export Linux/X11 build
+        run: |
+          godot --headless --export-release "Linux/X11" build/linux/zombie-apocalypse.x86_64
+
+      - name: Export Windows Desktop build
+        run: |
+          godot --headless --export-release "Windows Desktop" build/windows/zombie-apocalypse.exe
+
+      - name: Upload build artifacts (workflow run)
+        uses: actions/upload-artifact@v4
+        with:
+          name: godot-builds
+          path: build/
+          retention-days: 7
+
+  version-tag-release:
+    name: Compute CalVer tag, bump version, and release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Use a token with push permission so the version bump + tag push
+          # trigger downstream automation normally (default GITHUB_TOKEN is
+          # fine here since we push to main, not open a PR).
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: godot-builds
+          path: build/
+
+      - name: Determine whether this commit should be skipped
+        id: skip_check
+        run: |
+          set -euo pipefail
+          git fetch --tags --force origin
+          LAST_TAG=$(git tag -l --sort=-version:refname | grep -E '^[0-9]{4}\.[0-9]{2}\.[0-9]{2}(\.[0-9]+)?$' | head -n1 || true)
+          HEAD_SHA=$(git rev-parse HEAD)
+          skip=false
+          if [ -n "$LAST_TAG" ]; then
+            TAG_SHA=$(git rev-list -n 1 "$LAST_TAG" || true)
+            if [ "$TAG_SHA" = "$HEAD_SHA" ]; then
+              skip=true
+            fi
+          fi
+          echo "last_tag=$LAST_TAG" >> "$GITHUB_OUTPUT"
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
+
+      - name: Compute next CalVer tag
+        if: steps.skip_check.outputs.skip != 'true'
+        id: version
+        run: |
+          set -euo pipefail
+          BASE="$(date -u +%Y).$(date -u +%m).$(date -u +%d)"
+
+          EXISTING=$(git ls-remote --tags origin | sed -n "s#.*refs/tags/\(${BASE//./\\.}\(\.[0-9]\+\)\?\)\$#\1#p" || true)
+
+          if [ -z "$EXISTING" ]; then
+            TAG="$BASE"
+          else
+            MAX=0
+            while IFS= read -r t; do
+              if [ "$t" = "$BASE" ]; then
+                continue
+              fi
+              N="${t##*.}"
+              if [[ "$N" =~ ^[0-9]+$ ]] && [ "$N" -gt "$MAX" ]; then
+                MAX="$N"
+              fi
+            done <<< "$EXISTING"
+            TAG="${BASE}.$((MAX + 1))"
+          fi
+
+          if ! [[ "$TAG" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}(\.[0-9]+)?$ ]]; then
+            echo "Computed tag '$TAG' failed CalVer validation." >&2
+            exit 1
+          fi
+
+          if git ls-remote --tags origin | grep -q "refs/tags/${TAG}\$"; then
+            echo "Tag $TAG already exists on origin." >&2
+            exit 1
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Warn if HEAD is ahead of origin/main
+        if: steps.skip_check.outputs.skip != 'true'
+        run: |
+          git fetch origin main
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "::warning::HEAD is not a descendant of origin/main; releasing anyway (non-fatal)."
+          fi
+
+      - name: Bump project.godot version
+        if: steps.skip_check.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.version.outputs.tag }}"
+          if grep -q '^config/version=' project.godot; then
+            sed -i "s/^config\/version=.*/config\/version=\"${TAG}\"/" project.godot
+          else
+            sed -i "/^\[application\]/a config/version=\"${TAG}\"" project.godot
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add project.godot
+          git commit -m "chore(release): bump version to ${TAG}"
+          git push origin HEAD:main
+          git tag "${TAG}"
+          git push origin "refs/tags/${TAG}"
+
+      - name: Create GitHub Release
+        if: steps.skip_check.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.version.outputs.tag }}"
+          ASSETS=()
+          [ -f build/linux/zombie-apocalypse.x86_64 ] && ASSETS+=(build/linux/zombie-apocalypse.x86_64)
+          [ -f build/windows/zombie-apocalypse.exe ] && ASSETS+=(build/windows/zombie-apocalypse.exe)
+          gh release create "${TAG}" \
+            --title "${TAG}" \
+            --generate-notes \
+            "${ASSETS[@]}"
+
+      - name: Skip notice
+        if: steps.skip_check.outputs.skip == 'true'
+        run: echo "HEAD (${{ steps.skip_check.outputs.last_tag }}) already released; skipping."

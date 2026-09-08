@@ -2,7 +2,7 @@
 Zombie Apocalypse is created with Godot 4. A 2D game where the player can play with multiple characters to try and stop a zombie apocalypse 
 from spreading.
 
-[![GUT Tests](https://github.com/DewaldOosthuizen/zombie_apocalypse/actions/workflows/tests.yml/badge.svg)](https://github.com/DewaldOosthuizen/zombie_apocalypse/actions/workflows/tests.yml)
+[![PR Gate](https://github.com/DewaldOosthuizen/zombie_apocalypse/actions/workflows/pr_gate.yml/badge.svg)](https://github.com/DewaldOosthuizen/zombie_apocalypse/actions/workflows/pr_gate.yml)
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/DewaldOosthuizen1)
 
@@ -116,16 +116,36 @@ Under the hood, the script calls:
 Tests can also be run from inside the Godot editor via the GUT panel
 (Scene > GUT > Run All).
 
-The `.github/workflows/tests.yml` CI workflow runs automatically on push and
-pull_request when any `.gd` source file or file under `tests/` is modified.
-It can also be triggered manually from the GitHub Actions UI via
-`workflow_dispatch`. A 90-minute job timeout bounds the worst-case CI time.
+The `.github/workflows/pr_gate.yml` workflow runs the same test suite
+automatically on every pull request (gdlint -> path-guard -> GUT tests,
+fanned into a `pr-gate-summary` required check). A 90-minute job timeout
+bounds the worst-case CI time. See [CI / Release Pipeline](#ci--release-pipeline)
+below for the full picture, including releases.
 
 ## Local Verification
 
 `scripts/verify.sh` is the single entry point for replicating the full CI
 pipeline locally. It runs gdlint, the absolute-path guard, and the GUT test
-suite in sequence — exactly what CI does on every push and pull request.
+suite in sequence — exactly what `pr_gate.yml` does on every pull request.
+
+## CI / Release Pipeline
+
+- **`.github/workflows/pr_gate.yml`** — runs on every pull request:
+  `gdlint` and `path-guard` run in parallel, then `test` (GUT, headless
+  Godot) runs once both pass, then `pr-gate-summary` fans in all three and
+  is the required status check.
+- **`.github/workflows/release.yml`** — runs on push to `main` (and
+  `workflow_dispatch`): re-validates the exact commit being released
+  (`gdlint` + `test`, duplicated from `pr_gate.yml` since a merge commit is
+  not identical to its PR head), then builds Linux/X11 and Windows Desktop
+  exports via `barichello/godot-ci:4.6`, computes the next
+  [CalVer](https://calver.org/) tag (`YYYY.MM.DD[.N]`), bumps
+  `config/version` in `project.godot`, commits + tags + pushes, and
+  publishes a GitHub Release with both binaries attached. If `HEAD` is
+  already tagged, the release step is skipped (no duplicate releases on a
+  no-op push).
+- Godot version is pinned to **4.6-stable** across both workflows; bump the
+  pin in both files together with `project.godot`'s `config/features` entry.
 
 ### Prerequisites
 
@@ -146,11 +166,12 @@ To run only the lint and path checks (skip the Godot test run):
 ### What each step does
 
 1. **gdlint** (`scripts/` and `tests/`) — checks GDScript style and syntax,
-   mirroring `.github/workflows/ci.yml`.
+   mirroring the `gdlint` job in `.github/workflows/pr_gate.yml`.
 2. **Absolute-path guard** — scans source files for hard-coded home-directory
-   paths, mirroring `.github/workflows/lint-paths.yml`.
+   paths, mirroring the `path-guard` job in `.github/workflows/pr_gate.yml`.
 3. **GUT headless tests** (via `scripts/run_gut_tests.sh`) — runs the full
-   unit-test suite headlessly, mirroring `.github/workflows/tests.yml`.
+   unit-test suite headlessly, mirroring the `test` job in
+   `.github/workflows/pr_gate.yml`.
 
 
 ## Contributing

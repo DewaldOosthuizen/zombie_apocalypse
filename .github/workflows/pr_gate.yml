@@ -1,0 +1,111 @@
+name: PR Gate
+#
+# Consolidated PR validation pipeline. Replaces the previous four workflows
+# (ci.yml, tests.yml, gdlint.yml, lint-paths.yml) with a single pull_request
+# gate:
+#   gdlint (style) -> path-guard (no absolute home paths) -> test (GUT, headless Godot)
+# followed by a pr-gate-summary job that fans in the result of every job above
+# and is the single required status check for branch protection.
+#
+# Godot version pin: 4.6-stable (see project.godot `config/features`).
+
+on:
+  pull_request:
+
+concurrency:
+  group: pr-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gdlint:
+    name: GDScript Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install gdtoolkit
+        run: pip install gdtoolkit
+      - name: GDScript lint
+        run: gdlint scripts/ tests/
+
+  path-guard:
+    name: No absolute home paths
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject absolute home-directory paths in tracked files
+        run: |
+          if git grep -rE '(/[h]ome/[^/]+/|C:\\[U]sers\\[^\\]+\\)' -- ':!*.md' ':!openspec/'; then
+            echo "ERROR: Absolute home-directory path detected in a tracked file."
+            exit 1
+          fi
+
+  test:
+    name: GUT Tests (headless Godot)
+    needs: [gdlint, path-guard]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Cache Godot binary
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/godot
+          key: godot-4.6-stable
+
+      - name: Install Godot 4
+        run: |
+          if [ ! -f /usr/local/bin/godot ]; then
+            wget -q https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip
+            unzip -q Godot_v4.6-stable_linux.x86_64.zip
+            sudo mv Godot_v4.6-stable_linux.x86_64 /usr/local/bin/godot
+            chmod +x /usr/local/bin/godot
+          fi
+
+      - name: Import project assets
+        # Godot 4 headless --editor --quit does not guarantee exit 0 on success;
+        # '; true' explicitly allows a non-zero exit without silencing real failures.
+        run: godot --headless --editor --quit; true
+
+      - name: Run GUT tests headlessly
+        run: |
+          godot --headless -s addons/gut/addons/gut/gut_cmdln.gd \
+            -gdir=res://tests \
+            -gprefix=test_ \
+            -gsuffix=.gd \
+            -gexit
+
+  pr-gate-summary:
+    name: PR Gate Summary
+    if: always()
+    needs: [gdlint, path-guard, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if any required job did not succeed
+        run: |
+          declare -A results=(
+            [gdlint]="${{ needs.gdlint.result }}"
+            [path-guard]="${{ needs.path-guard.result }}"
+            [test]="${{ needs.test.result }}"
+          )
+          failed=0
+          for job in "${!results[@]}"; do
+            result="${results[$job]}"
+            echo "$job: $result"
+            if [ "$result" != "success" ]; then
+              failed=1
+            fi
+          done
+          if [ "$failed" -eq 1 ]; then
+            echo "One or more required jobs did not succeed."
+            exit 1
+          fi
+          echo "All required jobs succeeded."
