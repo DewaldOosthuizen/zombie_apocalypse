@@ -52,10 +52,9 @@ func _set_speed(delta):
 func _get_scale_for_power(p: int) -> Vector2:
 	if p == 0:
 		return BULLET_SCALE_POWER_0
-	elif p == 1:
+	if p == 1:
 		return BULLET_SCALE_POWER_1
-	else:
-		return BULLET_SCALE_POWER_2
+	return BULLET_SCALE_POWER_2
 
 
 func _create_muzzle(muzzle_scene):
@@ -74,18 +73,20 @@ func _animate():
 
 
 func _remove_if_brick(object):
-	if (object and object.get_collider()):
-		var object_parent = object.get_collider().get_parent()
-		if (object_parent.is_in_group("brick")):
-			object_parent.break_object()
-			if (power < 1):
-				self.queue_free()
-		elif (object_parent.is_in_group("power_up_brick")):
-			object_parent.break_object()
-			if (power < 1):
-				self.queue_free()
-		else:
-			_non_brick_hit_count += 1
+	if not (object and object.get_collider()):
+		return
+	var object_parent = object.get_collider().get_parent()
+	if object_parent.is_in_group("brick"):
+		object_parent.break_object()
+		if power < 1:
+			self.queue_free()
+		return
+	if object_parent.is_in_group("power_up_brick"):
+		object_parent.break_object()
+		if power < 1:
+			self.queue_free()
+		return
+	_non_brick_hit_count += 1
 
 
 func _check_collision_objects():

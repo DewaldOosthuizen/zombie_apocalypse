@@ -19,7 +19,7 @@ func _ready():
 
 
 # Override: ranger uses "run" not "walk" (asset naming difference)
-func _reset_character_sprite_states(delta):
+func _reset_character_sprite_states(_delta):
 	if player_sprite == null:
 		return
 	if (health <= 0):

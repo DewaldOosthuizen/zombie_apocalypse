@@ -71,7 +71,7 @@ fi
 step_header "Step 2/3 — Absolute home-path check"
 
 # Exact pattern from lint-paths.yml (one backslash removed per Bash layer)
-PATH_PATTERN='(/home/[^/]+/|C:\\Users\\[^\\]+\\)'
+PATH_PATTERN='(/[h]ome/[^/]+/|C:\\[U]sers\\[^\\]+\\)'
 
 if git grep -rE "$PATH_PATTERN" -- ':!*.md' ':!openspec/' 2>/dev/null; then
     echo "  ERROR: Absolute home-directory path detected in a tracked file."

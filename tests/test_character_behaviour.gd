@@ -1,9 +1,11 @@
 extends GutTest
 
+const _CHAR_SCRIPT = preload("res://scripts/generic_character_behaviour.gd")
+
 var _char
 
 func before_each():
-	_char = load("res://scripts/generic_character_behaviour.gd").new()
+	_char = _CHAR_SCRIPT.new()
 
 func after_each():
 	_char.free()
@@ -19,7 +21,7 @@ func test_shoot_bullet_with_null_bullet_scene_pushes_error_and_returns():
 func test_shoot_bullet_with_zero_ammo_is_noop():
 	# Use a non-null sentinel for bullet_scene — the ammo guard fires before
 	# instantiate() is ever called, so we only need a non-null reference here.
-	_char.bullet_scene = load("res://scripts/generic_character_behaviour.gd")
+	_char.bullet_scene = _CHAR_SCRIPT
 	_char.action1 = false
 	_char.ammo = 0
 	_char._shoot_bullet(10)
@@ -107,7 +109,7 @@ func _make_attacker() -> Object:
 	# Returns a bare generic_character_behaviour instance configured as an
 	# attacker with action1 active and positive health so most tests get a
 	# "should deal damage" baseline.
-	var attacker = load("res://scripts/generic_character_behaviour.gd").new()
+	var attacker = _CHAR_SCRIPT.new()
 	attacker.health = 100
 	attacker.action1 = true
 	attacker.action2 = false

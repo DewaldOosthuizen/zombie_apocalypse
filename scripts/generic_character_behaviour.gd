@@ -80,14 +80,14 @@ var shield_indicator = false # indicate if shield is destroyed
 var bullet_scene
 
 # Collision objects
-var _attack_area_2d: Area2D
-var _character_area_2d: Area2D
 var area_stand_collision_shape_2d
 var area_slide_collision_shape_2d
 var area_left_attack_collision_shape_2d
 var area_right_attack_collision_shape_2d
 var stand_collision_shape_2d
 var slide_collision_shape_2d
+var _attack_area_2d: Area2D
+var _character_area_2d: Area2D
 
 # default character behaviour drive, used for main characters
 func _start_process(delta):
